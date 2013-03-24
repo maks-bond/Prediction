@@ -1,0 +1,1 @@
+Android app for financial prediction based on GMDH

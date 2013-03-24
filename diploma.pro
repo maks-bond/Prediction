@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui declarative
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -55,5 +55,9 @@ OTHER_FILES += \
     android/src/org/kde/necessitas/ministro/IMinistroCallback.aidl \
     android/src/org/kde/necessitas/origo/QtActivity.java \
     android/src/org/kde/necessitas/origo/QtApplication.java \
-    android/version.xml
+    android/version.xml \
+    main.qml
+
+RESOURCES += \
+    res.qrc
 
