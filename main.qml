@@ -31,12 +31,12 @@ import QtQuick 1.0
              Column {
                   anchors.verticalCenter: parent.verticalCenter
                   Text {
-                      text: name
+                      text: date
                       font.pixelSize: 15
                       color: "white"
                   }
                   Text {
-                      text: '$' + cost
+                      text: '$' + price
                       color : "white"
                   }
 
@@ -49,7 +49,7 @@ import QtQuick 1.0
          id: listView
          anchors.fill: parent
          anchors.margins: 20
-         model: fruitModel
+         model: mModel
          delegate: fruitDelegate
          highlight: Rectangle { color: "lightsteelblue"; radius: 3 }
          focus: true
