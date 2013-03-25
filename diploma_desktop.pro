@@ -14,10 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    modelitem.cpp
+    modelitem.cpp \
+    csvreader.cpp
+
 
 HEADERS  += mainwindow.h \
-    modelitem.h
+    modelitem.h \
+    csvreader.h
 
 OTHER_FILES += \
     main.qml

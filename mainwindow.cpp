@@ -9,18 +9,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setSource(QUrl("qrc:/main.qml"));
     setCentralWidget(ui);
     ui->setResizeMode(QDeclarativeView::SizeRootObjectToView);
-
-    //Находим корневой элемент
     Root = ui->rootObject();
-    //Соединяем C++ и QML, делая видимым функции С++ через элемент window
     ui->rootContext()->setContextProperty("window", this);
 
 
-     QList<QObject*> dataList;
-     dataList.append(new ModelItem("23 March", 5));
-     dataList.append(new ModelItem("24 March", 6));
-     dataList.append(new ModelItem("25 March", 7));
-     dataList.append(new ModelItem("26 March", 8));
+     //dataList.append(new ModelItem("23 March", 5));
+     //dataList.append(new ModelItem("24 March", 6));
+     //dataList.append(new ModelItem("25 March", 7));
+     //dataList.append(new ModelItem("26 March", 8));
+     dataList = CSVReader::Read(QFileDialog::getOpenFileName(this, tr("Open File"),
+                                                             "/home",
+                                                             tr("CSV (*.csv)")));
 
      QDeclarativeContext *ctxt = ui->rootContext();
      ctxt->setContextProperty("mModel", QVariant::fromValue(dataList));
@@ -28,31 +27,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::FunctionC()
 {
-    //Найдем строку ввода
-    QObject* textinput = Root->findChild<QObject*>("textinput");
-
-    //Найдем поле вывода
-    QObject* memo = Root->findChild<QObject*>("memo");
-
-    QString str;//Создадим новую строковую переменную
-
-    //Считаем информацию со строки ввода через свойство text
-    str=(textinput->property("text")).toString();
-
-    int a;
-    a=str.toInt();//Переведем строку в число
-    a++;//Добавим к числу 1
-
-    QString str2;//Создадим еще одну строковую переменную
-    str2=QString::number(a);//Переведем число в строку
-
-    //Ну и наконец выведем в поле вывода нашу информацию
-    memo->setProperty("text", str+"+1="+str2);
+    //QObject* textinput = Root->findChild<QObject*>("textinput");
+    //str=(textinput->property("text")).toString();
+    //memo->setProperty("text", str+"+1="+str2);
 
 
     //Max Code
     //Here Must be some smart search of csv files and reading it
-    QList<QObject*> table = CSVReader::Read("Adobe.txt");
+    //QList<QObject*> table = CSVReader::Read("Adobe.txt");
     //This table must be viewed on qml view
 }
 

@@ -5,22 +5,6 @@ import QtQuick 1.0
      height: 400
      color: "#343434"
 
-     ListModel {
-        id: fruitModel
-        ListElement {
-              name: "Apple"
-              cost: 2.45
-        }
-        ListElement {
-            name: "Orange"
-            cost: 3.25
-        }
-        ListElement {
-            name: "Banana"
-            cost: 1.95
-        }
-     }
-
      Component {
          id: fruitDelegate
          Item {
@@ -83,7 +67,7 @@ import QtQuick 1.0
          MouseArea {
              id: mouseArea
              anchors.fill: parent
-             onClicked: container.clicked()
+             onClicked: window.FunctionC()
          }
 
          Text {

@@ -6,6 +6,8 @@
 #include <QGraphicsObject>
 #include <QtGui>
 #include <QDeclarativeContext>
+#include <QFileDialog>
+
 #include "modelitem.h"
 
 namespace Ui {
@@ -23,6 +25,7 @@ public:
 private:
     QDeclarativeView *ui;
     QObject *Root;
+    QList<QObject*> dataList;
 };
 
 #endif // MAINWINDOW_H
