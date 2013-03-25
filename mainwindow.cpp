@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 
+#include "csvreader.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
 {
@@ -46,6 +48,12 @@ void MainWindow::FunctionC()
 
     //Ну и наконец выведем в поле вывода нашу информацию
     memo->setProperty("text", str+"+1="+str2);
+
+
+    //Max Code
+    //Here Must be some smart search of csv files and reading it
+    QList<QObject*> table = CSVReader::Read("Adobe.txt");
+    //This table must be viewed on qml view
 }
 
 MainWindow::~MainWindow()
