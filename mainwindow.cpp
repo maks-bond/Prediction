@@ -17,9 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
      //dataList.append(new ModelItem("24 March", 6));
      //dataList.append(new ModelItem("25 March", 7));
      //dataList.append(new ModelItem("26 March", 8));
-     dataList = CSVReader::Read(QFileDialog::getOpenFileName(this, tr("Open File"),
-                                                             "/home",
-                                                             tr("CSV (*.csv)")));
+    dataList = CSVReader::Read(":/Adobe.csv");
 
      QDeclarativeContext *ctxt = ui->rootContext();
      ctxt->setContextProperty("mModel", QVariant::fromValue(dataList));
