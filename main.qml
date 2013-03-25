@@ -1,90 +1,62 @@
 import QtQuick 1.0
 
-Rectangle {
-    width: 300
-    height: 300
-    anchors.fill: parent
+ Rectangle {
+     width:400; height: 400
+     color: "#343434"
 
-    //Кнопка
-    Rectangle {
-        id: button //Имя кнопки
-
-        //Размещаем в центре
-        x: parent.width / 2 - button.width / 2;
-        y: parent.height / 2 - button.height / 2;
-
-        //Размеры кнопки
-        width: 100
-        height: 30
-
-        //Цвет кнопки
-        color: "gray"
-
-        //Текст кнопки
-        Text {
-            id: buttonLabel
-            text: "Пуск"
-            anchors.centerIn: parent;
+     ListModel {
+        id: fruitModel
+        ListElement {
+              name: "Apple"
+              cost: 2.45
         }
-
-        //Действие мыши
-        MouseArea {
-            anchors.fill: parent
-            id: mouseArea
-            //При нажатии вызвать фугкцию window.FunctionC()
-            onClicked: window.FunctionC()
+        ListElement {
+            name: "Orange"
+            cost: 3.25
         }
-    }
-
-    //Строка ввода
-        Rectangle {
-            id: textinputRect //Имя строки ввода
-
-            //Размещаем ниже
-            x: parent.width / 2 - button.width / 2;
-            y: parent.height / 2 - button.height / 2+40;
-
-            //Размеры строки ввода
-            width: 100
-            height: 18
-
-            //цвет строки ввода
-            color: "gray"
-
-            TextInput {
-                id: textinput
-                objectName: "textinput"
-                color: "#151515";
-                selectionColor: "blue"
-                font.pixelSize: 12;
-                width: parent.width-4
-                anchors.centerIn: parent
-                focus: true
-                text:"1"
-                }
+        ListElement {
+            name: "Banana"
+            cost: 1.95
         }
+     }
 
-        //Поле вывода
-        Rectangle {
-            id: memoRect //Имя поля вывода
+     Component {
+         id: fruitDelegate
+         Item {
+             id: delegateItem
+             width: listView.width; height: 55
+             //clip: true
+             Row {
+                 anchors.verticalCenter: parent.verticalCenter
+                 spacing: 10
+                 //Text { text: name }
+                 //Text { text: '$' + cost }
 
-            //Размещаем ниже
-            x: parent.width / 2 - button.width / 2;
-            y: parent.height / 2 - button.height / 2+70;
+                 Column {
+                      anchors.verticalCenter: parent.verticalCenter
 
-            //Размеры поле вывода
-            width: 100
-            height: 35
+                      Text {
+                          text: name
+                          font.pixelSize: 15
+                          color: "white"
+                      }
+                      Text {
+                          text: '$' + cost
+                          color : "white"
+                      }
 
-            //Цвет поля вывода
-            color: "gray"
+                  }
+             }
+         }
+     }
 
-            TextEdit{
-                id: memo
-                objectName: "memo"
-                wrapMode: TextEdit.Wrap
-                width:parent.width;
-                readOnly:true
-            }
-        }
-}
+     ListView {
+         id: listView
+         anchors.fill: parent
+         anchors.margins: 20
+         model: fruitModel
+         delegate: fruitDelegate
+         highlight: Rectangle { color: "lightsteelblue"; radius: 3 }
+         focus: true
+     }
+ }
