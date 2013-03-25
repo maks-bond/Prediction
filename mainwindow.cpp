@@ -12,6 +12,16 @@ MainWindow::MainWindow(QWidget *parent) :
     Root = ui->rootObject();
     //Соединяем C++ и QML, делая видимым функции С++ через элемент window
     ui->rootContext()->setContextProperty("window", this);
+
+
+     QList<QObject*> dataList;
+     dataList.append(new ModelItem("23 March", 5));
+     dataList.append(new ModelItem("24 March", 6));
+     dataList.append(new ModelItem("25 March", 7));
+     dataList.append(new ModelItem("26 March", 8));
+
+     QDeclarativeContext *ctxt = ui->rootContext();
+     ctxt->setContextProperty("mModel", QVariant::fromValue(dataList));
 }
 
 void MainWindow::FunctionC()

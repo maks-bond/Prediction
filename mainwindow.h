@@ -6,6 +6,7 @@
 #include <QGraphicsObject>
 #include <QtGui>
 #include <QDeclarativeContext>
+#include "modelitem.h"
 
 namespace Ui {
     class MainWindow;
