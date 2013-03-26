@@ -2,6 +2,7 @@
 #define CSVREADER_H
 
 #include "modelitem.h"
+#include "modelcompany.h"
 
 #include <QList>
 
@@ -10,7 +11,7 @@ class QObject;
 class CSVReader
 {
 public:
-    static QList<QObject*> Read(const QString& i_file);
+    static void Read(ModelCompany& o_model_company, const QString& i_file);
 
 };
 

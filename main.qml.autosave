@@ -46,7 +46,7 @@ import QtQuick 1.0
      Rectangle {
          id: mButton
 
-         anchors { left: listView.left; bottom: parent.bottom; margins: 20 }
+         anchors { left: parent.left; bottom: parent.bottom; margins: 20 }
 
 
          property variant text

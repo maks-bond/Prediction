@@ -2,25 +2,26 @@
 
 #include "csvreader.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent)
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , mp_ui(new QDeclarativeView)
 {
-    ui = new QDeclarativeView;
-    ui->setSource(QUrl("qrc:/main.qml"));
-    setCentralWidget(ui);
-    ui->setResizeMode(QDeclarativeView::SizeRootObjectToView);
-    Root = ui->rootObject();
-    ui->rootContext()->setContextProperty("window", this);
+    mp_ui->setSource(QUrl("qrc:/main.qml"));
+    setCentralWidget(mp_ui);
+    mp_ui->setResizeMode(QDeclarativeView::SizeRootObjectToView);
+    mp_root = mp_ui->rootObject();
+    mp_ui->rootContext()->setContextProperty("window", this);
 
 
      //dataList.append(new ModelItem("23 March", 5));
      //dataList.append(new ModelItem("24 March", 6));
      //dataList.append(new ModelItem("25 March", 7));
      //dataList.append(new ModelItem("26 March", 8));
-    dataList = CSVReader::Read(":/Adobe.csv");
+    ModelCompany data_list;
+    CSVReader::Read(data_list, ":/Adobe.csv");
 
-     QDeclarativeContext *ctxt = ui->rootContext();
-     ctxt->setContextProperty("mModel", QVariant::fromValue(dataList));
+    QDeclarativeContext *p_ctxt = mp_ui->rootContext();
+    p_ctxt->setContextProperty("mModel", QVariant::fromValue(data_list.GetListOfObjectItems()));
 }
 
 void MainWindow::FunctionC()
@@ -38,5 +39,5 @@ void MainWindow::FunctionC()
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    delete mp_ui;
 }

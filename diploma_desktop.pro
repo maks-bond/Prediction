@@ -15,12 +15,16 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     modelitem.cpp \
-    csvreader.cpp
+    csvreader.cpp \
+    modelcompany.cpp \
+    modelforecasting.cpp
 
 
 HEADERS  += mainwindow.h \
     modelitem.h \
-    csvreader.h
+    csvreader.h \
+    modelcompany.h \
+    modelforecasting.h
 
 OTHER_FILES += \
     main.qml

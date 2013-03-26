@@ -2,15 +2,17 @@
 
 #include <QObject>
 #include <QFile>
+#include <QFileInfo>
 #include <QStringList>
 
 #include "modelitem.h"
 
-QList<QObject*> CSVReader::Read(const QString& i_file)
+void CSVReader::Read(ModelCompany& o_model_company, const QString& i_file)
 {
-    QList<QObject*> res;
-
     QFile file(i_file);
+
+    o_model_company.SetCompanyName(QFileInfo(file).baseName());
+
     if(file.open(QIODevice::ReadOnly))
     {
         while(!file.atEnd())
@@ -18,10 +20,8 @@ QList<QObject*> CSVReader::Read(const QString& i_file)
             QString line = file.readLine();
             QStringList vals = line.split(',');
             ModelItem* model_item = new ModelItem(vals[0], vals[4].toDouble());
-            res.append(model_item);
+            o_model_company.AddItem(model_item);
         }
         file.close();
     }
-
-    return res;
 }

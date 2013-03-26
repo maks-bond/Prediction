@@ -9,6 +9,7 @@
 #include <QFileDialog>
 
 #include "modelitem.h"
+#include "modelcompany.h"
 
 namespace Ui {
     class MainWindow;
@@ -23,9 +24,8 @@ public:
     ~MainWindow();
     Q_INVOKABLE void FunctionC();//Функция C++ вызываемая из QML
 private:
-    QDeclarativeView *ui;
-    QObject *Root;
-    QList<QObject*> dataList;
+    QDeclarativeView *mp_ui;
+    QObject *mp_root;
 };
 
 #endif // MAINWINDOW_H

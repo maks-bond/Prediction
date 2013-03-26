@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QMetaType>
 
 class ModelItem : public QObject
 {
@@ -21,7 +22,6 @@ public:
 private :
     QString date_;
     double price_;
-    
 };
 
 #endif // MODELITEM_H
