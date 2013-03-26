@@ -9,7 +9,7 @@
 QList<QString> CSV::Find(const QDir &i_dir)
 {
     QStringList filters("*.csv");
-    QDirIterator dir_iterator(i_dir.path(), filters, QDir::NoFilter, QDirIterator::NoIteratorFlags);
+    QDirIterator dir_iterator(i_dir.path(), filters, QDir::NoFilter, QDirIterator::Subdirectories);
     QList<QString> res;
 
     while(1)

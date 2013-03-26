@@ -28,7 +28,10 @@ void MainWindow::FunctionC()
 
 void MainWindow::_FormModel()
 {
-    QList<QString> csv_files = CSV::Find(QDir::root());
+    QDir dir("/storage/emulated/0/DCIM/Diploma");
+    QList<QString> csv_files = CSV::Find(dir);
+    QObject* p_memo = mp_root->findChild<QObject*>("memo");
+    p_memo->setProperty("text", QVariant::fromValue(dir.path()));
     for(int i = 0; i<csv_files.size(); ++i)
     {
         ModelCompany* p_company = new ModelCompany();

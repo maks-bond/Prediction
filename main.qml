@@ -81,4 +81,27 @@ import QtQuick 1.0
              text: "Refresh"
          }
      }
+
+     Rectangle {
+             id: memoRect //Имя поля вывода
+
+             //Размещаем ниже
+             anchors.left: mButton.right;
+             anchors.top: mButton.top;
+
+             //Размеры поле вывода
+             width: 800
+             height: 35
+
+             //Цвет поля вывода
+             color: "gray"
+
+             TextEdit{
+                 id: memo
+                 objectName: "memo"
+                 wrapMode: TextEdit.Wrap
+                 width:parent.width;
+                 readOnly:true
+             }
+         }
  }
