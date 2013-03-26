@@ -15,11 +15,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     modelitem.cpp \
-    csvreader.cpp
+    modelcompany.cpp \
+    model.cpp \
+    csv.cpp
 
 HEADERS  += mainwindow.h \
     modelitem.h \
-    csvreader.h
+    modelcompany.h \
+    model.h \
+    csv.h
 
 FORMS    += mainwindow.ui
 

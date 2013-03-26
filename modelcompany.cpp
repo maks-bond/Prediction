@@ -1,8 +1,18 @@
 #include "modelcompany.h"
+#include "modelItem.h"
 
 ModelCompany::ModelCompany(QObject *parent)
     : QObject(parent)
 {
+}
+
+ModelCompany::~ModelCompany()
+{
+    for(int i = 0; i<m_model.size(); ++i)
+    {
+        delete m_model[i];
+        delete m_object_model[i];
+    }
 }
 
 void ModelCompany::AddItem(ModelItem* i_model_item)

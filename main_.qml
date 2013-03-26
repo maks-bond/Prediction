@@ -5,7 +5,7 @@ import QtQuick 1.0
      height: 400
      color: "#343434"
 
-     Component {
+     /*Component {
          id: fruitDelegate
          Item {
              id: delegateItem
@@ -31,19 +31,28 @@ import QtQuick 1.0
 
      ListView {
          id: listView
-         anchors.left: parent.left
+         anchors.fill: parent
+         /*anchors.left: parent.left
          anchors.bottom: mButton.top
          anchors.right: parent.right
-         anchors.top: parent.top
-         anchors.margins: 20
+         anchors.top: parent.top*/
+         /*anchors.margins: 20
          model: mModel
          delegate: fruitDelegate
          highlight: Rectangle { color: "lightsteelblue"; radius: 3 }
          focus: true
+     }*/
+
+
+     Button{
+         id: button
+         x: 0
+         y: 0
+         width: 100
+         height: 100
      }
 
-
-     Rectangle {
+     /*Rectangle {
          id: mButton
 
          anchors { left: parent.left; bottom: parent.bottom; margins: 20 }
@@ -79,5 +88,5 @@ import QtQuick 1.0
              font.pointSize: 10
              text: "Refresh"
          }
-     }
+     }*/
  }

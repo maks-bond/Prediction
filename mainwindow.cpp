@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 
-#include "csvreader.h"
+#include "csv.h"
+#include "csv.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,29 +13,28 @@ MainWindow::MainWindow(QWidget *parent)
     mp_root = mp_ui->rootObject();
     mp_ui->rootContext()->setContextProperty("window", this);
 
+    _FormModel();
 
-     //dataList.append(new ModelItem("23 March", 5));
-     //dataList.append(new ModelItem("24 March", 6));
-     //dataList.append(new ModelItem("25 March", 7));
-     //dataList.append(new ModelItem("26 March", 8));
-    ModelCompany data_list;
-    CSVReader::Read(data_list, ":/Adobe.csv");
-
-    QDeclarativeContext *p_ctxt = mp_ui->rootContext();
-    p_ctxt->setContextProperty("mModel", QVariant::fromValue(data_list.GetListOfObjectItems()));
+    if(m_model.HasCompanies())
+    {
+        QDeclarativeContext *p_ctxt = mp_ui->rootContext();
+        p_ctxt->setContextProperty("mModel", QVariant::fromValue(m_model.GetListOfCompanies()[0]->GetListOfObjectItems()));
+    }
 }
 
 void MainWindow::FunctionC()
 {
-    //QObject* textinput = Root->findChild<QObject*>("textinput");
-    //str=(textinput->property("text")).toString();
-    //memo->setProperty("text", str+"+1="+str2);
+}
 
-
-    //Max Code
-    //Here Must be some smart search of csv files and reading it
-    //QList<QObject*> table = CSVReader::Read("Adobe.txt");
-    //This table must be viewed on qml view
+void MainWindow::_FormModel()
+{
+    QList<QString> csv_files = CSV::Find(QDir::root());
+    for(int i = 0; i<csv_files.size(); ++i)
+    {
+        ModelCompany* p_company = new ModelCompany();
+        CSV::Read(*p_company, csv_files[i]);
+        m_model.AddCompany(p_company);
+    }
 }
 
 MainWindow::~MainWindow()

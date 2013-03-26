@@ -10,6 +10,7 @@
 
 #include "modelitem.h"
 #include "modelcompany.h"
+#include "model.h"
 
 namespace Ui {
     class MainWindow;
@@ -24,8 +25,11 @@ public:
     ~MainWindow();
     Q_INVOKABLE void FunctionC();//Функция C++ вызываемая из QML
 private:
+    void _FormModel();
+
     QDeclarativeView *mp_ui;
     QObject *mp_root;
+    Model m_model;
 };
 
 #endif // MAINWINDOW_H

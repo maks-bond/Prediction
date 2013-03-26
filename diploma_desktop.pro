@@ -15,19 +15,20 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     modelitem.cpp \
-    csvreader.cpp \
     modelcompany.cpp \
-    modelforecasting.cpp
+    model.cpp \
+    csv.cpp
 
 
 HEADERS  += mainwindow.h \
     modelitem.h \
-    csvreader.h \
     modelcompany.h \
-    modelforecasting.h
+    model.h \
+    csv.h
 
 OTHER_FILES += \
-    main.qml
+    main.qml \
+    Button.qml
 
 RESOURCES += \
     res.qrc

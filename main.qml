@@ -1,8 +1,8 @@
 import QtQuick 1.0
 
  Rectangle {
-     width:400
-     height: 400
+     width:1280
+     height: 800
      color: "#343434"
 
      Component {
@@ -31,10 +31,11 @@ import QtQuick 1.0
 
      ListView {
          id: listView
-         anchors.left: parent.left
+         anchors.fill: parent
+         /*anchors.left: parent.left
          anchors.bottom: mButton.top
          anchors.right: parent.right
-         anchors.top: parent.top
+         anchors.top: parent.top*/
          anchors.margins: 20
          model: mModel
          delegate: fruitDelegate
@@ -46,7 +47,7 @@ import QtQuick 1.0
      Rectangle {
          id: mButton
 
-         anchors { left: listView.left; bottom: parent.bottom; margins: 20 }
+         anchors { left: parent.left; bottom: parent.bottom; margins: 20 }
 
 
          property variant text

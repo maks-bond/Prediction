@@ -4,14 +4,15 @@
 #include <QObject>
 #include <QList>
 
-#include "modelitem.h"
+class ModelItem;
 
 class ModelCompany : public QObject
 {
     Q_OBJECT
 public:
     ModelCompany(QObject *parent = 0);
-    
+    ~ModelCompany();
+
     void AddItem(ModelItem* i_model_item);
     void SetCompanyName(const QString& i_company_name);
 
