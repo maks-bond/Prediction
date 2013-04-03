@@ -1,107 +1,174 @@
 import QtQuick 1.0
 
- Rectangle {
-     width:1280
-     height: 800
-     color: "#343434"
+Item {
+    id : main_form
+    width: 400; height: 600
 
-     Component {
-         id: fruitDelegate
-         Item {
-             id: delegateItem
-             width: listView.width
-             height: 55
-             clip: true
-             Column {
-                  anchors.verticalCenter: parent.verticalCenter
-                  Text {
-                      text: date
-                      font.pixelSize: 15
-                      color: "white"
-                  }
-                  Text {
-                      text: '$' + price
-                      color : "white"
-                  }
+    Column {
+        anchors.horizontalCenter: parent.horizontalCenter
+        //anchors.verticalCenter: parent.verticalCenter
 
-              }
+        //spacing: 5
 
+        Rectangle {
+            id : top
+            color: "lightblue"
+            radius: 10.0
+            width: main_form.width
+            height: main_form.height/2
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if(main_form.state == "")
+                        main_form.state = "Down"
+                    else if(main_form.state == "Up")
+                        main_form.state = ""
+                }
+            }
+
+        }
+        Rectangle {
+            id : bottom
+            color: "gold"
+            radius: 10.0
+            width: main_form.width
+            height: main_form.height/2
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if(main_form.state == ""){
+                        main_form.state = "Up"
+                    }
+                    else if(main_form.state == "Down")
+                        main_form.state = ""
+                }
+            }
+        }
+    }
+    states: [
+        State {
+            name: "Up"
+            PropertyChanges { target: bottom; height: 500}
+            PropertyChanges {target : top; height : 100}
+        },
+        State {
+            name : "Down"
+            PropertyChanges { target: top; height: 500}
+            PropertyChanges {target : bottom; height : 100}
+        }
+    ]
+    transitions: [
+        Transition {
+            from: "Up"
+            to: ""
+            reversible: true
+            NumberAnimation { target: top; property: "height" ;duration: 400}
+            NumberAnimation { target: bottom; property: "height" ;duration: 400}
+        },
+        Transition {
+            from: "Down"
+            to: ""
+            reversible: true
+            NumberAnimation { target: top; property: "height" ; duration: 400}
+            NumberAnimation { target: bottom; property: "height" ; duration: 400}
+        }
+    ]
+}
+
+
+
+
+/*
+Rectangle {
+    color: "#343434"
+    width: 400
+    height: 600
+
+    ListModel {
+         id : testModel
+         ListElement {
+             date: "Bill Smith"
+             price: "555 3264"
+         }
+         ListElement {
+             date: "John Brown"
+             price: "555 8426"
+         }
+         ListElement {
+             date: "Sam Wise"
+             price: "555 0473"
          }
      }
 
-     ListView {
-         id: listView
-         anchors.fill: parent
-         /*anchors.left: parent.left
-         anchors.bottom: mButton.top
-         anchors.right: parent.right
-         anchors.top: parent.top*/
-         anchors.margins: 20
-         model: mModel
-         delegate: fruitDelegate
-         highlight: Rectangle { color: "lightsteelblue"; radius: 3 }
-         focus: true
-     }
+    VisualItemModel {
+        id: itemModel
 
+        PriceList {
+            model : mModel
+            width: view.width; height: view.height
 
-     Rectangle {
-         id: mButton
+            Component.onDestruction: print("destroyed 1")
+        }
+        Rectangle {
+            width: view.width; height: view.height
+            color: "#F0FFF7"
+            Text { text: "Page 2"; font.bold: true; anchors.centerIn: parent }
 
-         anchors { left: parent.left; bottom: parent.bottom; margins: 20 }
+            Component.onDestruction: print("destroyed 2")
+        }
+        Rectangle {
+            width: view.width; height: view.height
+            color: "#F4F0FF"
+            Text { text: "Page 3"; font.bold: true; anchors.centerIn: parent }
 
+            Component.onDestruction: print("destroyed 3")
+        }
+    }
 
-         property variant text
-         signal clicked
+    ListView {
+        id: view
+        anchors { fill: parent; bottomMargin: 40;}
+        model: itemModel
+        preferredHighlightBegin: 0; preferredHighlightEnd: 0
+        highlightRangeMode: ListView.StrictlyEnforceRange
+        orientation: ListView.Horizontal
+        snapMode: ListView.SnapOneItem; flickDeceleration: 2000
+        cacheBuffer: 200
+    }
 
-         height: text.height + 10; width: text.width + 20
-         //border.width: 1
-         radius: 4
+    Rectangle {
+        width: parent.width; height: 40
+        anchors { top: view.bottom; bottom: parent.bottom }
+        color : "black"
 
-         gradient: Gradient {
-             GradientStop {
-                 position: 0.0
-                 color: !mouseArea.pressed ? "#eeeeee" : "#888888"
-             }
-             GradientStop {
-                 position: 1.0
-                 color: !mouseArea.pressed ? "#888888" : "#333333"
-             }
-         }
+        Row {
+            anchors.centerIn: parent
+            spacing: 20
 
-         MouseArea {
-             id: mouseArea
-             anchors.fill: parent
-             onClicked: window.FunctionC()
-         }
+            Button {
+                anchors.verticalCenter: parent.verticalCenter
+                x : 10
+                text : "Forecast"
+            }
 
-         Text {
-             id: text
-             anchors.centerIn:parent
-             font.pointSize: 10
-             text: "Refresh"
-         }
-     }
+            Repeater {
+                model: itemModel.count
 
-     Rectangle {
-             id: memoRect //Имя поля вывода
+                Rectangle {
+                    width: 5; height: 5
+                    radius: 3
+                    color: view.currentIndex == index ? "darkGrey" : "white"
 
-             //Размещаем ниже
-             anchors.left: mButton.right;
-             anchors.top: mButton.top;
-
-             //Размеры поле вывода
-             width: 800
-             height: 35
-
-             //Цвет поля вывода
-             color: "gray"
-
-             TextEdit{
-                 id: memo
-                 objectName: "memo"
-                 wrapMode: TextEdit.Wrap
-                 width:parent.width;
-                 readOnly:true
-             }
-         }
- }
+                    MouseArea {
+                        width: 20; height: 20
+                        anchors.centerIn: parent
+                        onClicked: view.currentIndex = index
+                    }
+                }
+            }
+        }
+    }
+}
+*/

@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Adobe.csv</file>
+        <file>Button.qml</file>
+        <file>PriceList.qml</file>
     </qresource>
 </RCC>
