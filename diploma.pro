@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     modelitem.cpp \
     modelcompany.cpp \
     model.cpp \
-    csv.cpp
+    csv.cpp \
+    recognizer.cpp
 
 HEADERS  += mainwindow.h \
     modelitem.h \
     modelcompany.h \
     model.h \
-    csv.h
+    csv.h \
+    recognizer.h
 
 FORMS    += mainwindow.ui
 
@@ -130,7 +132,10 @@ OTHER_FILES += \
     android/src/org/kde/necessitas/ministro/IMinistroCallback.aidl \
     android/src/org/kde/necessitas/origo/QtActivity.java \
     android/src/org/kde/necessitas/origo/QtApplication.java \
-    android/version.xml
+    android/version.xml \
+    Button.qml \
+    ItemModel.qml \
+    PriceList.qml
 
 RESOURCES += \
     res.qrc
