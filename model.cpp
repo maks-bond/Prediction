@@ -15,14 +15,20 @@ Model::~Model()
     }
 }
 
-void Model::AddCompany(ModelCompany* i_model_comopany)
+void Model::AddCompany(ModelCompany* i_model_company)
 {
-    m_model.append(i_model_comopany);
+    m_model.append(i_model_company);
+    m_names.append(i_model_company->GetCompanyName());
 }
 
 QVector<ModelCompany*> Model::GetListOfCompanies() const
 {
     return m_model;
+}
+
+QVector<QString> Model::GetCompanyNames() const
+{
+    return m_names;
 }
 
 bool Model::HasCompanies() const

@@ -16,11 +16,13 @@ public:
     void AddCompany(ModelCompany* i_model_comopany);
 
     QVector<ModelCompany*> GetListOfCompanies() const;
+    QVector<QString> GetCompanyNames() const;
 
     bool HasCompanies() const;
 
 private:
     QVector<ModelCompany*> m_model;
+    QVector<QString> m_names;
 };
 
 #endif // MODELFORECASTING_H
