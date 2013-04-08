@@ -15,6 +15,7 @@ public:
 
     void AddCompany(DataCompany* ip_model_company);
     TCompanies GetCompaniesData() const;
+    int GetCompanyNumber() const;
     bool IsValid() const;
 
 private:

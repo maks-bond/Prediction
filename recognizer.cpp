@@ -38,31 +38,34 @@ void Recognizer::SetData(DataModel* data)
 
 void Recognizer::_CreateModel()
 {
+    BasicModel basic_model = ModelGenerator::GenerateBasicModel(mp_data->GetCompanyNumber(),m_max_power);
+    QVector<ForecastModel> prev_level_models;
+    QVector<ForecastModel> cur_level_models = ModelGenerator::GenerateForecastModels(basic_model);
     /*
-    CreateBasicModel();
-    while(CompareLevels()){
-        for(int i=0; i< current_models.size();i++){
-            candidate_models = CreateCandidateModels(current_models[i]);
-            SetUpCandidateModels(candidate_models);
-            FilterCandidateModels(candidate_models);
-            EvaluateCandidateModels(candidate_models);
-        }
+    while(CompareLevels(prev_level_models, cur_level_models))
+    {
+        prev_level_models = cur_level_models;
+        cur_level_models = CreateCandidateModels(cur_level_models);
+        ComputeCandidateModels(cur_level_models);
+        //EvaluateCandidateModels(cur_level_models);
+        FilterCandidateModels(cur_level_models);
     }
     */
 }
 
 /*
-Model Recognizer::CreateCandidateModels(Model& model){
-    Model res;
-    for(int i=0;i<model.size();i++){
-        for(int j=i+1;j<model.size();j++){
-            Model cur_model = model[i] + model[j];
+QVector<ForecastModel> Recognizer::CreateCandidateModels(QVector<ForecastModel>& i_models){
+    QVector<ForecastModel> res;
+    for(int i=0;i<i_models.size();i++){
+        for(int j=i+1;j<i_models.size();j++){
+            ForecastModel cur_model = i_models[i] + i_models[j];
             res.append(cur_model);
         }
     }
     return res;
 }
 */
+
 double Recognizer::_EvaluateModel()
 {
     return NOT_VALID;

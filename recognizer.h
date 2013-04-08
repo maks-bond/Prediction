@@ -27,11 +27,12 @@ public:
     static bool IsValidResult(double i_price) {return i_price != NOT_VALID;}
 
 private :
+    double _EvaluateModel();
+    void _CreateModel();
 
     bool m_is_created;
 
-    double _EvaluateModel();
-    void _CreateModel();
+    QVector<ForecastModel> m_models;
 
     DataModel* mp_data;
     int m_max_power;

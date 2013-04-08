@@ -23,6 +23,11 @@ TCompanies DataModel::GetCompaniesData() const
     return m_model;
 }
 
+int DataModel::GetCompanyNumber() const
+{
+    return m_model.size();
+}
+
 bool DataModel::IsValid() const
 {
     return !m_model.empty();
