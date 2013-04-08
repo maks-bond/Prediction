@@ -1,0 +1,16 @@
+#ifndef MODELGENERATOR_H
+#define MODELGENERATOR_H
+
+#include <basicmodel.h>
+#include <forecastmodel.h>
+
+class ModelGenerator
+{
+    BasicModel GenerateBasicModel(int i_number_of_companies, int i_max_generation_length);
+    QVector<ForecastModel> GenerateForecastModels(const BasicModel& i_basic_model);
+
+private:
+    ModelGenerator();    
+};
+
+#endif // MODELGENERATOR_H

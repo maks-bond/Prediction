@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     datacompany.cpp \
     datamodel.cpp \
     forecastmodel.cpp \
-    basicmodel.cpp
+    basicmodel.cpp \
+    modelgenerator.cpp
 
 HEADERS  += mainwindow.h \
     modelitem.h \
@@ -29,7 +30,8 @@ HEADERS  += mainwindow.h \
     datacompany.h \
     datamodel.h \
     forecastmodel.h \
-    basicmodel.h
+    basicmodel.h \
+    modelgenerator.h
 
 FORMS    += mainwindow.ui
 
