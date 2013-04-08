@@ -18,14 +18,16 @@ SOURCES += main.cpp\
     csv.cpp \
     recognizer.cpp \
     datacompany.cpp \
-    datamodel.cpp
+    datamodel.cpp \
+    forecastmodel.cpp
 
 HEADERS  += mainwindow.h \
     modelitem.h \
     csv.h \
     recognizer.h \
     datacompany.h \
-    datamodel.h
+    datamodel.h \
+    forecastmodel.h
 
 FORMS    += mainwindow.ui
 
