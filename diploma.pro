@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     recognizer.cpp \
     datacompany.cpp \
     datamodel.cpp \
-    forecastmodel.cpp
+    forecastmodel.cpp \
+    basicmodel.cpp
 
 HEADERS  += mainwindow.h \
     modelitem.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     recognizer.h \
     datacompany.h \
     datamodel.h \
-    forecastmodel.h
+    forecastmodel.h \
+    basicmodel.h
 
 FORMS    += mainwindow.ui
 
