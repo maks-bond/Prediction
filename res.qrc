@@ -1,8 +1,14 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Adobe.csv</file>
         <file>Button.qml</file>
         <file>PriceList.qml</file>
+        <file>images/clear.png</file>
+        <file>images/lineedit-bg.png</file>
+        <file>images/lineedit-bg-focus.png</file>
+        <file>SearchBox.qml</file>
+        <file>images/stripes.png</file>
+        <file>Glossy.qml</file>
+        <file>CompanyDelegate.qml</file>
     </qresource>
 </RCC>

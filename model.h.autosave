@@ -1,0 +1,28 @@
+#ifndef MODELFORECASTING_H
+#define MODELFORECASTING_H
+
+#include <QVector>
+
+class DataCompany;
+
+typedef QVector<DataCompany*> TCompanies;
+
+class Model
+{
+public:
+    Model(QObject *ip_parent = 0);
+    ~Model();
+
+    void AddCompany(DataCompany* ip_model_company);
+
+    TCompanies GetCompaniesData() const;
+    QVector<QString> GetCompaniesNames() const;
+
+    bool IsValid() const;
+
+
+private:
+    TCompanies m_model;
+};
+
+#endif // MODELFORECASTING_H

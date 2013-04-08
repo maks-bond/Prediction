@@ -1,17 +1,22 @@
  import QtQuick 1.0
 
  Rectangle {
+     id : container
      property alias text: textItem.text
 
-     width: 100; height: 20
-     //border.width: 1
-     radius: 2
+     signal clicked
+
+     width: 60; height: 25
+     radius: 1
      smooth: true
+     color : "steelblue"
 
-     gradient: Gradient {
-         GradientStop { position: 0.0; color: "darkGrey" }
-         GradientStop { position: 0.66; color: "#343434" }
+     Glossy{}
 
+     MouseArea {
+         id : mouseRegion
+         anchors.fill : parent
+         onClicked: {container.clicked();}
      }
 
      Text {
@@ -19,6 +24,16 @@
          anchors.centerIn: parent
          font.pointSize: 13
          color: "white"
+         style: Text.Raised
+         styleColor: "black"
      }
+
+     states: [
+         State {
+             name: "Pressed"
+             when: mouseRegion.pressed == true
+             PropertyChanges { target: container; opacity: 0.5 }
+         }
+     ]
 
  }

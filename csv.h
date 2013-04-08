@@ -1,17 +1,18 @@
 #ifndef CSV_H
 #define CSV_H
 
-#include <QList>
+#include <QVector>
 #include <QString>
 
 class QDir;
-class ModelCompany;
+class DataCompany;
 
 class CSV
 {
 public:
-    static QList<QString> Find(const QDir& i_dir);
-    static void Read(ModelCompany& o_model_company, const QString& i_file);
+    // returns list of csv file names
+    static QVector<QString> Find(const QDir& i_dir);
+    static DataCompany* Read(const QString& i_file);
 
 private:
     CSV(){}

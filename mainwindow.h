@@ -8,9 +8,8 @@
 #include <QDeclarativeContext>
 #include <QFileDialog>
 
-#include "modelitem.h"
-#include "modelcompany.h"
-#include "model.h"
+#include "datacompany.h"
+#include "datamodel.h"
 
 namespace Ui {
     class MainWindow;
@@ -29,7 +28,7 @@ private:
 
     QDeclarativeView *mp_ui;
     QObject *mp_root;
-    Model m_model;
+    DataModel m_model;
 };
 
 #endif // MAINWINDOW_H

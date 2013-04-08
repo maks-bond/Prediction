@@ -3,14 +3,18 @@
 #include <QDir>
 #include <QDirIterator>
 
-#include "modelcompany.h"
-#include "modelitem.h"
+#include "datacompany.h"
 
-QList<QString> CSV::Find(const QDir &i_dir)
+namespace
+{
+    const QString g_date_format("yyyy-M-d");
+}
+
+QVector<QString> CSV::Find(const QDir &i_dir)
 {
     QStringList filters("*.csv");
     QDirIterator dir_iterator(i_dir.path(), filters, QDir::NoFilter, QDirIterator::Subdirectories);
-    QList<QString> res;
+    QVector<QString> res;
 
     while(1)
     {
@@ -26,11 +30,13 @@ QList<QString> CSV::Find(const QDir &i_dir)
     return res;
 }
 
-void CSV::Read(ModelCompany& o_model_company, const QString& i_file)
+DataCompany* CSV::Read(const QString &i_file)
 {
     QFile file(i_file);
+    DataCompany* p_res = new DataCompany();
+    p_res->SetCompanyName(QFileInfo(file).baseName());
 
-    o_model_company.SetCompanyName(QFileInfo(file).baseName());
+    bool first_date_flag = true;
 
     if(file.open(QIODevice::ReadOnly))
     {
@@ -38,9 +44,21 @@ void CSV::Read(ModelCompany& o_model_company, const QString& i_file)
         {
             QString line = file.readLine();
             QStringList vals = line.split(',');
-            ModelItem* model_item = new ModelItem(vals[0], vals[4].toDouble());
-            o_model_company.AddItem(model_item);
+            QDate cur_date = QDate::fromString(vals[0],g_date_format);
+
+            if(first_date_flag)
+            {
+                if(cur_date.isValid())
+                {
+                    p_res->SetStartPeriod(cur_date);
+                    first_date_flag = false;
+                }
+                else continue;
+            }
+
+            p_res->AddSeqPrice(vals[4].toDouble());
         }
         file.close();
     }
+    return p_res;
 }

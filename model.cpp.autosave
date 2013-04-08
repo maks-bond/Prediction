@@ -1,6 +1,5 @@
 #include "model.h"
-
-#include "modelcompany.h"
+#include "datacompany.h"
 
 Model::Model(QObject *parent) :
     QObject(parent)
@@ -15,13 +14,13 @@ Model::~Model()
     }
 }
 
-void Model::AddCompany(ModelCompany* i_model_company)
+void Model::AddCompany(DataCompany* i_model_company)
 {
     m_model.append(i_model_company);
     m_names.append(i_model_company->GetCompanyName());
 }
 
-QVector<ModelCompany*> Model::GetListOfCompanies() const
+QVector<DataCompany*> Model::GetListOfCompanies() const
 {
     return m_model;
 }
@@ -34,4 +33,9 @@ QVector<QString> Model::GetCompanyNames() const
 bool Model::HasCompanies() const
 {
     return !m_model.empty();
+}
+
+bool Model::IsValid() const
+{
+    return true; // should be implemented
 }

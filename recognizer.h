@@ -1,23 +1,39 @@
+// Model - mathematical model for prediction
+// Steps of algorithm :
+// 1.)
+
+
 #ifndef RECOGNIZER_H
 #define RECOGNIZER_H
 
-#include <model.h>
-#include <modelitem.h>
+#include <datamodel.h>
 #include <QDate>
 
 
 class Recognizer
 {
 public:
-    Recognizer(QDate& start, QDate& end);
-    QList<ModelItem*> Forecast(const Model& model,int comp_index);
+    Recognizer(DataModel* ip_data);
+    Recognizer();
 
-    void SetStartPeriod(QDate& start);
-    void SetEndPeriod(QDate& end);
+    double Forecast();
+
+
+    void SetMaxPower(int i_max_power);
+    void SetData(DataModel* ip_data);
+
+    static const int NOT_VALID = -1; // should be implemented
+    static bool IsValidResult(double i_price) {return i_price != NOT_VALID;}
 
 private :
-    QDate m_period_start;
-    QDate m_period_end;
+
+    bool m_is_created;
+
+    double _EvaluateModel();
+    void _CreateModel();
+
+    DataModel* mp_data;
+    int m_max_power;
 };
 
 #endif // RECOGNIZER_H

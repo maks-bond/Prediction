@@ -15,17 +15,17 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     modelitem.cpp \
-    modelcompany.cpp \
-    model.cpp \
     csv.cpp \
-    recognizer.cpp
+    recognizer.cpp \
+    datacompany.cpp \
+    datamodel.cpp
 
 HEADERS  += mainwindow.h \
     modelitem.h \
-    modelcompany.h \
-    model.h \
     csv.h \
-    recognizer.h
+    recognizer.h \
+    datacompany.h \
+    datamodel.h
 
 FORMS    += mainwindow.ui
 
@@ -135,7 +135,10 @@ OTHER_FILES += \
     android/version.xml \
     Button.qml \
     ItemModel.qml \
-    PriceList.qml
+    PriceList.qml \
+    SearchBox.qml \
+    Glossy.qml \
+    CompanyDelegate.qml
 
 RESOURCES += \
     res.qrc
