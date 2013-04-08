@@ -9,6 +9,7 @@
 #include <datamodel.h>
 #include <QDate>
 
+#include "modelgenerator.h"
 
 class Recognizer
 {
