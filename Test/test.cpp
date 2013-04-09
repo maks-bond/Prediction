@@ -2,13 +2,14 @@
 #include <QtTest>
 
 #include "../mathutils.h"
+#include "../modelgenerator.h"
 
-class MathUtilsTest : public QObject
+class Test : public QObject
 {
     Q_OBJECT
     
 public:
-    MathUtilsTest();
+    Test();
     
 private Q_SLOTS:
     void SnoobTest();
@@ -22,13 +23,16 @@ private Q_SLOTS:
 
     void ApplyMaskForElementsTest();
     void ApplyMaskForElementsTest_data();
+
+    void GenerateBasicModelTest();
+    void GenerateBasicModelTest_data();
 };
 
-MathUtilsTest::MathUtilsTest()
+Test::Test()
 {
 }
 
-void MathUtilsTest::SnoobTest_data()
+void Test::SnoobTest_data()
 {
     QTest::addColumn<int>("snoob");
     QTest::addColumn<int>("result");
@@ -42,7 +46,7 @@ void MathUtilsTest::SnoobTest_data()
     QTest::newRow("46")<<46<<51;
 }
 
-void MathUtilsTest::SnoobTest()
+void Test::SnoobTest()
 {
     QFETCH(int, snoob);
     QFETCH(int, result);
@@ -51,20 +55,20 @@ void MathUtilsTest::SnoobTest()
     //QVERIFY(MathUtils::Snoob(3) == 5);
 }
 
-void MathUtilsTest::GenerateMinimumNumberOfBitsTest()
+void Test::GenerateMinimumNumberOfBitsTest()
 {
     QVERIFY(MathUtils::GenerateMinimumNumberOfBits(1) == 1);
     QVERIFY(MathUtils::GenerateMinimumNumberOfBits(2) == 3);
 }
 
-void MathUtilsTest::GenerateMaximumNumberOfBitsTest()
+void Test::GenerateMaximumNumberOfBitsTest()
 {
     QVERIFY(MathUtils::GenerateMaximumNumberOfBits(2, 4) == 12);
     QVERIFY(MathUtils::GenerateMaximumNumberOfBits(2, 2) == 3);
     QVERIFY(MathUtils::GenerateMaximumNumberOfBits(1, 4) == 8);
 }
 
-void MathUtilsTest::GenerateCombinationsOfOneBitsTest()
+void Test::GenerateCombinationsOfOneBitsTest()
 {
     QFETCH(int, bits);
     QFETCH(int, max_bits);
@@ -73,7 +77,7 @@ void MathUtilsTest::GenerateCombinationsOfOneBitsTest()
     QCOMPARE(MathUtils::GenerateCombinationsOfOneBits(bits, max_bits), result);
 }
 
-void MathUtilsTest::GenerateCombinationsOfOneBitsTest_data()
+void Test::GenerateCombinationsOfOneBitsTest_data()
 {
     QTest::addColumn<int>("bits");
     QTest::addColumn<int>("max_bits");
@@ -101,7 +105,7 @@ void MathUtilsTest::GenerateCombinationsOfOneBitsTest_data()
     QTest::newRow("Test3")<<2<<4<<test3;
 }
 
-void MathUtilsTest::ApplyMaskForElementsTest()
+void Test::ApplyMaskForElementsTest()
 {
     QFETCH(QVector<int>, elements);
     QFETCH(int, bits);
@@ -110,7 +114,7 @@ void MathUtilsTest::ApplyMaskForElementsTest()
     QCOMPARE(MathUtils::ApplyMaskForElements(elements, bits), result);
 }
 
-void MathUtilsTest::ApplyMaskForElementsTest_data()
+void Test::ApplyMaskForElementsTest_data()
 {
     QTest::addColumn<QVector<int> >("elements");
     QTest::addColumn<int>("bits");
@@ -154,6 +158,32 @@ void MathUtilsTest::ApplyMaskForElementsTest_data()
     QTest::newRow("Test6")<<test2<<7<<result6;
 }
 
-QTEST_APPLESS_MAIN(MathUtilsTest)
+void Test::GenerateBasicModelTest()
+{
+    QFETCH(int, number_of_companies);
+    QFETCH(int, max_generation_length);
+    QFETCH(BasicModel, result);
 
-#include "tst_mathutilstest.moc"
+    QCOMPARE(ModelGenerator::GenerateBasicModel(number_of_companies, max_generation_length), result);
+}
+
+void Test::GenerateBasicModelTest_data()
+{
+    QTest::addColumn<int>("number_of_companies");
+    QTest::addColumn<int>("max_generation_length");
+    QTest::addColumn<BasicModel>("result");
+
+    BasicModel result;
+    result.PushComponent(QVector<int>(1, 0));
+    result.PushComponent(QVector<int>(1, 1));
+    QVector<int> comp3;
+    comp3.push_back(0);
+    comp3.push_back(1);
+    result.PushComponent(comp3);
+
+    QTest::newRow("Test1")<<2<<2<<result;
+}
+
+QTEST_APPLESS_MAIN(Test)
+#include "test.moc"
+

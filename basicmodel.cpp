@@ -23,3 +23,8 @@ int BasicModel::Size() const
 {
     return m_components.size();
 }
+
+bool BasicModel::operator ==(const BasicModel &i_other) const
+{
+    return m_components == i_other.m_components;
+}

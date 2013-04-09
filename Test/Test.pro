@@ -8,14 +8,21 @@ QT       += testlib
 
 QT       -= gui
 
-TARGET = tst_mathutilstest
+TARGET = test
 CONFIG   += console
 CONFIG   -= app_bundle
 
 TEMPLATE = app
 
 INCLUDEPATH += ../
-HEADERS += ../mathutils.h
-SOURCES += ../mathutils.cpp
-SOURCES += tst_mathutilstest.cpp
+HEADERS += ../mathutils.h \
+    ../modelgenerator.h \
+    ../basicmodel.h
+
+SOURCES += ../mathutils.cpp \
+    ../modelgenerator.cpp \
+    test.cpp \
+    ../basicmodel.cpp
+
+SOURCES +=
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
