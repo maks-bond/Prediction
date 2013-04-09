@@ -1,5 +1,7 @@
 #include "mathutils.h"
 
+#include <stdexcept>
+
 // this function returns next higher number with same number of set bits as x.
 int MathUtils::Snoob(int i_x)
 {
@@ -38,6 +40,22 @@ int MathUtils::Snoob(int i_x)
     }
 
     return next;
+}
+
+int MathUtils::GenerateMinimumNumberOfBits(int i_bits)
+{
+    if(i_bits<=0)
+        throw std::logic_error("Bad number of bits");
+
+    return (1<<i_bits)-1;
+}
+
+int MathUtils::GenerateMaximumNumberOfBits(int i_bits, int i_max_bit)
+{
+    if(i_bits > i_max_bit || i_bits <= 0)
+        throw std::logic_error("Bad number of bits");
+
+    return GenerateMinimumNumberOfBits(i_bits)<<(i_max_bit - i_bits);
 }
 
 MathUtils::MathUtils()

@@ -13,6 +13,9 @@ public:
 private Q_SLOTS:
     void SnoobTest();
     void SnoobTest_data();
+
+    void GenerateMinimumNumberOfBitsTest();
+    void GenerateMaximumNumberOfBitsTest();
 };
 
 MathUtilsTest::MathUtilsTest()
@@ -40,6 +43,18 @@ void MathUtilsTest::SnoobTest()
 
     QCOMPARE(MathUtils::Snoob(snoob), result);
     //QVERIFY(MathUtils::Snoob(3) == 5);
+}
+
+void MathUtilsTest::GenerateMinimumNumberOfBitsTest()
+{
+    QVERIFY(MathUtils::GenerateMinimumNumberOfBits(1) == 1);
+    QVERIFY(MathUtils::GenerateMinimumNumberOfBits(2) == 3);
+}
+
+void MathUtilsTest::GenerateMaximumNumberOfBitsTest()
+{
+    QVERIFY(MathUtils::GenerateMaximumNumberOfBits(2, 4) == 12);
+    QVERIFY(MathUtils::GenerateMaximumNumberOfBits(2, 2) == 3);
 }
 
 QTEST_APPLESS_MAIN(MathUtilsTest)
