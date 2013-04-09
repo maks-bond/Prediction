@@ -58,6 +58,39 @@ int MathUtils::GenerateMaximumNumberOfBits(int i_bits, int i_max_bit)
     return GenerateMinimumNumberOfBits(i_bits)<<(i_max_bit - i_bits);
 }
 
+QVector<int> MathUtils::GenerateCombinationsOfOneBits(int i_bits, int i_max_bits)
+{
+    QVector<int> result;
+
+    int cur = GenerateMinimumNumberOfBits(i_bits);
+
+    while(cur<=GenerateMaximumNumberOfBits(i_bits, i_max_bits))
+    {
+        result.push_back(cur);
+        cur = Snoob(cur);
+    }
+
+    return result;
+}
+
+QVector<int> MathUtils::ApplyMaskForElements(const QVector<int> &i_elements, int i_mask)
+{
+    if(i_mask < 0)
+        throw std::logic_error("Bad number of bits");
+
+    QVector<int> result;
+
+    for(int i = 0; i<=i_elements.size(); ++i)
+    {
+        if(i_mask&1)
+            result.push_back(i_elements[i]);
+
+        i_mask>>=1;
+    }
+
+    return result;
+}
+
 MathUtils::MathUtils()
 {
 }
