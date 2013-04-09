@@ -32,6 +32,7 @@ local.properties
 ## Android
 #################
 Android
+Test-build-Desktop_Qt_5_0_1_MinGW_32bit-Debug
 
 #################
 ## Visual Studio
