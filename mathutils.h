@@ -4,11 +4,11 @@
 class MathUtils
 {
 public:
-    static int Snoob(int a, int b);
+    //same number of one bits(higher)
+    static int Snoob(int i_x);
 
 private:
     MathUtils();
-
 };
 
 #endif // MATHUTILS_H
