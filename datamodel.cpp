@@ -1,34 +1,32 @@
 #include "datamodel.h"
 #include "datacompany.h"
 
+#include <stdexcept>
+
 DataModel::DataModel()
 {
 }
 
-DataModel::~DataModel()
+void DataModel::SetStartDate(const QDate i_date)
 {
-    for(int i = 0; i<m_model.size(); ++i)
-    {
-        delete m_model[i];
-    }
+    m_start_date = i_date;
 }
 
-void DataModel::AddCompany(DataCompany* ip_model_company)
+void DataModel::AddCompany(const DataCompany &i_data_company)
 {
-    m_model.append(ip_model_company);
+    if(i_data_company.GetStartDate() != m_start_date)
+        throw std::logic_error("Bad date!");
+
+    m_data.PushVariable(i_data_company.GetPrices());
+    m_companies_names.push_back(i_data_company.GetCompanyName());
 }
 
-TCompanies DataModel::GetCompaniesData() const
+const Matrix &DataModel::GetRawData() const
 {
-    return m_model;
-}
-
-int DataModel::GetCompanyNumber() const
-{
-    return m_model.size();
+    return m_data;
 }
 
 bool DataModel::IsValid() const
 {
-    return !m_model.empty();
+    return m_start_date.isValid() && !m_data.IsEmpty() && !m_companies_names.empty();
 }

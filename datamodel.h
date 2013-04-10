@@ -1,25 +1,30 @@
 #ifndef MODELFORECASTING_H
 #define MODELFORECASTING_H
 
+#include "datacompany.h"
+#include "mathstructures.h"
+
+#include <QDate>
 #include <QVector>
 
-class DataCompany;
 
-typedef QVector<DataCompany*> TCompanies;
+typedef QVector<QString> TCompaniesNames;
 
 class DataModel
 {
 public:
     DataModel();
-    ~DataModel();
 
-    void AddCompany(DataCompany* ip_model_company);
-    TCompanies GetCompaniesData() const;
-    int GetCompanyNumber() const;
+    void SetStartDate(const QDate i_date);
+    void AddCompany(const DataCompany& i_data_company);
+    const Matrix& GetRawData() const;
     bool IsValid() const;
 
 private:
-    TCompanies m_model;
+    //TCompanies m_model;
+    TCompaniesNames m_companies_names;
+    QDate m_start_date;
+    Matrix m_data;
 };
 
 #endif // MODELFORECASTING_H

@@ -50,3 +50,8 @@ void ForecastModel::SetParams(QVector<int>& i_a)
     m_a = i_a;
     m_is_comptuted = false;
 }
+
+ForecastModel ForecastModel::operator +(const ForecastModel &i_other) const
+{
+    return ForecastModel();
+}

@@ -1,30 +1,27 @@
 #ifndef MODELCOMPANY_H
 #define MODELCOMPANY_H
 
-#include <QVector>
-#include <QDate>
+#include "mathstructures.h"
 
-typedef QVector<double> TPrices;
+#include <QDate>
 
 class DataCompany
 {
 public:
     DataCompany();
-    ~DataCompany();
 
-    // add sequential price to data table
-    void AddSeqPrice(double i_price);
+    void PushPrice(double i_price);
 
     void SetCompanyName(const QString& i_company_name);
-    void SetStartPeriod(const QDate& i_period_start);
+    void SetStartDate(const QDate& i_period_start);
     QString GetCompanyName() const;
-    QDate GetStartPeriod() const;
-    TPrices GetPrices() const;
+    QDate GetStartDate() const;
+    Matrix::TVariable GetPrices() const;
 
 private:
-    QDate m_period_start;
+    QDate m_start_date;
     QString m_company_name;
-    TPrices m_model;
+    Matrix::TVariable m_prices;
 };
 
 #endif // MODELCOMPANY_H

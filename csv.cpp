@@ -30,14 +30,15 @@ QVector<QString> CSV::Find(const QDir &i_dir)
     return res;
 }
 
-DataCompany* CSV::Read(const QString &i_file)
+DataCompany CSV::Read(const QString &i_file)
 {
     QFile file(i_file);
-    DataCompany* p_res = new DataCompany();
-    p_res->SetCompanyName(QFileInfo(file).baseName());
+    DataCompany data_company;
+    data_company.SetCompanyName(QFileInfo(file).baseName());
 
     bool first_date_flag = true;
 
+    //HERE WE ASSUME THAT DATES IS CONSEQUENTIAL!!!
     if(file.open(QIODevice::ReadOnly))
     {
         while(!file.atEnd())
@@ -50,15 +51,15 @@ DataCompany* CSV::Read(const QString &i_file)
             {
                 if(cur_date.isValid())
                 {
-                    p_res->SetStartPeriod(cur_date);
+                    data_company.SetStartDate(cur_date);
                     first_date_flag = false;
                 }
                 else continue;
             }
 
-            p_res->AddSeqPrice(vals[4].toDouble());
+            data_company.PushPrice(vals[4].toDouble());
         }
         file.close();
     }
-    return p_res;
+    return data_company;
 }

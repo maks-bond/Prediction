@@ -16,24 +16,28 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     modelitem.cpp \
     csv.cpp \
-    recognizer.cpp \
-    datacompany.cpp \
     datamodel.cpp \
     forecastmodel.cpp \
     basicmodel.cpp \
     modelgenerator.cpp \
-    mathutils.cpp
+    mathutils.cpp \
+    abstractgmdh.cpp \
+    forecaster.cpp \
+    mathstructures.cpp \
+    datacompany.cpp
 
 HEADERS  += mainwindow.h \
     modelitem.h \
     csv.h \
-    recognizer.h \
-    datacompany.h \
     datamodel.h \
     forecastmodel.h \
     basicmodel.h \
     modelgenerator.h \
-    mathutils.h
+    mathutils.h \
+    abstractgmdh.h \
+    forecaster.h \
+    mathstructures.h \
+    datacompany.h
 
 FORMS    += mainwindow.ui
 

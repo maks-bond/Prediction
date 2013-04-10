@@ -1,0 +1,6 @@
+-Create UML diagrams
+-Create fabrics for  GMDH
+-Create Controller and presenter
+-Decompose testing
+-Add settings class
+-Check assuming of the consequential prices

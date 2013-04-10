@@ -15,6 +15,8 @@ public:
 
     void SetParams(QVector<int>& i_a);
 
+    ForecastModel operator +(const ForecastModel& i_other) const;
+
 private :
     void _Compute();
 

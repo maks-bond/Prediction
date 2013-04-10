@@ -28,7 +28,7 @@ void MainWindow::FunctionC()
 
 void MainWindow::_FormModel()
 {
-    QDir dir(QDir::currentPath());
+    /*QDir dir(QDir::currentPath());
     QVector<QString> csv_files = CSV::Find(dir);
     //QObject* p_memo = mp_root->findChild<QObject*>("memo");
     //p_memo->setProperty("text", QVariant::fromValue(dir.path()));
@@ -37,6 +37,7 @@ void MainWindow::_FormModel()
         DataCompany* p_company = CSV::Read(csv_files[i]);
         m_model.AddCompany(p_company);
     }
+    */
 }
 
 MainWindow::~MainWindow()
