@@ -9,13 +9,6 @@ Component{
 
         property real detailsOpacity : 0
 
-        Rectangle {
-            id : hightlight
-            width: parent.width; height : parent.height;
-            opacity: wrapper.detailsOpacity
-            color: "steelblue"
-        }
-
         Row {
             anchors.fill : parent
             anchors.margins: 10
@@ -31,10 +24,8 @@ Component{
                 //anchors.verticalCenter: parent.verticalCenter
 
                 onClicked:{
-                    if(wrapper.state == "Current")
-                        wrapper.state = ""
-                    else
-                        wrapper.state = "Current"
+                    wrapper.state = ""
+                    wrapper.ListView.view.currentIndex = -1
                 }
             }
             Button{
@@ -46,6 +37,7 @@ Component{
 
             }
         }
+
         // indent the item if it is the current item
         states: State {
             name: "Current"
@@ -53,7 +45,6 @@ Component{
             //PropertyChanges { target: wrapper; x: 20 }
             PropertyChanges { target: wrapper; height: 200 }
             PropertyChanges { target: wrapper; detailsOpacity: 1 }
-            //PropertyChanges {target : wrapper; color: "black"}
         }
         transitions: Transition {
             from: "Current"
@@ -63,7 +54,6 @@ Component{
                 //NumberAnimation { properties: "x"; duration: 200 }
                 NumberAnimation {properties: "height"; duration:  200}
                 NumberAnimation {properties: "detailsOpacity"; duration:  200}
-                //ColorAnimation { from: "black"; to: "steelblue"; duration: 200 }
             }
         }
         MouseArea {

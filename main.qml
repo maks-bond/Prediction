@@ -80,6 +80,12 @@ Rectangle {
                     //width: parent.width; height: parent.height
                     anchors.fill : parent
                     delegate: CompanyDelegate {}
+                    highlight: Rectangle{
+                        color: "steelblue";
+                        anchors.horizontalCenter: parent.horizontalCenter;
+                        width: parent.width-10;
+                        radius: 2
+                    }
                 }
             }
 
