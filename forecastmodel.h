@@ -14,8 +14,9 @@ public:
     double Quality();
 
     void SetParams(QVector<int>& i_a);
+    QVector<int> GetParams();
 
-    ForecastModel operator +(const ForecastModel& i_other) const;
+    ForecastModel operator +(ForecastModel& i_other) const;
 
 private :
     void _Compute();

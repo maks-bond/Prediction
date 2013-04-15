@@ -51,7 +51,18 @@ void ForecastModel::SetParams(QVector<int>& i_a)
     m_is_comptuted = false;
 }
 
-ForecastModel ForecastModel::operator +(const ForecastModel &i_other) const
+QVector<int> ForecastModel::GetParams()
 {
-    return ForecastModel();
+    return m_a;
+}
+
+ForecastModel ForecastModel::operator +(ForecastModel &i_other) const
+{
+    QVector<int> params(m_a);
+    QVector<int> params_ad = i_other.GetParams();
+    for(int i=0;i<params_ad.size();i++){
+        params.push_back(params_ad[i]);
+    }
+    qSort(params);
+    return ForecastModel(params);
 }

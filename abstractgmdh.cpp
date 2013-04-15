@@ -50,8 +50,8 @@ AbstractGMDH::TForecastModels AbstractGMDH::_CreateBestModels(const AbstractGMDH
     TForecastModels res;
     for(int i=0;i<i_prev_models.size();i++){
         for(int j=i+1;j<i_prev_models.size();j++){
-            ForecastModel cur_model = i_prev_models[i] + i_prev_models[j];
-            res.append(cur_model);
+            ForecastModel m1 = i_prev_models[i], m2 = i_prev_models[j] ;
+            res.append(m1+m2);
         }
     }
     return res;
