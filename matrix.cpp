@@ -75,7 +75,7 @@ Matrix::TTimeSlice Matrix::GetTimeSlice(int i_time, const TFilter& i_filters) co
     TTimeSlice filter_res;
 
     for(int i=0;i<i_filters.size();i++){
-        int k = filters[i];
+        int k = i_filters[i];
         filter_res.push_back(res[k]);
     }
 
