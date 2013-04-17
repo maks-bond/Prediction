@@ -1,5 +1,4 @@
 #include "abstractgmdh.h"
-
 #include "modelgenerator.h"
 
 #include <stdexcept>
