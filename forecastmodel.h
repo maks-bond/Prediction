@@ -3,6 +3,8 @@
 
 #include <QVector>
 
+#include "matrix.h"
+
 class ForecastModel
 {
 
@@ -11,6 +13,7 @@ public:
     ForecastModel(QVector<int>& i_a);
 
     double Evaluate(const QVector<double> i_a);
+    void SetUp(const Matrix::TVariable& y,const Matrix& X);
     double Quality();
 
     void SetParams(QVector<int>& i_a);
@@ -19,9 +22,7 @@ public:
     ForecastModel operator +(ForecastModel& i_other) const;
 
 private :
-    void _Compute();
-
-    bool m_is_comptuted;
+    bool m_is_computed;
     double m_quality;
     QVector<double> m_w; // factors in regression model
     QVector<int> m_a; // variables in regression model

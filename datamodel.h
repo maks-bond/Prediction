@@ -2,7 +2,7 @@
 #define MODELFORECASTING_H
 
 #include "datacompany.h"
-#include "mathstructures.h"
+#include "matrix.h"
 
 #include <QDate>
 #include <QVector>
@@ -16,7 +16,11 @@ public:
     DataModel();
 
     void SetStartDate(const QDate i_date);
-    void AddCompany(const DataCompany& i_data_company);
+    QDate GetStartDate() const;
+    void AddCompanyData(const DataCompany& i_data_company);
+    const Matrix::TVariable& GetRawData(const QString& i_comp_name) const;
+    Matrix GetRawDataExcept(const QString& i_comp_name) const;
+    Matrix::TTimeSlice GetTimeSliceExcept(const QDate& i_date, const QString& i_comp_name) const;
     const Matrix& GetRawData() const;
     bool IsValid() const;
 

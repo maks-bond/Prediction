@@ -70,7 +70,7 @@ Rectangle {
             Rectangle {
                 id : search_page
 
-                color : "blue"
+                color : "#343434"
                 radius: 5
                 width : parent.width; height : parent.height
 
@@ -99,7 +99,7 @@ Rectangle {
 
                 Rectangle {
                     id : top
-                    color: "lightblue"
+                    color: "darkGrey"
                     radius: 5
                     width: parent.width; height: parent.height/2
 
@@ -115,7 +115,7 @@ Rectangle {
 
                 Rectangle {
                     id : bottom
-                    color: "gold"
+                    color: "#343434"
                     radius: 5
                     width: parent.width; height: parent.height/2
 

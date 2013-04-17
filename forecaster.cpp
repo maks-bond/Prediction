@@ -9,16 +9,16 @@ Forecaster::Forecaster()
 {
 }
 
-double Forecaster::Forecast()
+double Forecaster::Forecast(const QString& i_comp_name)
 {
     if(!mp_data || !mp_data->IsValid() || !mp_gmdh_algo)
         throw std::logic_error("Data Model is not valid");
 
     // create gmdh models
-    mp_gmdh_algo->SetData(mp_data->GetRawData());
+    mp_gmdh_algo->SetData(mp_data->GetRawDataExcept(i_comp_name),mp_data->GetRawData(i_comp_name));
     //Someone must set up here the max power coef!!!
     mp_gmdh_algo->CreateModels(2);
-    return mp_gmdh_algo->Evaluate(mp_data->GetRawData());
+    return mp_gmdh_algo->Evaluate(mp_data->GetTimeSliceExcept(mp_data->GetStartDate(),i_comp_name));
 }
 
 void Forecaster::SetData(const DataModel* data)

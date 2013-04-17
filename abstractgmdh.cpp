@@ -9,17 +9,18 @@ AbstractGMDH::AbstractGMDH()
 {
 }
 
-void AbstractGMDH::SetData(const Matrix &i_data)
+void AbstractGMDH::SetData(const Matrix &i_X, const Matrix::TVariable &i_y)
 {
-    m_data = i_data;
+    m_y = i_y;
+    m_X = i_X;
 }
 
 void AbstractGMDH::CreateModels(int i_max_power)
 {
-    if(m_data.IsEmpty())
+    if(m_X.IsEmpty())
         throw std::logic_error("You must set up data!");
 
-    BasicModel basic_model = ModelGenerator::GenerateBasicModel(m_data.GetVariablesNumber()
+    BasicModel basic_model = ModelGenerator::GenerateBasicModel(m_X.GetVariablesNumber()
                                                                 , i_max_power);
     TForecastModels prev_level_models;
     m_best_models = ModelGenerator::GenerateForecastModels(basic_model);
@@ -35,13 +36,13 @@ void AbstractGMDH::CreateModels(int i_max_power)
     m_is_computed = true;
 }
 
-double AbstractGMDH::Evaluate(const Matrix& i_evaluation_data)
+double AbstractGMDH::Evaluate(const Matrix::TTimeSlice &i_time_slice)
 {
     if(!m_is_computed)
         throw std::logic_error("Models must be computed!");
 
     //Here we must store the matrix by reference!!!
-    _Evaluate(i_evaluation_data);
+    _Evaluate(i_time_slice);
     return 0;
 }
 
@@ -60,4 +61,8 @@ AbstractGMDH::TForecastModels AbstractGMDH::_CreateBestModels(const AbstractGMDH
 
 void AbstractGMDH::_SetUpBestModels()
 {
+    for(int i=0;i<m_best_models.size();i++){
+        ForecastModel cur_model = m_best_models[i];
+        cur_model.SetUp(m_y,m_X.Filter(cur_model.GetParams()));
+    }
 }

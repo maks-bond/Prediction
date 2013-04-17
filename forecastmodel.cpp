@@ -1,46 +1,55 @@
 #include "forecastmodel.h"
+#include "alglib/interpolation.h"
+
+#include <stdexcept>
+#include <vector>
 
 ForecastModel::ForecastModel()
-    : m_is_comptuted(false), m_quality(-1)
+    : m_is_computed(false), m_quality(-1)
 {
 
 }
 
 ForecastModel::ForecastModel(QVector<int> &i_a)
-    : m_is_comptuted(false), m_a(i_a), m_quality(-1)
+    : m_is_computed(false), m_a(i_a), m_quality(-1)
 {
 
 }
 
 double ForecastModel::Evaluate(const QVector<double> i_a)
 {
-    if(!m_is_comptuted) _Compute();
-    double res = 0;
+    if(!m_is_computed) throw std::logic_error("Set up model!");
 
+    double res = 0;
     for(int j=0;j<i_a.size();j++) res+= i_a[j]*m_w[j];
 
     return res;
 }
 
-
-void ForecastModel::_Compute()
+void ForecastModel::SetUp(const Matrix::TVariable &y, const Matrix &X)
 {
-    if(m_is_comptuted) return;
+    alglib::real_1d_array a_y;
+    a_y.setcontent(y.size(),y.constData());
+    alglib::real_2d_array a_X;
+    a_X.setcontent(X.GetObservationNumber(),X.GetVariablesNumber(),X.Data());
+    alglib::real_1d_array a_w;
+    alglib::lsfitreport a_report;
+    int a_code;
 
-    //implement
+    alglib::lsfitlinear(a_y,a_X,a_code,a_w,a_report);
 
-    m_is_comptuted = true;
+    if(a_code == -4) throw std::logic_error("Can't fit model!");
+
+    double* p_w = a_w.getcontent();
+    m_w.fromStdVector(std::vector<double>(p_w,p_w+X.GetVariablesNumber()));
+    m_is_computed = true;
+    m_quality = a_report.avgerror;
 }
 
 
 double ForecastModel::Quality()
 {
-    if(m_quality != -1) return m_quality;
-    if(!m_is_comptuted) _Compute();
-
-    m_quality = 0;
-    // implement
-
+    if(!m_is_computed) throw std::logic_error("Set up model!");
     return m_quality;
 }
 
@@ -48,7 +57,7 @@ void ForecastModel::SetParams(QVector<int>& i_a)
 {
     if(m_a == i_a) return;
     m_a = i_a;
-    m_is_comptuted = false;
+    m_is_computed = false;
 }
 
 QVector<int> ForecastModel::GetParams()

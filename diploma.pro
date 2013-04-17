@@ -23,8 +23,17 @@ SOURCES += main.cpp\
     mathutils.cpp \
     abstractgmdh.cpp \
     forecaster.cpp \
-    mathstructures.cpp \
-    datacompany.cpp
+    datacompany.cpp \
+    alglib\integration.cpp \
+    alglib\ap.cpp \
+    alglib\alglibinternal.cpp \
+    alglib\linalg.cpp \
+    alglib\interpolation.cpp \
+    alglib\specialfunctions.cpp \
+    alglib\alglibmisc.cpp \
+    alglib\solvers.cpp \
+    alglib\optimization.cpp \
+    matrix.cpp
 
 HEADERS  += mainwindow.h \
     modelitem.h \
@@ -36,8 +45,18 @@ HEADERS  += mainwindow.h \
     mathutils.h \
     abstractgmdh.h \
     forecaster.h \
-    mathstructures.h \
-    datacompany.h
+    datacompany.h \
+    alglib\integration.h \
+    alglib\stdafx.h \
+    alglib\ap.h \
+    alglib\alglibinternal.h \
+    alglib\linalg.h \
+    alglib\interpolation.h \
+    alglib\specialfunctions.h \
+    alglib\alglibmisc.h \
+    alglib\solvers.h \
+    alglib\optimization.h \
+    matrix.h
 
 FORMS    += mainwindow.ui
 

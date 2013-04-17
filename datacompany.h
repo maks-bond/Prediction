@@ -1,7 +1,7 @@
 #ifndef MODELCOMPANY_H
 #define MODELCOMPANY_H
 
-#include "mathstructures.h"
+#include "matrix.h"
 
 #include <QDate>
 
