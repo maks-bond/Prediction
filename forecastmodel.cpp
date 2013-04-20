@@ -5,13 +5,16 @@
 #include <vector>
 
 ForecastModel::ForecastModel()
-    : m_is_computed(false), m_quality(-1)
+    : m_is_computed(false),
+      m_quality(-1)
 {
 
 }
 
-ForecastModel::ForecastModel(QVector<int> &i_a)
-    : m_is_computed(false), m_a(i_a), m_quality(-1)
+ForecastModel::ForecastModel(const QVector<int> &i_a)
+    : m_is_computed(false),
+      m_quality(-1),
+      m_a(i_a)
 {
 
 }

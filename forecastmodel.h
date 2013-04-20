@@ -10,7 +10,7 @@ class ForecastModel
 
 public:
     ForecastModel();
-    ForecastModel(QVector<int>& i_a);
+    ForecastModel(const QVector<int>& i_a);
 
     double Evaluate(const QVector<double> i_a);
     void SetUp(const Matrix::TVariable& y,const Matrix& X);
