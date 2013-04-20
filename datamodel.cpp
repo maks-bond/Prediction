@@ -26,7 +26,7 @@ void DataModel::AddCompanyData(const DataCompany &i_data_company)
     m_companies_names.push_back(i_data_company.GetCompanyName());
 }
 
-const Matrix::TVariable &DataModel::GetRawData(const QString &i_comp_name) const
+const Matrix::TVariable& DataModel::GetRawData(const QString &i_comp_name) const
 {
     int ind = m_companies_names.indexOf(i_comp_name);
     if(ind == -1) throw std::logic_error("can't find company in DataModel");

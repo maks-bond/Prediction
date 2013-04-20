@@ -1,7 +1,5 @@
 #include "mathutils.h"
 
-#include <stdexcept>
-
 // this function returns next higher number with same number of set bits as x.
 int MathUtils::Snoob(int i_x)
 {
@@ -73,22 +71,19 @@ QVector<int> MathUtils::GenerateCombinationsOfOneBits(int i_bits, int i_max_bits
     return result;
 }
 
-QVector<int> MathUtils::ApplyMaskForElements(const QVector<int> &i_elements, int i_mask)
+QVector<int> MathUtils::GetOneBitsIndexes(int i_n)
 {
-    if(i_mask < 0)
-        throw std::logic_error("Bad number of bits");
-
     QVector<int> result;
+    int cur_ind = 0;
 
-    for(int i = 0; i<=i_elements.size(); ++i)
+    while(i_n)
     {
-        if(i_mask&1)
-            result.push_back(i_elements[i]);
+        if(i_n&1)
+            result.push_back(cur_ind);
 
-        i_mask>>=1;
+        cur_ind++;
+        i_n>>=1;
     }
-
-    return result;
 }
 
 MathUtils::MathUtils()

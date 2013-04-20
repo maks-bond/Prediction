@@ -17,11 +17,34 @@ TEMPLATE = app
 INCLUDEPATH += ../
 HEADERS += ../mathutils.h \
     ../modelgenerator.h \
-    ../basicmodel.h
+    ../basicmodel.h \
+    ../forecastmodel.h \
+    ../alglib/stdafx.h \
+    ../alglib/specialfunctions.h \
+    ../alglib/solvers.h \
+    ../alglib/optimization.h \
+    ../alglib/linalg.h \
+    ../alglib/interpolation.h \
+    ../alglib/integration.h \
+    ../alglib/ap.h \
+    ../alglib/alglibmisc.h \
+    ../alglib/alglibinternal.h \
+    ../matrix.h
 
 SOURCES += ../mathutils.cpp \
     ../modelgenerator.cpp \
-    test.cpp
+    test.cpp \
+    ../forecastmodel.cpp \
+    ../alglib/specialfunctions.cpp \
+    ../alglib/solvers.cpp \
+    ../alglib/optimization.cpp \
+    ../alglib/linalg.cpp \
+    ../alglib/interpolation.cpp \
+    ../alglib/integration.cpp \
+    ../alglib/ap.cpp \
+    ../alglib/alglibmisc.cpp \
+    ../alglib/alglibinternal.cpp \
+    ../matrix.cpp
 
 SOURCES +=
 DEFINES += SRCDIR=\\\"$$PWD/\\\"

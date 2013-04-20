@@ -13,6 +13,8 @@ namespace
 
         return res;
     }
+
+    const int g_number_of_begin_forecast_model_variables = 2;
 }
 
 ModelGenerator::ModelGenerator()
@@ -38,5 +40,13 @@ BasicModel ModelGenerator::GenerateBasicModel(int i_number_of_companies, int i_m
 
 QVector<ForecastModel> ModelGenerator::GenerateForecastModels(const BasicModel &i_basic_model)
 {
-    return QVector<ForecastModel>();
+    QVector<ForecastModel> result;
+
+    QVector<int> combinations = MathUtils::GenerateCombinationsOfOneBits(g_number_of_begin_forecast_model_variables
+                                                                         , i_basic_model.size());
+
+    for(int j = 0; j<combinations.size(); ++j)
+        result.push_back(ForecastModel(MathUtils::GetOneBitsIndexes(combinations[j])));
+
+    return result;
 }

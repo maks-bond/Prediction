@@ -51,7 +51,7 @@ int Matrix::GetObservationNumber() const
     return 0;
 }
 
-const Matrix::TVariable Matrix::GetVariable(int index) const
+const Matrix::TVariable& Matrix::GetVariable(int index) const
 {
     if(index < 0 || index >= GetVariablesNumber())
         throw std::logic_error("Can't retrieve variable");

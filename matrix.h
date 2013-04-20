@@ -19,7 +19,7 @@ public:
     bool IsEmpty() const;
     int GetVariablesNumber() const;
     int GetObservationNumber() const;
-    const TVariable GetVariable(int index) const;
+    const TVariable& GetVariable(int index) const;
     TTimeSlice GetTimeSlice(int i_time, const TFilter& i_filters = TFilter()) const;
     Matrix Filter(const TFilter& i_filters);
 
