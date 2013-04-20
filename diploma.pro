@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     alglib\alglibmisc.cpp \
     alglib\solvers.cpp \
     alglib\optimization.cpp \
-    matrix.cpp
+    matrix.cpp \
+    multiseriesgmdh.cpp
 
 HEADERS  += mainwindow.h \
     modelitem.h \
@@ -56,7 +57,8 @@ HEADERS  += mainwindow.h \
     alglib\alglibmisc.h \
     alglib\solvers.h \
     alglib\optimization.h \
-    matrix.h
+    matrix.h \
+    multiseriesgmdh.h
 
 FORMS    += mainwindow.ui
 
