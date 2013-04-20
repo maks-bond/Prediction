@@ -30,7 +30,7 @@ BasicModel ModelGenerator::GenerateBasicModel(int i_number_of_companies, int i_m
         QVector<int> combinations = MathUtils::GenerateCombinationsOfOneBits(i, i_number_of_companies);
 
         for(int j = 0; j<combinations.size(); ++j)
-            model.PushComponent(MathUtils::ApplyMaskForElements(elements, combinations[j]));
+            model.push_back(MathUtils::ApplyMaskForElements(elements, combinations[j]));
     }
 
     return model;

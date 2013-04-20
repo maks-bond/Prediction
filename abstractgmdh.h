@@ -11,7 +11,6 @@ class AbstractGMDH
 {
 public:
     AbstractGMDH();
-    virtual ~AbstractGMDH() = 0;
 
     void SetData(const Matrix& i_X,const Matrix::TVariable& i_y);
     void CreateModels(int i_max_power);

@@ -18,7 +18,6 @@ SOURCES += main.cpp\
     csv.cpp \
     datamodel.cpp \
     forecastmodel.cpp \
-    basicmodel.cpp \
     modelgenerator.cpp \
     mathutils.cpp \
     abstractgmdh.cpp \

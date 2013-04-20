@@ -26,7 +26,6 @@ private :
     double m_quality;
     QVector<double> m_w; // factors in regression model
     QVector<int> m_a; // variables in regression model
-
 };
 
 #endif // FORECASTMODEL_H
