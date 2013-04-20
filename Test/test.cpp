@@ -174,12 +174,12 @@ void Test::GenerateBasicModelTest_data()
     QTest::addColumn<BasicModel>("result");
 
     BasicModel result;
-    result.PushComponent(QVector<int>(1, 0));
-    result.PushComponent(QVector<int>(1, 1));
+    result.push_back(QVector<int>(1, 0));
+    result.push_back(QVector<int>(1, 1));
     QVector<int> comp3;
     comp3.push_back(0);
     comp3.push_back(1);
-    result.PushComponent(comp3);
+    result.push_back(comp3);
 
     QTest::newRow("Test1")<<2<<2<<result;
 }
