@@ -22,12 +22,13 @@ protected:
     virtual bool _CompareLevels(const TForecastModels& i_prev_models, const TForecastModels& i_cur_models) = 0;
     virtual TForecastModels _CreateBestModels(const TForecastModels& i_prev_models);
     virtual void _FilterBestModels() = 0;
-    virtual void _Evaluate(const Matrix::TTimeSlice& i_time_slice) = 0;
+    virtual double _Evaluate(const Matrix::TTimeSlice& i_time_slice) = 0;
 
     TForecastModels m_best_models;
 
 private:
     void _SetUpBestModels();
+    Matrix _GenForecastModelData(const ForecastModel &i_model);
 
     Matrix m_X;
     Matrix::TVariable m_y;

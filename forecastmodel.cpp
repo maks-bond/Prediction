@@ -47,7 +47,7 @@ void ForecastModel::SetUp(const Matrix::TVariable &y, const Matrix &X)
 }
 
 
-double ForecastModel::Quality()
+double ForecastModel::Quality() const
 {
     if(!m_is_computed) throw std::logic_error("Set up model!");
     return m_quality;
@@ -60,7 +60,7 @@ void ForecastModel::SetParams(QVector<int>& i_a)
     m_is_computed = false;
 }
 
-QVector<int> ForecastModel::GetParams()
+QVector<int> ForecastModel::GetParams() const
 {
     return m_a;
 }

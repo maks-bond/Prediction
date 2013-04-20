@@ -14,10 +14,10 @@ public:
 
     double Evaluate(const QVector<double> i_a);
     void SetUp(const Matrix::TVariable& y,const Matrix& X);
-    double Quality();
+    double Quality() const ;
 
     void SetParams(QVector<int>& i_a);
-    QVector<int> GetParams();
+    QVector<int> GetParams() const;
 
     ForecastModel operator +(ForecastModel& i_other) const;
 

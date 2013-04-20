@@ -8,10 +8,10 @@ class MultiSeriesGMDH : public AbstractGMDH
 public:
     MultiSeriesGMDH();
 
-private:
+protected:
     virtual bool _CompareLevels(const TForecastModels& i_prev_models, const TForecastModels& i_cur_models);
     virtual void _FilterBestModels();
-    virtual void _Evaluate(const Matrix::TTimeSlice& i_time_slice);
+    virtual double _Evaluate(const Matrix::TTimeSlice& i_time_slice);
 };
 
 #endif // MULTISERIESGMDH_H

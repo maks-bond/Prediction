@@ -41,8 +41,7 @@ double AbstractGMDH::Evaluate(const Matrix::TTimeSlice &i_time_slice)
         throw std::logic_error("Models must be computed!");
 
     //Here we must store the matrix by reference!!!
-    _Evaluate(i_time_slice);
-    return 0;
+    return _Evaluate(i_time_slice);
 }
 
 AbstractGMDH::TForecastModels AbstractGMDH::_CreateBestModels(const AbstractGMDH::TForecastModels &i_prev_models)
@@ -62,6 +61,30 @@ void AbstractGMDH::_SetUpBestModels()
 {
     for(int i=0;i<m_best_models.size();i++){
         ForecastModel cur_model = m_best_models[i];
-        cur_model.SetUp(m_y,m_X.Filter(cur_model.GetParams()));
+        cur_model.SetUp(m_y,_GenForecastModelData(cur_model));//m_X.Filter(cur_model.GetParams()));
     }
+}
+
+Matrix AbstractGMDH::_GenForecastModelData(const ForecastModel &i_model)
+{
+    QVector<int> a = i_model.GetParams();
+    Matrix res;
+    for(int i = 0; i < a.size(); i++){
+        Component c = m_basic_model[a[i]];
+        if(c.size()==1){
+            res.PushVariable(m_X.GetVariable(c[0]));
+        }
+        else{
+            Matrix::TVariable com_var = m_X.GetVariable(c[0]), cur_var;
+            for(int j=1;j<c.size();j++){
+                cur_var = m_X.GetVariable(c[j]);
+                for(int k=0;k<cur_var.size();k++){
+                    com_var[k] *= cur_var[k];
+                }
+            }
+            res.PushVariable(com_var);
+        }
+    }
+
+    return res;
 }

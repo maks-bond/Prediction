@@ -26,6 +26,9 @@ private Q_SLOTS:
 
     void GenerateBasicModelTest();
     void GenerateBasicModelTest_data();
+
+    //void ForecastModelTest();
+    //void ForecastModelTest_data();
 };
 
 Test::Test()
