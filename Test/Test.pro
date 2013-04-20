@@ -21,8 +21,7 @@ HEADERS += ../mathutils.h \
 
 SOURCES += ../mathutils.cpp \
     ../modelgenerator.cpp \
-    test.cpp \
-    ../basicmodel.cpp
+    test.cpp
 
 SOURCES +=
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
