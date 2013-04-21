@@ -29,7 +29,9 @@ HEADERS += ../modelgenerator.h \
     ../alglib/alglibmisc.h \
     ../alglib/alglibinternal.h \
     ../matrix.h \
-    modelgeneratortest.h
+    modelgeneratortest.h \
+    ../datamodel.h \
+    datamodeltest.h
 
 SOURCES += ../modelgenerator.cpp \
     ../forecastmodel.cpp \
@@ -44,7 +46,9 @@ SOURCES += ../modelgenerator.cpp \
     ../alglib/alglibinternal.cpp \
     ../matrix.cpp \
     main.cpp \
-    modelgeneratortest.cpp
+    modelgeneratortest.cpp \
+    ../datamodel.cpp \
+    datamodeltest.cpp
 
 SOURCES +=
 DEFINES += SRCDIR=\\\"$$PWD/\\\"

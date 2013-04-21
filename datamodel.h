@@ -18,10 +18,10 @@ public:
     void SetStartDate(const QDate i_date);
     QDate GetStartDate() const;
     void AddCompanyData(const DataCompany& i_data_company);
-    const Matrix::TVariable& GetRawData(const QString& i_comp_name) const;
+    const Matrix::TVariable& GetVariable(const QString& i_comp_name) const;
     Matrix GetRawDataExcept(const QString& i_comp_name) const;
     Matrix::TTimeSlice GetTimeSliceExcept(const QDate& i_date, const QString& i_comp_name) const;
-    const Matrix& GetRawData() const;
+    const Matrix& GetVariable() const;
     bool IsValid() const;
 
 private:
