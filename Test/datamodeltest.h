@@ -15,6 +15,9 @@ private slots:
 
     void IsValidTest();
     void IsValidTest_data();
+
+    void GetVariableTest();
+    void GetVariableTest_data();
 };
 
 #endif // DATAMODELTEST_H

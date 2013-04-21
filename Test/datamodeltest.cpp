@@ -135,3 +135,29 @@ void DataModelTest::IsValidTest_data()
     data_model.AddCompanyData(data_company);
     QTest::newRow("Test4")<<data_model<<true;
 }
+
+void DataModelTest::GetVariableTest()
+{
+    QFETCH(DataModel, data_model);
+    QFETCH(QString, company_name);
+    QFETCH(Matrix::TVariable, result);
+
+    QCOMPARE(data_model.GetVariable(company_name), result);
+}
+
+void DataModelTest::GetVariableTest_data()
+{
+    QTest::addColumn<DataModel>("data_model");
+    QTest::addColumn<QString>("company_name");
+    QTest::addColumn<Matrix::TVariable>("result");
+
+    QTest::newRow("Test1")<<Generate1_1DataModel(1.0)<<QString("Apple")<<Matrix::TVariable(1, 1.0);
+    QVector<double> prices;
+    prices<<1.0<<2.0<<3.0<<4.0;
+    Matrix::TVariable var1;
+    var1<<1.0<<2.0;
+    Matrix::TVariable var2;
+    var2<<3.0<<4.0;
+    QTest::newRow("Test2")<<Generate2_2DataModel(prices)<<QString("Apple")<<var1;
+    QTest::newRow("Test3")<<Generate2_2DataModel(prices)<<QString("IBM")<<var2;
+}
