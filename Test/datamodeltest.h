@@ -10,7 +10,7 @@ public:
     explicit DataModelTest(QObject *parent = 0);
     
 private slots:
-
+    void GetRawDataTest
 };
 
 #endif // DATAMODELTEST_H

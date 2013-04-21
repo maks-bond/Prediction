@@ -62,7 +62,7 @@ Matrix::TTimeSlice DataModel::GetTimeSliceExcept(const QDate &i_date, const QStr
     return m_data.GetTimeSlice(m_start_date.daysTo(i_date),filter);
 }
 
-const Matrix &DataModel::GetVariable() const
+const Matrix &DataModel::GetRawData() const
 {
     return m_data;
 }

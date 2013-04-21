@@ -21,7 +21,7 @@ public:
     const Matrix::TVariable& GetVariable(const QString& i_comp_name) const;
     Matrix GetRawDataExcept(const QString& i_comp_name) const;
     Matrix::TTimeSlice GetTimeSliceExcept(const QDate& i_date, const QString& i_comp_name) const;
-    const Matrix& GetVariable() const;
+    const Matrix& GetRawData() const;
     bool IsValid() const;
 
 private:
