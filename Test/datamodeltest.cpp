@@ -161,3 +161,35 @@ void DataModelTest::GetVariableTest_data()
     QTest::newRow("Test2")<<Generate2_2DataModel(prices)<<QString("Apple")<<var1;
     QTest::newRow("Test3")<<Generate2_2DataModel(prices)<<QString("IBM")<<var2;
 }
+
+void DataModelTest::GetRawDataExceptTest()
+{
+    QFETCH(DataModel, data_model);
+    QFETCH(QString, company_name);
+    QFETCH(Matrix, result);
+
+    QCOMPARE(data_model.GetRawDataExcept(company_name), result);
+}
+
+void DataModelTest::GetRawDataExceptTest_data()
+{
+    QTest::addColumn<DataModel>("data_model");
+    QTest::addColumn<QString>("company_name");
+    QTest::addColumn<Matrix>("result");
+
+    QVector<double> prices;
+    prices<<1.0<<2.0<<3.0<<4.0;
+    DataModel data_model = Generate2_2DataModel(prices);
+    Matrix matrix;
+    Matrix::TVariable var1;
+    var1<<1.0<<2.0;
+    Matrix::TVariable var2;
+    var2<<3.0<<4.0;
+    matrix.PushVariable(var1);
+    QTest::newRow("Test1")<<data_model<<"IBM"<<matrix;
+    matrix.Clear();
+    matrix.PushVariable(var2);
+    QTest::newRow("Test2")<<data_model<<"Apple"<<matrix;
+    data_model = Generate1_1DataModel(1.0);
+    QTest::newRow("Test3")<<data_model<<"Apple"<<Matrix();
+}

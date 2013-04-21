@@ -18,6 +18,9 @@ private slots:
 
     void GetVariableTest();
     void GetVariableTest_data();
+
+    void GetRawDataExceptTest();
+    void GetRawDataExceptTest_data();
 };
 
 #endif // DATAMODELTEST_H
