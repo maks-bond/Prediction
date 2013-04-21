@@ -10,7 +10,7 @@ class ModelGeneratorTest : public QObject
 public:
     ModelGeneratorTest();
 
-private Q_SLOTS:
+private slots:
     void SnoobTest();
     void SnoobTest_data();
 

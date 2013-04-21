@@ -15,8 +15,7 @@ CONFIG   -= app_bundle
 TEMPLATE = app
 
 INCLUDEPATH += ../
-HEADERS += ../mathutils.h \
-    ../modelgenerator.h \
+HEADERS += ../modelgenerator.h \
     ../basicmodel.h \
     ../forecastmodel.h \
     ../alglib/stdafx.h \
@@ -32,8 +31,7 @@ HEADERS += ../mathutils.h \
     ../matrix.h \
     modelgeneratortest.h
 
-SOURCES += ../mathutils.cpp \
-    ../modelgenerator.cpp \
+SOURCES += ../modelgenerator.cpp \
     ../forecastmodel.cpp \
     ../alglib/specialfunctions.cpp \
     ../alglib/solvers.cpp \

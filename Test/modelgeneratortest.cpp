@@ -3,7 +3,8 @@
 #include <QString>
 #include <QtTest>
 
-#include "../mathutils.h"
+#define private public
+
 #include "../modelgenerator.h"
 
 ModelGeneratorTest::ModelGeneratorTest()
@@ -29,21 +30,21 @@ void ModelGeneratorTest::SnoobTest()
     QFETCH(int, snoob);
     QFETCH(int, result);
 
-    QCOMPARE(MathUtils::Snoob(snoob), result);
-    //QVERIFY(MathUtils::Snoob(3) == 5);
+    QCOMPARE(ModelGenerator::Snoob(snoob), result);
+    //QVERIFY(ModelGenerator::Snoob(3) == 5);
 }
 
 void ModelGeneratorTest::GenerateMinimumNumberOfBitsTest()
 {
-    QVERIFY(MathUtils::GenerateMinimumNumberOfBits(1) == 1);
-    QVERIFY(MathUtils::GenerateMinimumNumberOfBits(2) == 3);
+    QVERIFY(ModelGenerator::GenerateMinimumNumberOfBits(1) == 1);
+    QVERIFY(ModelGenerator::GenerateMinimumNumberOfBits(2) == 3);
 }
 
 void ModelGeneratorTest::GenerateMaximumNumberOfBitsTest()
 {
-    QVERIFY(MathUtils::GenerateMaximumNumberOfBits(2, 4) == 12);
-    QVERIFY(MathUtils::GenerateMaximumNumberOfBits(2, 2) == 3);
-    QVERIFY(MathUtils::GenerateMaximumNumberOfBits(1, 4) == 8);
+    QVERIFY(ModelGenerator::GenerateMaximumNumberOfBits(2, 4) == 12);
+    QVERIFY(ModelGenerator::GenerateMaximumNumberOfBits(2, 2) == 3);
+    QVERIFY(ModelGenerator::GenerateMaximumNumberOfBits(1, 4) == 8);
 }
 
 void ModelGeneratorTest::GenerateCombinationsOfOneBitsTest()
@@ -52,7 +53,7 @@ void ModelGeneratorTest::GenerateCombinationsOfOneBitsTest()
     QFETCH(int, max_bits);
     QFETCH(QVector<int>, result);
 
-    QCOMPARE(MathUtils::GenerateCombinationsOfOneBits(bits, max_bits), result);
+    QCOMPARE(ModelGenerator::GenerateCombinationsOfOneBits(bits, max_bits), result);
 }
 
 void ModelGeneratorTest::GenerateCombinationsOfOneBitsTest_data()
@@ -89,7 +90,7 @@ void ModelGeneratorTest::ApplyMaskForElementsTest()
     QFETCH(int, bits);
     QFETCH(QVector<int>, result);
 
-    QCOMPARE(MathUtils::ApplyMaskForElements(elements, bits), result);
+    QCOMPARE(ModelGenerator::ApplyMaskForElements(elements, bits), result);
 }
 
 void ModelGeneratorTest::ApplyMaskForElementsTest_data()
@@ -162,3 +163,4 @@ void ModelGeneratorTest::GenerateBasicModelTest_data()
     QTest::newRow("Test1")<<2<<2<<result;
 }
 
+#undef private

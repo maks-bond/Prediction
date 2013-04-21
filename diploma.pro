@@ -19,7 +19,6 @@ SOURCES += main.cpp\
     datamodel.cpp \
     forecastmodel.cpp \
     modelgenerator.cpp \
-    mathutils.cpp \
     abstractgmdh.cpp \
     forecaster.cpp \
     datacompany.cpp \
@@ -42,7 +41,6 @@ HEADERS  += mainwindow.h \
     forecastmodel.h \
     basicmodel.h \
     modelgenerator.h \
-    mathutils.h \
     abstractgmdh.h \
     forecaster.h \
     datacompany.h \
