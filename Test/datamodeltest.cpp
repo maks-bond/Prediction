@@ -2,8 +2,69 @@
 
 #include "matrix.h"
 #include "datamodel.h"
+#include "datacompany.h"
 
 #include <QTest>
+
+#include <stdexcept>
+
+namespace
+{
+    DataModel Generate1_1DataModel(double i_price)
+    {
+        DataModel data_model;
+        DataCompany data_company;
+        data_company.PushPrice(i_price);
+        data_company.SetStartDate(QDate::currentDate());
+        data_company.SetCompanyName("Apple");
+        data_model.SetStartDate(QDate::currentDate());
+        data_model.AddCompanyData(data_company);
+        return data_model;
+    }
+
+    DataModel GenerateWrongDataModel(QVector<double> i_prices)
+    {
+        if(i_prices.size() != 3)
+            throw std::logic_error("Must be 3 prices");
+
+        DataModel data_model;
+        DataCompany data_company;
+        data_company.PushPrice(i_prices[0]);
+        data_company.SetStartDate(QDate::currentDate());
+        data_company.SetCompanyName("Apple");
+        data_model.SetStartDate(QDate::currentDate());
+        data_model.AddCompanyData(data_company);
+        DataCompany data_company2;
+        data_company2.SetStartDate(QDate::currentDate());
+        data_company2.SetCompanyName("IBM");
+        data_company2.PushPrice(i_prices[1]);
+        data_company2.PushPrice(i_prices[2]);
+        data_model.AddCompanyData(data_company2);
+        return data_model;
+    }
+
+    DataModel Generate2_2DataModel(QVector<double> i_prices)
+    {
+        if(i_prices.size() != 4)
+            throw std::logic_error("Must be 3 prices");
+
+        DataModel data_model;
+        DataCompany data_company;
+        data_company.PushPrice(i_prices[0]);
+        data_company.PushPrice(i_prices[1]);
+        data_company.SetStartDate(QDate::currentDate());
+        data_company.SetCompanyName("Apple");
+        data_model.SetStartDate(QDate::currentDate());
+        data_model.AddCompanyData(data_company);
+        DataCompany data_company2;
+        data_company2.SetStartDate(QDate::currentDate());
+        data_company2.SetCompanyName("IBM");
+        data_company2.PushPrice(i_prices[2]);
+        data_company2.PushPrice(i_prices[3]);
+        data_model.AddCompanyData(data_company2);
+        return data_model;
+    }
+}
 
 DataModelTest::DataModelTest(QObject *parent) :
     QObject(parent)
@@ -27,4 +88,24 @@ void DataModelTest::GetRawDataTest_data()
     Matrix matrix;
 
     QTest::newRow("Test1")<<data_model<<matrix;
+
+    matrix.PushVariable(Matrix::TVariable(1, 1.0));
+
+    QTest::newRow("Test2")<<Generate1_1DataModel(1.0)<<matrix;
+    //Test must generate an exception
+    //QVector<double> prices(3, 1.0);
+    //matrix.PushVariable(Matrix::TVariable(2, 1.0));
+    //QTest::newRow("Test3")<<GenerateWrongDataModel(prices)<<matrix;
+
+    QVector<double> prices;
+    prices<<1.0<<2.0<<3.0<<4.0;
+    Matrix matrix2;
+    Matrix::TVariable variable;
+    variable<<1.0<<2.0;
+    matrix2.PushVariable(variable);
+    variable.clear();
+    variable<<3.0<<4.0;
+    matrix2.PushVariable(variable);
+
+    QTest::newRow("Test4")<<Generate2_2DataModel(prices)<<matrix2;
 }

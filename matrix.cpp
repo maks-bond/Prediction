@@ -35,6 +35,11 @@ bool Matrix::IsEmpty() const
     return m_matrix.empty();
 }
 
+void Matrix::Clear()
+{
+    m_matrix.clear();
+}
+
 int Matrix::GetVariablesNumber() const
 {
     if(!IsEmpty())

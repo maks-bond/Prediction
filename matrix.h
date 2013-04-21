@@ -17,6 +17,7 @@ public:
     void PushVariable(const TVariable& i_variable);
     void RemoveVariable(int index);
     bool IsEmpty() const;
+    void Clear();
     int GetVariablesNumber() const;
     int GetObservationNumber() const;
     const TVariable& GetVariable(int index) const;
