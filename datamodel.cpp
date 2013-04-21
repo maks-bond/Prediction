@@ -54,10 +54,7 @@ Matrix::TTimeSlice DataModel::GetTimeSliceExcept(const QDate &i_date, const QStr
     if(ind == -1) throw std::logic_error("can't find company in DataModel");
 
     Matrix::TFilter filter;
-    for(int i=0;i<m_companies_names.size();i++){
-        if(i!=ind)
-            filter.push_back(i);
-    }
+    filter.insert(ind);
 
     return m_data.GetTimeSlice(m_start_date.daysTo(i_date),filter);
 }

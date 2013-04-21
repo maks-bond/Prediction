@@ -51,7 +51,7 @@ int Matrix::GetVariablesNumber() const
 int Matrix::GetObservationNumber() const
 {
     if(!IsEmpty())
-        m_matrix[0].size();
+        return m_matrix[0].size();
 
     return 0;
 }
@@ -70,24 +70,16 @@ Matrix::TTimeSlice Matrix::GetTimeSlice(int i_time, const TFilter& i_filters) co
 
     TTimeSlice res;
 
-    for(int i=0;i<GetVariablesNumber();i++){
-        res.push_back(m_matrix[i][i_time]);
+    for(int i=0;i<GetVariablesNumber();i++)
+    {
+        if(i_filters.find(i) == i_filters.cend())
+            res.push_back(m_matrix[i][i_time]);
     }
 
-    if(i_filters.isEmpty())
-        return res;
-
-    TTimeSlice filter_res;
-
-    for(int i=0;i<i_filters.size();i++){
-        int k = i_filters[i];
-        filter_res.push_back(res[k]);
-    }
-
-    return filter_res;
+    return res;
 }
 
-Matrix Matrix::Filter(const TFilter& i_filters)
+/*Matrix Matrix::Filter(const TFilter& i_filters)
 {
     Matrix res;
     int n = i_filters.size();
@@ -98,7 +90,7 @@ Matrix Matrix::Filter(const TFilter& i_filters)
     }
 
     return res;
-}
+}*/
 
 double* Matrix::Data() const
 {

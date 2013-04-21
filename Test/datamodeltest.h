@@ -21,6 +21,9 @@ private slots:
 
     void GetRawDataExceptTest();
     void GetRawDataExceptTest_data();
+
+    void GetTimeSliceExcept();
+    void GetTimeSliceExcept_data();
 };
 
 #endif // DATAMODELTEST_H

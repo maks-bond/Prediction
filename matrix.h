@@ -3,13 +3,14 @@
 
 #include <QMetaType>
 #include <QVector>
+#include <QSet>
 
 class Matrix
 {
 public:
     typedef QVector<double> TVariable;
     typedef QVector<double> TTimeSlice;
-    typedef QVector<int> TFilter;
+    typedef QSet<int> TFilter;
 
     Matrix();
     Matrix(const QVector<TVariable >& i_matrix);
@@ -22,7 +23,7 @@ public:
     int GetObservationNumber() const;
     const TVariable& GetVariable(int index) const;
     TTimeSlice GetTimeSlice(int i_time, const TFilter& i_filters = TFilter()) const;
-    Matrix Filter(const TFilter& i_filters);
+    //Matrix Filter(const TFilter& i_filters);
 
     double* Data() const;
 

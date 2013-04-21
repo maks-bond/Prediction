@@ -193,3 +193,30 @@ void DataModelTest::GetRawDataExceptTest_data()
     data_model = Generate1_1DataModel(1.0);
     QTest::newRow("Test3")<<data_model<<"Apple"<<Matrix();
 }
+
+void DataModelTest::GetTimeSliceExcept()
+{
+    QFETCH(DataModel, data_model);
+    QFETCH(QDate, date);
+    QFETCH(QString, company_name);
+    QFETCH(Matrix::TTimeSlice, result);
+
+    QCOMPARE(data_model.GetTimeSliceExcept(date, company_name), result);
+}
+
+
+void DataModelTest::GetTimeSliceExcept_data()
+{
+    QTest::addColumn<DataModel>("data_model");
+    QTest::addColumn<QDate>("date");
+    QTest::addColumn<QString>("company_name");
+    QTest::addColumn<Matrix::TTimeSlice>("result");
+
+    QVector<double> prices;
+    prices<<1.0<<2.0<<3.0<<4.0;
+    QTest::newRow("Test1")<<Generate2_2DataModel(prices)<<QDate::currentDate().addDays(1)<<"IBM"<<Matrix::TTimeSlice(1, 2.0);
+    QTest::newRow("Test2")<<Generate2_2DataModel(prices)<<QDate::currentDate().addDays(1)<<"Apple"<<Matrix::TTimeSlice(1, 4.0);
+    QTest::newRow("Test3")<<Generate2_2DataModel(prices)<<QDate::currentDate()<<"IBM"<<Matrix::TTimeSlice(1, 1.0);
+    QTest::newRow("Test4")<<Generate2_2DataModel(prices)<<QDate::currentDate()<<"Apple"<<Matrix::TTimeSlice(1, 3.0);
+    QTest::newRow("Test5")<<Generate1_1DataModel(1.0)<<QDate::currentDate()<<"Apple"<<Matrix::TTimeSlice();
+}
