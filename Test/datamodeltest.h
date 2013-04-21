@@ -12,6 +12,9 @@ public:
 private slots:
     void GetRawDataTest();
     void GetRawDataTest_data();
+
+    void IsValidTest();
+    void IsValidTest_data();
 };
 
 #endif // DATAMODELTEST_H

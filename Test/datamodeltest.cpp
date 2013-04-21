@@ -109,3 +109,29 @@ void DataModelTest::GetRawDataTest_data()
 
     QTest::newRow("Test4")<<Generate2_2DataModel(prices)<<matrix2;
 }
+
+void DataModelTest::IsValidTest()
+{
+    QFETCH(DataModel, data_model);
+    QFETCH(bool, result);
+
+    QCOMPARE(data_model.IsValid(), result);
+}
+
+void DataModelTest::IsValidTest_data()
+{
+    QTest::addColumn<DataModel>("data_model");
+    QTest::addColumn<bool>("result");
+
+    DataModel data_model;
+    QTest::newRow("Test1")<<data_model<<false;
+    QTest::newRow("Test2")<<Generate1_1DataModel(1.0)<<true;
+    data_model.SetStartDate(QDate::currentDate());
+    QTest::newRow("Test3")<<data_model<<false;
+    DataCompany data_company;
+    data_company.SetStartDate(QDate::currentDate());
+    data_company.SetCompanyName("Apple");
+    data_company.PushPrice(1.0);
+    data_model.AddCompanyData(data_company);
+    QTest::newRow("Test4")<<data_model<<true;
+}
