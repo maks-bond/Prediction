@@ -79,7 +79,7 @@ ForecastModel ForecastModel::operator +(ForecastModel &i_other) const
     return ForecastModel(params);
 }
 
-bool ForecastModel::operator ==(const ForecastModel &i_other)
+bool ForecastModel::operator ==(const ForecastModel &i_other) const
 {
     if(m_is_computed != i_other.m_is_computed)
         return false;

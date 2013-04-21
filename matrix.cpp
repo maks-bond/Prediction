@@ -107,7 +107,7 @@ double* Matrix::Data() const
     return res;
 }
 
-bool Matrix::operator ==(const Matrix &i_other)
+bool Matrix::operator ==(const Matrix &i_other) const
 {
     return m_matrix == i_other.m_matrix;
 }

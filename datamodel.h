@@ -5,6 +5,7 @@
 #include "matrix.h"
 
 #include <QDate>
+#include <QMetaType>
 #include <QVector>
 
 
@@ -30,5 +31,7 @@ private:
     QDate m_start_date;
     Matrix m_data;
 };
+
+Q_DECLARE_METATYPE(DataModel)
 
 #endif // MODELFORECASTING_H

@@ -1,7 +1,7 @@
 #ifndef MATHSTRUCTURES_H
 #define MATHSTRUCTURES_H
 
-
+#include <QMetaType>
 #include <QVector>
 
 class Matrix
@@ -25,10 +25,12 @@ public:
 
     double* Data() const;
 
-    bool operator ==(const Matrix& i_other);
+    bool operator ==(const Matrix& i_other) const;
 
 private:
     QVector<TVariable > m_matrix;
 };
+
+Q_DECLARE_METATYPE(Matrix)
 
 #endif // MATHSTRUCTURES_H

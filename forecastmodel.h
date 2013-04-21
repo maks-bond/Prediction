@@ -21,7 +21,7 @@ public:
     QVector<int> GetParams() const;
 
     ForecastModel operator +(ForecastModel& i_other) const;
-    bool operator ==(const ForecastModel& i_other);
+    bool operator ==(const ForecastModel& i_other) const;
 
 private :
     bool m_is_computed;
