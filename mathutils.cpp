@@ -84,6 +84,8 @@ QVector<int> MathUtils::GetOneBitsIndexes(int i_n)
         cur_ind++;
         i_n>>=1;
     }
+
+    return result;
 }
 
 MathUtils::MathUtils()

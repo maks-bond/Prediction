@@ -29,11 +29,11 @@ HEADERS += ../mathutils.h \
     ../alglib/ap.h \
     ../alglib/alglibmisc.h \
     ../alglib/alglibinternal.h \
-    ../matrix.h
+    ../matrix.h \
+    modelgeneratortest.h
 
 SOURCES += ../mathutils.cpp \
     ../modelgenerator.cpp \
-    test.cpp \
     ../forecastmodel.cpp \
     ../alglib/specialfunctions.cpp \
     ../alglib/solvers.cpp \
@@ -44,7 +44,9 @@ SOURCES += ../mathutils.cpp \
     ../alglib/ap.cpp \
     ../alglib/alglibmisc.cpp \
     ../alglib/alglibinternal.cpp \
-    ../matrix.cpp
+    ../matrix.cpp \
+    main.cpp \
+    modelgeneratortest.cpp
 
 SOURCES +=
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
