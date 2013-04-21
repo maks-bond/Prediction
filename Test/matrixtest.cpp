@@ -158,19 +158,19 @@ void MatrixTest::TestTimeSliceFilter_data()
     Matrix::TTimeSlice time_slice;
     time_slice << 1 << 7;
     Matrix::TFilter filter;
-    filter << 0 << 2 ;
+    filter << 1 ;
     QTest::newRow("1") << 0 << test << time_slice << filter;
 
     time_slice.clear();
     time_slice << 2 << 5;
     filter.clear();
-    filter << 0 << 1;
+    filter << 2;
     QTest::newRow("2") << 1 << test << time_slice << filter;
 
     time_slice.clear();
     time_slice << 6 << 9;
     filter.clear();
-    filter << 1 << 2;
+    filter << 0;
     QTest::newRow("3") << 2 << test << time_slice << filter;
 }
 
