@@ -96,9 +96,9 @@ double* Matrix::Data() const
 {
     int m = GetObservationNumber(), n = GetVariablesNumber();
     double* res = new double[n*m];
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            res[i*n+j] = m_matrix[i][j];
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            res[i*n+j] = m_matrix[j][i];
         }
     }
     return res;
