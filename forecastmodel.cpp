@@ -78,3 +78,14 @@ ForecastModel ForecastModel::operator +(ForecastModel &i_other) const
     qSort(params);
     return ForecastModel(params);
 }
+
+bool ForecastModel::operator ==(const ForecastModel &i_other)
+{
+    if(m_is_computed != i_other.m_is_computed)
+        return false;
+
+    if(m_is_computed)
+        return m_w == i_other.m_w && m_a == i_other.m_a && m_quality == i_other.m_quality;
+
+    return m_a == i_other.m_a;
+}

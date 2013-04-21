@@ -155,12 +155,59 @@ void ModelGeneratorTest::GenerateBasicModelTest_data()
     BasicModel result;
     result.push_back(QVector<int>(1, 0));
     result.push_back(QVector<int>(1, 1));
-    QVector<int> comp3;
-    comp3.push_back(0);
-    comp3.push_back(1);
-    result.push_back(comp3);
+    QVector<int> comp;
+    comp.push_back(0);
+    comp.push_back(1);
+    result.push_back(comp);
+
+    BasicModel result2;
+    result2.push_back(QVector<int>(1, 0));
+    result2.push_back(QVector<int>(1, 1));
+    result2.push_back(QVector<int>(1, 2));
+    result2.push_back(comp);
+    comp[1] = 2;
+    result2.push_back(comp);
+    comp[0] = 1;
+    result2.push_back(comp);
+
+    BasicModel result3 = result2;
+    comp.push_front(0);
+    result3.push_back(comp);
 
     QTest::newRow("Test1")<<2<<2<<result;
+    QTest::newRow("Test2")<<3<<2<<result2;
+    QTest::newRow("Test3")<<3<<3<<result3;
+}
+
+void ModelGeneratorTest::GenerateForecastModelsTest_data()
+{
+    QTest::addColumn<BasicModel>("basic_model");
+    QTest::addColumn<QVector<ForecastModel> >("result");
+
+    BasicModel basic_model;
+    basic_model.push_back(QVector<int>(1, 0));
+    basic_model.push_back(QVector<int>(1, 1));
+    QVector<int> comp;
+    comp.push_back(0);
+    comp.push_back(1);
+    basic_model.push_back(comp);
+
+    QVector<ForecastModel> result;
+    result.push_back(ForecastModel(comp));
+    comp[1] = 2;
+    result.push_back(ForecastModel(comp));
+    comp[0] = 1;
+    result.push_back(ForecastModel(comp));
+
+    QTest::newRow("Test1")<<basic_model<<result;
+}
+
+void ModelGeneratorTest::GenerateForecastModelsTest()
+{
+    QFETCH(BasicModel, basic_model);
+    QFETCH(QVector<ForecastModel>, result);
+
+    QCOMPARE(ModelGenerator::GenerateForecastModels(basic_model), result);
 }
 
 #undef private

@@ -4,3 +4,5 @@
 -Decompose testing
 -Add settings class
 -Check assuming of the consequential prices
+
+GenerateBasicModel должен генерировать комбинации с повторениями.

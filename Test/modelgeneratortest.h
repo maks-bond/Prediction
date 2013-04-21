@@ -25,6 +25,9 @@ private slots:
 
     void GenerateBasicModelTest();
     void GenerateBasicModelTest_data();
+
+    void GenerateForecastModelsTest();
+    void GenerateForecastModelsTest_data();
 };
 
 #endif // MODELGENERATORTEST_H

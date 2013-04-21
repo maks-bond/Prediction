@@ -1,6 +1,7 @@
 #ifndef FORECASTMODEL_H
 #define FORECASTMODEL_H
 
+#include <QMetaType>
 #include <QVector>
 
 #include "matrix.h"
@@ -20,6 +21,7 @@ public:
     QVector<int> GetParams() const;
 
     ForecastModel operator +(ForecastModel& i_other) const;
+    bool operator ==(const ForecastModel& i_other);
 
 private :
     bool m_is_computed;
@@ -27,5 +29,7 @@ private :
     QVector<double> m_w; // factors in regression model
     QVector<int> m_a; // variables in regression model
 };
+
+Q_DECLARE_METATYPE(ForecastModel)
 
 #endif // FORECASTMODEL_H
