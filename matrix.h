@@ -25,6 +25,8 @@ public:
 
     double* Data() const;
 
+    bool operator ==(const Matrix& i_other);
+
 private:
     QVector<TVariable > m_matrix;
 };
