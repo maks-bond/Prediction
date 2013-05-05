@@ -4,6 +4,25 @@
 #include <stdexcept>
 #include <vector>
 
+#include <QFile>
+#include <QTextStream>
+
+namespace
+{
+    void WriteAlgLibArray(const alglib::real_1d_array& i_array, int i_n, const QString& i_file_name)
+    {
+        QFile file(i_file_name);
+        file.open(QFile::WriteOnly);
+
+        QTextStream text_stream(&file);
+
+        for(int i = 0; i<i_n; ++i)
+            text_stream<<i_array[i]<<" ";
+
+        file.close();
+    }
+}
+
 ForecastModel::ForecastModel()
     : m_is_computed(false),
       m_quality(-1)
@@ -40,11 +59,12 @@ void ForecastModel::SetUp(const Matrix::TVariable &y, const Matrix &X)
     int a_code;
 
     alglib::lsfitlinear(a_y,a_X,a_code,a_w,a_report);
+    WriteAlgLibArray(a_w, X.GetVariablesNumber(), "1.out");
 
     if(a_code == -4) throw std::logic_error("Can't fit model!");
 
     double* p_w = a_w.getcontent();
-    m_w.fromStdVector(std::vector<double>(p_w,p_w+X.GetVariablesNumber()));
+    m_w = QVector<double>::fromStdVector(std::vector<double>(p_w,p_w+X.GetVariablesNumber()+1));
     m_is_computed = true;
     m_quality = a_report.avgerror;
 }

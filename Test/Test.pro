@@ -33,7 +33,8 @@ HEADERS += ../modelgenerator.h \
     ../datamodel.h \
     datamodeltest.h \
     ../datacompany.h \
-    matrixtest.h
+    matrixtest.h \
+    forecastmodeltest.h
 
 SOURCES += ../modelgenerator.cpp \
     ../forecastmodel.cpp \
@@ -52,7 +53,8 @@ SOURCES += ../modelgenerator.cpp \
     ../datamodel.cpp \
     datamodeltest.cpp \
     ../datacompany.cpp \
-    matrixtest.cpp
+    matrixtest.cpp \
+    forecastmodeltest.cpp
 
 SOURCES +=
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
