@@ -6,7 +6,7 @@ MultiSeriesGMDH::MultiSeriesGMDH()
 
 bool MultiSeriesGMDH::_CompareLevels(const AbstractGMDH::TForecastModels &i_prev_models, const AbstractGMDH::TForecastModels &i_cur_models)
 {
-    return i_prev_models[0].Quality() >= i_cur_models[0].Quality();
+    return i_prev_models[0].Quality() > i_cur_models[0].Quality();
 }
 
 void MultiSeriesGMDH::_FilterBestModels()
