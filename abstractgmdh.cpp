@@ -19,10 +19,10 @@ void AbstractGMDH::CreateModels(int i_max_power)
     if(m_X.IsEmpty())
         throw std::logic_error("You must set up data!");
 
-    BasicModel basic_model = ModelGenerator::GenerateBasicModel(m_X.GetVariablesNumber()
+    BasicModel m_basic_model = ModelGenerator::GenerateBasicModel(m_X.GetVariablesNumber()
                                                                 , i_max_power);
     TForecastModels prev_level_models;
-    m_best_models = ModelGenerator::GenerateForecastModels(basic_model);
+    m_best_models = ModelGenerator::GenerateForecastModels(m_basic_model);
     while(_CompareLevels(prev_level_models, m_best_models))
     {
         prev_level_models = m_best_models;
