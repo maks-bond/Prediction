@@ -207,5 +207,55 @@ void forecastmodeltest::OperatorPlusTest_data()
     QTest::newRow("5")<<ForecastModel()<<ForecastModel()<<ForecastModel();
 }
 
+void forecastmodeltest::EvaluateTest()
+{
+    QFETCH(ForecastModel, model);
+    QFETCH(QVector<double>, vals);
+    QFETCH(double, res);
+
+    QCOMPARE(model.Evaluate(vals), res);
+}
+
+void forecastmodeltest::EvaluateTest_data()
+{
+    QTest::addColumn<ForecastModel>("model");
+    QTest::addColumn<QVector<double> >("vals");
+    QTest::addColumn<double>("res");
+
+    ForecastModel model;
+    Matrix::TVariable y;
+    y<<0<<1;
+
+    Matrix matrix;
+    matrix.PushVariable(y);
+    model.SetUp(y, matrix);
+
+    QVector<double> vals;
+    vals<<5.0;
+
+    double res = 5;
+
+    QTest::newRow("1")<<model<<vals<<res;
+
+    Matrix::TVariable var;
+    y.clear();
+    y<<0<<5<<1;
+    matrix.Clear();
+    var.clear();
+    var<<1<<0<<2;
+    matrix.PushVariable(var);
+    var.clear();
+    var<<-1<<1<<-1;
+    matrix.PushVariable(var);
+
+    //y=2+1*x1+3*x2
+    model.SetUp(y, matrix);
+
+    vals.clear();
+    vals<<1<<3;
+
+    QTest::newRow("2")<<model<<vals<<12.0;
+}
+
 #undef private
 

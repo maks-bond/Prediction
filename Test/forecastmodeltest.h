@@ -18,6 +18,9 @@ private slots:
 
     void OperatorPlusTest();
     void OperatorPlusTest_data();
+
+    void EvaluateTest();
+    void EvaluateTest_data();
 };
 
 #endif // FORECASTMODELTEST_H
