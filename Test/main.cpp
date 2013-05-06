@@ -16,6 +16,6 @@ int main(int argc, char *argv[])
     QTest::qExec(new DataModelTest);
     QTest::qExec(new MatrixTest);
     QTest::qExec(new forecastmodeltest);
-    //QTest::qExec(new MultiSeriesGMDHTest);
+    QTest::qExec(new MultiSeriesGMDHTest);
     return a.exec();
 }

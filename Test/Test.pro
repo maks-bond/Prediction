@@ -35,7 +35,9 @@ HEADERS += ../modelgenerator.h \
     ../datacompany.h \
     matrixtest.h \
     forecastmodeltest.h \
-    multiseriesgmdhtest.h
+    multiseriesgmdhtest.h \
+    ../multiseriesgmdh.h \
+    ../abstractgmdh.h
 
 SOURCES += ../modelgenerator.cpp \
     ../forecastmodel.cpp \
@@ -56,7 +58,9 @@ SOURCES += ../modelgenerator.cpp \
     ../datacompany.cpp \
     matrixtest.cpp \
     forecastmodeltest.cpp \
-    multiseriesgmdhtest.cpp
+    multiseriesgmdhtest.cpp \
+    ../multiseriesgmdh.cpp \
+    ../abstractgmdh.cpp
 
 SOURCES +=
 DEFINES += SRCDIR=\\\"$$PWD/\\\"

@@ -5,12 +5,14 @@
 #include "forecastmodel.h"
 #include "matrix.h"
 
+#include <QMetaType>
 #include <QVector>
 
 class AbstractGMDH
 {
 public:
     AbstractGMDH();
+    virtual ~AbstractGMDH(){}
 
     void SetData(const Matrix& i_X,const Matrix::TVariable& i_y);
     void CreateModels(int i_max_power);
@@ -35,5 +37,7 @@ private:
     BasicModel m_basic_model;
     bool m_is_computed;
 };
+
+//Q_DECLARE_METATYPE(AbstractGMDH)
 
 #endif // ABSTRACTGMDH_H

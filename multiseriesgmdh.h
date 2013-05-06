@@ -9,6 +9,7 @@ class MultiSeriesGMDH : public AbstractGMDH
 {
 public:
     MultiSeriesGMDH();
+    virtual ~MultiSeriesGMDH(){}
 
 protected:
     virtual bool _CompareLevels(const TForecastModels& i_prev_models, const TForecastModels& i_cur_models);
