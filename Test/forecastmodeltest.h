@@ -15,6 +15,10 @@ private slots:
 
     void OperatorEqualTest();
     void OperatorEqualTest_data();
+
+    void OperatorPlusTest();
+    void OperatorPlusTest_data();
 };
 
 #endif // FORECASTMODELTEST_H
+

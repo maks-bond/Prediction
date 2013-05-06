@@ -162,5 +162,50 @@ void forecastmodeltest::OperatorEqualTest_data()
     QTest::newRow("4")<<one<<two<<true;
 }
 
+void forecastmodeltest::OperatorPlusTest()
+{
+    QFETCH(ForecastModel, one);
+    QFETCH(ForecastModel, two);
+    QFETCH(ForecastModel, res);
+
+    QCOMPARE(one+two, res);
+}
+
+void forecastmodeltest::OperatorPlusTest_data()
+{
+    QTest::addColumn<ForecastModel>("one");
+    QTest::addColumn<ForecastModel>("two");
+    QTest::addColumn<ForecastModel>("res");
+
+    QVector<int> vars1;
+    QVector<int> vars2;
+    QVector<int> vars3;
+    QVector<int> varsres1;
+    QVector<int> varsres2;
+    QVector<int> varsres3;
+    QVector<int> varsres4;
+    vars1<<0<<1;
+    vars2<<2<<3;
+    vars3<<1<<2;
+    varsres1<<0<<1<<2<<3;
+    varsres2<<0<<0<<1<<1;
+    varsres3<<0<<1<<1<<2;
+    varsres4<<1<<2<<2<<3;
+    ForecastModel a(vars1);
+    ForecastModel b(vars2);
+    ForecastModel c(vars3);
+
+    ForecastModel res1(varsres1);
+    ForecastModel res2(varsres2);
+    ForecastModel res3(varsres3);
+    ForecastModel res4(varsres4);
+
+    QTest::newRow("1")<<a<<b<<res1;
+    QTest::newRow("2")<<a<<a<<res2;
+    QTest::newRow("3")<<a<<c<<res3;
+    QTest::newRow("4")<<b<<c<<res4;
+    QTest::newRow("5")<<ForecastModel()<<ForecastModel()<<ForecastModel();
+}
+
 #undef private
 
