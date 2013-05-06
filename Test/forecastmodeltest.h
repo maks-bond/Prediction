@@ -12,6 +12,9 @@ public:
 private slots:
     void SetUpTest();
     void SetUpTest_data();
+
+    void OperatorEqualTest();
+    void OperatorEqualTest_data();
 };
 
 #endif // FORECASTMODELTEST_H

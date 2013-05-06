@@ -104,6 +104,63 @@ void forecastmodeltest::SetUpTest_data()
     w<<0.5<<0.9;
     //y=0.5+0.9(From Udacity:) )
     QTest::newRow("4")<<y<<matrix<<w;
+
+    y.clear();
+    var.clear();
+    matrix.Clear();
+    w.clear();
+    y<<0<<1<<2;
+    var<<0<<1<<2;
+    w<<0<<1;
+    matrix.PushVariable(var);
+
+    QTest::newRow("5")<<y<<matrix<<w;
+}
+
+void forecastmodeltest::OperatorEqualTest()
+{
+    QFETCH(ForecastModel, one);
+    QFETCH(ForecastModel, two);
+    QFETCH(bool, result);
+
+    QCOMPARE(one==two, result);
+}
+
+void forecastmodeltest::OperatorEqualTest_data()
+{
+    QTest::addColumn<ForecastModel>("one");
+    QTest::addColumn<ForecastModel>("two");
+    QTest::addColumn<bool>("result");
+
+    QVector<int> vars;
+    vars<<0<<1;
+    QVector<int> vars2;
+    vars2<<0;
+
+    ForecastModel one(vars);
+    ForecastModel two(vars);
+
+    QTest::newRow("1")<<one<<two<<true;
+    two.SetParams(vars2);
+    QTest::newRow("2")<<one<<two<<false;
+
+    two.SetParams(vars);
+
+    Matrix::TVariable y;
+    y<<0<<1;
+
+    Matrix matrix;
+    matrix.PushVariable(y);
+
+    one.SetUp(y, matrix);
+    QTest::newRow("3")<<one<<two<<false;
+    y<<2;
+    matrix.Clear();
+    matrix.PushVariable(y);
+    two.SetUp(y, matrix);
+
+    QTest::newRow("4")<<one<<two<<true;
 }
 
 #undef private
+

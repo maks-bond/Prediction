@@ -15,7 +15,7 @@ public:
 
     double Evaluate(const QVector<double> i_a);
     void SetUp(const Matrix::TVariable& y,const Matrix& X);
-    double Quality() const ;
+    double Quality() const;
 
     void SetParams(QVector<int>& i_a);
     QVector<int> GetParams() const;
