@@ -78,10 +78,16 @@ ForecastModel::ForecastModel(const QVector<int> &i_a)
 
 double ForecastModel::Evaluate(const QVector<double> i_a)
 {
-    if(!m_is_computed) throw std::logic_error("Set up model!");
+    if(m_w.empty() || !m_is_computed)
+        throw std::logic_error("Set up model!");
 
-    double res = 0;
-    for(int j=0;j<i_a.size();j++) res+= i_a[j]*m_w[j];
+    if(i_a.size() + 1 != m_w.size())
+        throw std::logic_error("Wrong input!");
+
+    double res = m_w[0];
+
+    for(int j = 0; j < i_a.size(); j++)
+        res += i_a[j]*m_w[j+1];
 
     return res;
 }
