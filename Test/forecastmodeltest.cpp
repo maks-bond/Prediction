@@ -64,15 +64,17 @@ void forecastmodeltest::SetUpTest_data()
     w<<1<<0;
 
     //y=x
-    QTest::newRow("1")<<y<<matrix<<w;
+    //QTest::newRow("1")<<y<<matrix<<w;
 
     y.clear();
+    y<<0<<5<<1;
     matrix.Clear();
     Matrix::TVariable var;
     var<<1<<0<<2;
     matrix.PushVariable(var);
     var.clear();
     var<<-1<<1<<-1;
+    matrix.PushVariable(var);
 
     w.clear();
     w<<1<<3<<2;

@@ -25,6 +25,7 @@ public:
     TTimeSlice GetTimeSlice(int i_time, const TFilter& i_filters = TFilter()) const;
     //Matrix Filter(const TFilter& i_filters);
 
+    //Memory leak is here!!!
     double* Data() const;
 
     bool operator ==(const Matrix& i_other) const;

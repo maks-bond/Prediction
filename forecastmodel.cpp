@@ -9,7 +9,20 @@
 
 namespace
 {
-    void WriteAlgLibArray(const alglib::real_1d_array& i_array, int i_n, const QString& i_file_name)
+    void _WriteDoubleArray(const double* ip_array, int i_n, const QString& i_file_name)
+    {
+        QFile file(i_file_name);
+        file.open(QFile::WriteOnly);
+
+        QTextStream out(&file);
+
+        for(int i = 0; i<i_n; ++i)
+            out<<ip_array[i]<<" ";
+
+        file.close();
+    }
+
+    void _WriteAlgLibArray(const alglib::real_1d_array& i_array, int i_n, const QString& i_file_name)
     {
         QFile file(i_file_name);
         file.open(QFile::WriteOnly);
@@ -18,6 +31,25 @@ namespace
 
         for(int i = 0; i<i_n; ++i)
             text_stream<<i_array[i]<<" ";
+
+        file.close();
+    }
+
+    void _WriteAlgLib2DArray(const alglib::real_2d_array& i_array, int i_rows, int i_columns, const QString& i_file_name)
+    {
+        QFile file(i_file_name);
+        file.open(QFile::WriteOnly);
+
+        QTextStream text_stream(&file);
+
+        for(int i = 0; i<i_rows; ++i)
+        {
+            for(int j = 0; j<i_columns; ++j)
+            {
+                text_stream<<i_array(i, j)<<" ";
+            }
+            text_stream<<"\n";
+        }
 
         file.close();
     }
@@ -53,13 +85,15 @@ void ForecastModel::SetUp(const Matrix::TVariable &y, const Matrix &X)
     alglib::real_1d_array a_y;
     a_y.setcontent(y.size(),y.constData());
     alglib::real_2d_array a_X;
-    a_X.setcontent(X.GetObservationNumber(),X.GetVariablesNumber(),X.Data());
+    a_X.setcontent(X.GetObservationNumber(), X.GetVariablesNumber(), X.Data());
+    _WriteDoubleArray(X.Data(), X.GetObservationNumber()*X.GetVariablesNumber(), "Double.out");
+
+    _WriteAlgLib2DArray(a_X, X.GetObservationNumber(), X.GetVariablesNumber(), "A2D.out");
     alglib::real_1d_array a_w;
     alglib::lsfitreport a_report;
     int a_code;
-
     alglib::lsfitlinear(a_y,a_X,a_code,a_w,a_report);
-    WriteAlgLibArray(a_w, X.GetVariablesNumber(), "1.out");
+    _WriteAlgLibArray(a_w, X.GetVariablesNumber() + 1, "1.out");
 
     if(a_code == -4) throw std::logic_error("Can't fit model!");
 
