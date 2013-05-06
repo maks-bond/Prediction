@@ -59,9 +59,6 @@ void forecastmodeltest::SetUpTest_data()
 
     Matrix matrix;
     Matrix::TVariable var;
-    //var<<1<<1;
-    //matrix.PushVariable(var);
-    //var.clear();
     var<<0<<1;
     matrix.PushVariable(var);
 
@@ -75,9 +72,6 @@ void forecastmodeltest::SetUpTest_data()
     y<<0<<5<<1;
     matrix.Clear();
     var.clear();
-    //var<<1<<1<<1;
-    //matrix.PushVariable(var);
-    //var.clear();
     var<<1<<0<<2;
     matrix.PushVariable(var);
     var.clear();
@@ -88,6 +82,28 @@ void forecastmodeltest::SetUpTest_data()
     w<<2<<1<<3;
     //y=2+1*x1+3*x2
     QTest::newRow("2")<<y<<matrix<<w;
+
+    y.clear();
+    y<<0<<-3<<-1<<-2;
+    var.clear();
+    matrix.Clear();
+    var<<3<<6<<4<<5;
+    matrix.PushVariable(var);
+    w.clear();
+    w<<3<<-1;
+    //y=3-1*x(From Udacity:) )
+    QTest::newRow("3")<<y<<matrix<<w;
+
+    y.clear();
+    var.clear();
+    matrix.Clear();
+    w.clear();
+    y<<2<<5<<5<<8;
+    var<<2<<4<<6<<8;
+    matrix.PushVariable(var);
+    w<<0.5<<0.9;
+    //y=0.5+0.9(From Udacity:) )
+    QTest::newRow("4")<<y<<matrix<<w;
 }
 
 #undef private
