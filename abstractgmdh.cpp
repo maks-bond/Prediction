@@ -23,15 +23,19 @@ void AbstractGMDH::CreateModels(int i_max_power)
                                                                 , i_max_power);
     TForecastModels prev_level_models;
     m_best_models = ModelGenerator::GenerateForecastModels(m_basic_model);
-    while(_CompareLevels(prev_level_models, m_best_models))
+    //Filter can be here
+    _SetUpBestModels();
+
+    do
     {
         prev_level_models = m_best_models;
         m_best_models = _CreateBestModels(m_best_models);
         //Least squares is here
         _SetUpBestModels();
         _FilterBestModels();
-    }
+    } while(_CompareLevels(prev_level_models, m_best_models));
 
+    m_best_models = prev_level_models;
     m_is_computed = true;
 }
 
