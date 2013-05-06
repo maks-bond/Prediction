@@ -11,15 +11,14 @@ Matrix::Matrix(const QVector<TVariable > &i_matrix)
 {
 }
 
+void Matrix::PushFrontVariable(const Matrix::TVariable &i_variable)
+{
+    _PushVariable(i_variable, false);
+}
+
 void Matrix::PushVariable(const Matrix::TVariable &i_variable)
 {
-    if((IsEmpty() && !i_variable.empty()) || (!IsEmpty() && m_matrix[0].size() == i_variable.size()))
-    {
-        m_matrix.push_back(i_variable);
-        return;
-    }
-
-    throw std::logic_error("Bad variable!");
+    _PushVariable(i_variable, true);
 }
 
 void Matrix::RemoveVariable(int index)
@@ -107,5 +106,16 @@ double* Matrix::Data() const
 bool Matrix::operator ==(const Matrix &i_other) const
 {
     return m_matrix == i_other.m_matrix;
+}
+
+void Matrix::_PushVariable(const Matrix::TVariable &i_variable, bool i_is_back)
+{
+    if((IsEmpty() && !i_variable.empty()) || (!IsEmpty() && m_matrix[0].size() == i_variable.size()))
+    {
+        i_is_back ? m_matrix.push_back(i_variable) : m_matrix.push_front(i_variable);
+        return;
+    }
+
+    throw std::logic_error("Bad variable!");
 }
 

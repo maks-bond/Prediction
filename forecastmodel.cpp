@@ -53,6 +53,12 @@ namespace
 
         file.close();
     }
+
+    void _AddOnesVariable(Matrix& i_matrix)
+    {
+        Matrix::TVariable var(i_matrix.GetObservationNumber(), 1.0);
+        i_matrix.PushFrontVariable(var);
+    }
 }
 
 ForecastModel::ForecastModel()
@@ -80,25 +86,26 @@ double ForecastModel::Evaluate(const QVector<double> i_a)
     return res;
 }
 
-void ForecastModel::SetUp(const Matrix::TVariable &y, const Matrix &X)
+void ForecastModel::SetUp(const Matrix::TVariable &y, const Matrix &i_X)
 {
     alglib::real_1d_array a_y;
     a_y.setcontent(y.size(),y.constData());
     alglib::real_2d_array a_X;
+    Matrix X(i_X);
+    _AddOnesVariable(X);
     a_X.setcontent(X.GetObservationNumber(), X.GetVariablesNumber(), X.Data());
-    _WriteDoubleArray(X.Data(), X.GetObservationNumber()*X.GetVariablesNumber(), "Double.out");
-
-    _WriteAlgLib2DArray(a_X, X.GetObservationNumber(), X.GetVariablesNumber(), "A2D.out");
+    //_WriteDoubleArray(X.Data(), X.GetObservationNumber()*X.GetVariablesNumber(), "Double.out");
+    //_WriteAlgLib2DArray(a_X, X.GetObservationNumber(), X.GetVariablesNumber(), "A2D.out");
     alglib::real_1d_array a_w;
     alglib::lsfitreport a_report;
     int a_code;
     alglib::lsfitlinear(a_y,a_X,a_code,a_w,a_report);
-    _WriteAlgLibArray(a_w, X.GetVariablesNumber() + 1, "1.out");
+    //_WriteAlgLibArray(a_w, X.GetVariablesNumber() + 1, "1.out");
 
     if(a_code == -4) throw std::logic_error("Can't fit model!");
 
     double* p_w = a_w.getcontent();
-    m_w = QVector<double>::fromStdVector(std::vector<double>(p_w,p_w+X.GetVariablesNumber()+1));
+    m_w = QVector<double>::fromStdVector(std::vector<double>(p_w,p_w+X.GetVariablesNumber()));
     m_is_computed = true;
     m_quality = a_report.avgerror;
 }

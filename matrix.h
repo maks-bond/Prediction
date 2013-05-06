@@ -15,6 +15,7 @@ public:
     Matrix();
     Matrix(const QVector<TVariable >& i_matrix);
 
+    void PushFrontVariable(const TVariable& i_variable);
     void PushVariable(const TVariable& i_variable);
     void RemoveVariable(int index);
     bool IsEmpty() const;
@@ -31,6 +32,7 @@ public:
     bool operator ==(const Matrix& i_other) const;
 
 private:
+    void _PushVariable(const TVariable& i_variable, bool i_is_back);
     QVector<TVariable > m_matrix;
 };
 
