@@ -3,6 +3,8 @@
 
 #include "abstractgmdh.h"
 
+#include <QMetaType>
+
 class MultiSeriesGMDH : public AbstractGMDH
 {
 public:
@@ -13,5 +15,7 @@ protected:
     virtual void _FilterBestModels();
     virtual double _Evaluate(const Matrix::TTimeSlice& i_time_slice);
 };
+
+Q_DECLARE_METATYPE(MultiSeriesGMDH)
 
 #endif // MULTISERIESGMDH_H

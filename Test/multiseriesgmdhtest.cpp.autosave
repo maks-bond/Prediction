@@ -1,0 +1,37 @@
+#include "multiseriesgmdhtest.h"
+#include <QTest>
+
+#define protected public
+#define private public
+
+#include "multiseriesgmdh.h"
+#include "matrix.h"
+#include "forecastmodel.h"
+
+
+MultiSeriesGMDHTest::MultiSeriesGMDHTest(QObject *parent) : QObject(parent)
+{
+}
+
+void MultiSeriesGMDHTest::GenForecastModelData()
+{
+    QFETCH(Matrix,data);
+    QFETCH(ForecastModel,model);
+    QFETCH(MultiSeriesGMDH,gmdh);
+
+    QCOMPARE(data,gmdh._GenForecastModelData(model));
+}
+
+void MultiSeriesGMDHTest::GenForecastModelData_data()
+{
+    QTest::addColumn<Matrix>("data");
+    QTest::addColumn<ForecastModel>("model");
+    QTest::addColumn<MultiSeriesGMDH>("gmdh");
+
+    MultiSeriesGMDH algo;
+
+
+}
+
+#undef protected
+#undef private
