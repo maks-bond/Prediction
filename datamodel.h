@@ -16,8 +16,8 @@ class DataModel
 public:
     DataModel();
 
-    void SetStartDate(const QDate i_date);
-    QDate GetStartDate() const;
+    //void SetStartDate(const QDate i_date);
+    const QDate& GetStartDate() const;
     void AddCompanyData(const DataCompany& i_data_company);
     const Matrix::TVariable& GetVariable(const QString& i_comp_name) const;
     Matrix GetRawDataExcept(const QString& i_comp_name) const;

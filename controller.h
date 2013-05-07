@@ -5,6 +5,9 @@ class Controller
 {
 public:
     Controller();
+
+private:
+
 };
 
 #endif // CONTROLLER_H

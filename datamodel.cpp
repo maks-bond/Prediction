@@ -7,18 +7,21 @@ DataModel::DataModel()
 {
 }
 
-void DataModel::SetStartDate(const QDate i_date)
+/*void DataModel::SetStartDate(const QDate i_date)
 {
     m_start_date = i_date;
-}
+}*/
 
-QDate DataModel::GetStartDate() const
+const QDate& DataModel::GetStartDate() const
 {
     return m_start_date;
 }
 
 void DataModel::AddCompanyData(const DataCompany &i_data_company)
 {
+    if(m_data.IsEmpty())
+        m_start_date = i_data_company.GetStartDate();
+
     if(i_data_company.GetStartDate() != m_start_date)
         throw std::logic_error("Bad date!");
 
