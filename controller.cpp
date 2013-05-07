@@ -26,8 +26,8 @@ namespace
     }
 }
 
-Controller::Controller(const QDir& i_dir)
-    : mp_data_model(_CreateDataModel(i_dir))
+Controller::Controller()
+    : mp_data_model(nullptr)
     , mp_gmdh(new MultiSeriesGMDH())
 {
 }
@@ -36,6 +36,17 @@ Controller::~Controller()
 {
     delete mp_gmdh;
     delete mp_data_model;
+}
+
+void Controller::Initialize(const QDir &i_dir)
+{
+    delete mp_data_model;
+    mp_data_model = _CreateDataModel(i_dir);
+}
+
+bool Controller::IsInitialized() const
+{
+    return mp_data_model;
 }
 
 const DataModel *Controller::GetDataModel() const

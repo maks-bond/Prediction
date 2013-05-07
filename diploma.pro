@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     alglib\optimization.cpp \
     matrix.cpp \
     multiseriesgmdh.cpp \
-    controller.cpp
+    controller.cpp \
+    presenter.cpp
 
 HEADERS  += mainwindow.h \
     modelitem.h \
@@ -57,9 +58,11 @@ HEADERS  += mainwindow.h \
     alglib\optimization.h \
     matrix.h \
     multiseriesgmdh.h \
-    controller.h
+    controller.h \
+    presenter.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    presenter.ui
 
 CONFIG += mobility
 MOBILITY = 
