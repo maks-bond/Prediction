@@ -1,6 +1,8 @@
 #ifndef PRESENTER_H
 #define PRESENTER_H
 
+#include "controller.h"
+
 #include <QWidget>
 
 namespace Ui {
@@ -15,8 +17,14 @@ public:
     explicit Presenter(QWidget *parent = 0);
     ~Presenter();
     
+private slots:
+    void OnOpen();
+    void OnPredict();
+
 private:
     Ui::Presenter *ui;
+
+    Controller controller;
 };
 
 #endif // PRESENTER_H

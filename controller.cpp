@@ -27,7 +27,7 @@ namespace
 }
 
 Controller::Controller()
-    : mp_data_model(nullptr)
+    : mp_data_model(0)
     , mp_gmdh(new MultiSeriesGMDH())
 {
 }
