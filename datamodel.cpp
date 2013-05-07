@@ -29,6 +29,19 @@ void DataModel::AddCompanyData(const DataCompany &i_data_company)
     m_companies_names.push_back(i_data_company.GetCompanyName());
 }
 
+const QString &DataModel::GetCompanyName(int i_index) const
+{
+    if(i_index < 0 || i_index >= m_companies_names.size())
+        throw std::logic_error("Bad index");
+
+    return m_companies_names[i_index];
+}
+
+int DataModel::GetCompaniesNumber() const
+{
+    return m_companies_names.size();
+}
+
 const Matrix::TVariable& DataModel::GetVariable(const QString &i_comp_name) const
 {
     int ind = m_companies_names.indexOf(i_comp_name);

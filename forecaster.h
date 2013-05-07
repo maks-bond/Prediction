@@ -19,7 +19,7 @@ public:
     double Forecast(const QString& i_comp_name);
 
     void SetData(const DataModel* ip_data);
-    void SetForecastAlgorithm(AbstractGMDH* i_gmdh_algo);
+    void SetForecastAlgorithm(AbstractGMDH* ip_gmdh_algo);
 
 private :
     static int const mg_max_power = 2;

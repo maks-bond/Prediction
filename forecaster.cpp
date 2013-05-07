@@ -26,9 +26,9 @@ void Forecaster::SetData(const DataModel* data)
     if(data->IsValid()) mp_data = data;
 }
 
-void Forecaster::SetForecastAlgorithm(AbstractGMDH *i_gmdh_algo)
+void Forecaster::SetForecastAlgorithm(AbstractGMDH *ip_gmdh_algo)
 {
-    mp_gmdh_algo = i_gmdh_algo;
+    mp_gmdh_algo = ip_gmdh_algo;
 }
 
 

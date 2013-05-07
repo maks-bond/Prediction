@@ -17,7 +17,7 @@ namespace
         data_company.PushPrice(i_price);
         data_company.SetStartDate(QDate::currentDate());
         data_company.SetCompanyName("Apple");
-        data_model.SetStartDate(QDate::currentDate());
+        //data_model.SetStartDate(QDate::currentDate());
         data_model.AddCompanyData(data_company);
         return data_model;
     }
@@ -32,7 +32,7 @@ namespace
         data_company.PushPrice(i_prices[0]);
         data_company.SetStartDate(QDate::currentDate());
         data_company.SetCompanyName("Apple");
-        data_model.SetStartDate(QDate::currentDate());
+        //data_model.SetStartDate(QDate::currentDate());
         data_model.AddCompanyData(data_company);
         DataCompany data_company2;
         data_company2.SetStartDate(QDate::currentDate());
@@ -54,7 +54,7 @@ namespace
         data_company.PushPrice(i_prices[1]);
         data_company.SetStartDate(QDate::currentDate());
         data_company.SetCompanyName("Apple");
-        data_model.SetStartDate(QDate::currentDate());
+        //data_model.SetStartDate(QDate::currentDate());
         data_model.AddCompanyData(data_company);
         DataCompany data_company2;
         data_company2.SetStartDate(QDate::currentDate());
@@ -126,7 +126,7 @@ void DataModelTest::IsValidTest_data()
     DataModel data_model;
     QTest::newRow("Test1")<<data_model<<false;
     QTest::newRow("Test2")<<Generate1_1DataModel(1.0)<<true;
-    data_model.SetStartDate(QDate::currentDate());
+    //data_model.SetStartDate(QDate::currentDate());
     QTest::newRow("Test3")<<data_model<<false;
     DataCompany data_company;
     data_company.SetStartDate(QDate::currentDate());
