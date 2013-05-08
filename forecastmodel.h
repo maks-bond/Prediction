@@ -24,6 +24,9 @@ public:
     bool operator ==(const ForecastModel& i_other) const;
 
 private :
+
+    bool _DoubleVectorEqual(const QVector<double>& i_a, const QVector<double>& i_b) const;
+
     bool m_is_computed;
     double m_quality;
     QVector<double> m_w; // factors in regression model

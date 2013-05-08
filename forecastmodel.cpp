@@ -3,6 +3,7 @@
 
 #include <stdexcept>
 #include <vector>
+#include <cmath>
 
 #include <QFile>
 #include <QTextStream>
@@ -152,7 +153,19 @@ bool ForecastModel::operator ==(const ForecastModel &i_other) const
         return false;
 
     if(m_is_computed)
-        return m_w == i_other.m_w && m_a == i_other.m_a && m_quality == i_other.m_quality;
+        return _DoubleVectorEqual(m_w,i_other.m_w) && m_a == i_other.m_a && fabs(m_quality - i_other.m_quality) <= 1e-4 ;
 
     return m_a == i_other.m_a;
+}
+
+bool ForecastModel::_DoubleVectorEqual(const QVector<double> &i_a, const QVector<double> &i_b) const
+{
+    if(i_a.size() != i_b.size())
+        throw std::logic_error("double vector equal error!!");
+
+    for(int i = 0; i < i_a.size(); ++i)
+        if(fabs(i_a[i]-i_b[i]) > 1e-4)
+            return false;
+
+    return true;
 }

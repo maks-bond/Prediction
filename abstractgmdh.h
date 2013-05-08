@@ -26,11 +26,15 @@ protected:
     virtual void _FilterBestModels() = 0;
     virtual double _Evaluate(const Matrix::TTimeSlice& i_time_slice) = 0;
 
+    Matrix::TTimeSlice _GenForecastModelTimeSlice(const ForecastModel & i_model,
+                                                  const Matrix::TTimeSlice& i_time_slice);
+
     TForecastModels m_best_models;
 
 private:
     void _SetUpBestModels();
     Matrix _GenForecastModelData(const ForecastModel &i_model);
+
 
     Matrix m_X;
     Matrix::TVariable m_y;

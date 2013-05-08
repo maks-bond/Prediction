@@ -95,3 +95,23 @@ Matrix AbstractGMDH::_GenForecastModelData(const ForecastModel &i_model)
 
     return res;
 }
+
+Matrix::TTimeSlice AbstractGMDH::_GenForecastModelTimeSlice(const ForecastModel &i_model,
+                                                            const Matrix::TTimeSlice &i_time_slice)
+{
+    QVector<int> a = i_model.GetParams();
+    Matrix::TTimeSlice res;
+    for(int i = 0; i < a.size(); i++){
+        Component c = m_basic_model[a[i]];
+        if(c.size()==1){
+            res.push_back(i_time_slice[c[0]]);
+        }
+        else{
+            double cur_val = i_time_slice[c[0]];
+            for(int j=1;j<c.size();j++)
+                cur_val *= i_time_slice[c[j]];
+            res.push_back(cur_val);
+        }
+    }
+    return res;
+}

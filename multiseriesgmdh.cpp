@@ -30,7 +30,7 @@ double MultiSeriesGMDH::_Evaluate(const Matrix::TTimeSlice &i_time_slice)
     int n = m_best_models.size();
 
     for(int i=0;i<n;i++){
-        res += m_best_models[i].Evaluate(i_time_slice);
+        res += m_best_models[i].Evaluate(_GenForecastModelTimeSlice(m_best_models[i],i_time_slice));
     }
 
     return res/n;
