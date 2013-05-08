@@ -50,6 +50,9 @@ double AbstractGMDH::Evaluate(const Matrix::TTimeSlice &i_time_slice)
 
 AbstractGMDH::TForecastModels AbstractGMDH::_CreateBestModels(const AbstractGMDH::TForecastModels &i_prev_models)
 {
+    if(i_prev_models.size() <= 1)
+        return i_prev_models;
+
     TForecastModels res;
     for(int i=0;i<i_prev_models.size();i++){
         for(int j=i+1;j<i_prev_models.size();j++){
@@ -64,7 +67,7 @@ AbstractGMDH::TForecastModels AbstractGMDH::_CreateBestModels(const AbstractGMDH
 void AbstractGMDH::_SetUpBestModels()
 {
     for(int i=0;i<m_best_models.size();i++){
-        ForecastModel cur_model = m_best_models[i];
+        ForecastModel& cur_model = m_best_models[i];
         cur_model.SetUp(m_y,_GenForecastModelData(cur_model));//m_X.Filter(cur_model.GetParams()));
     }
 }
