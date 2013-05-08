@@ -188,9 +188,9 @@ void forecastmodeltest::OperatorPlusTest_data()
     vars2<<2<<3;
     vars3<<1<<2;
     varsres1<<0<<1<<2<<3;
-    varsres2<<0<<0<<1<<1;
-    varsres3<<0<<1<<1<<2;
-    varsres4<<1<<2<<2<<3;
+    varsres2<<0<<1;
+    varsres3<<0<<1<<2;
+    varsres4<<1<<2<<3;
     ForecastModel a(vars1);
     ForecastModel b(vars2);
     ForecastModel c(vars3);
