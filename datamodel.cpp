@@ -42,6 +42,11 @@ int DataModel::GetCompaniesNumber() const
     return m_companies_names.size();
 }
 
+int DataModel::GetObservationNumber() const
+{
+    return m_data.GetObservationNumber();
+}
+
 const Matrix::TVariable& DataModel::GetVariable(const QString &i_comp_name) const
 {
     int ind = m_companies_names.indexOf(i_comp_name);

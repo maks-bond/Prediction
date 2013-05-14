@@ -18,7 +18,7 @@ double Forecaster::Forecast(const QString& i_comp_name)
     mp_gmdh_algo->SetData(mp_data->GetRawDataExcept(i_comp_name),mp_data->GetVariable(i_comp_name));
     //Someone must set up here the max power coef!!!
     mp_gmdh_algo->CreateModels(2);
-    return mp_gmdh_algo->Evaluate(mp_data->GetTimeSliceExcept(mp_data->GetStartDate(),i_comp_name));
+    return mp_gmdh_algo->Evaluate(mp_data->GetTimeSliceExcept(mp_data->GetStartDate().addDays(mp_data->GetObservationNumber() - 1), i_comp_name));
 }
 
 void Forecaster::SetData(const DataModel* data)

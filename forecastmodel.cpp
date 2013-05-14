@@ -101,13 +101,10 @@ void ForecastModel::SetUp(const Matrix::TVariable &y, const Matrix &i_X)
     Matrix X(i_X);
     _AddOnesVariable(X);
     a_X.setcontent(X.GetObservationNumber(), X.GetVariablesNumber(), X.Data());
-    //_WriteDoubleArray(X.Data(), X.GetObservationNumber()*X.GetVariablesNumber(), "Double.out");
-    //_WriteAlgLib2DArray(a_X, X.GetObservationNumber(), X.GetVariablesNumber(), "A2D.out");
     alglib::real_1d_array a_w;
     alglib::lsfitreport a_report;
     int a_code;
     alglib::lsfitlinear(a_y,a_X,a_code,a_w,a_report);
-    //_WriteAlgLibArray(a_w, X.GetVariablesNumber() + 1, "1.out");
 
     if(a_code == -4) throw std::logic_error("Can't fit model!");
 
