@@ -13,7 +13,8 @@ Presenter::Presenter(QWidget *parent) :
     setWindowTitle("GMDH Forecaster");
     connect(mp_ui->buttonOpen, SIGNAL(clicked()), this, SLOT(OnOpen()));
     connect(mp_ui->buttonPredict, SIGNAL(clicked()), this, SLOT(OnPredict()));
-    connect(mp_ui->tableData, SIGNAL(cellClicked(int,int)), this, SLOT(OnCellClicked(int, int)));
+    connect(mp_ui->tableData, SIGNAL(cellPressed(int,int)), this, SLOT(OnCellClicked(int, int)));
+    connect(mp_ui->tableData, SIGNAL(cellActivated(int,int)), this, SLOT(OnCellClicked(int, int)));
 }
 
 Presenter::~Presenter()
@@ -42,7 +43,7 @@ void Presenter::OnOpen()
 
 void Presenter::OnPredict()
 {
-    if(!m_controller.IsValidCompanyName(mp_ui->editCompanyName))
+    if(!m_controller.IsValidCompanyName(mp_ui->editCompanyName->text()))
     {
         QMessageBox::critical(this, "Error", "You must set correct company name!");
         return;
@@ -50,8 +51,7 @@ void Presenter::OnPredict()
     //ui->editPrediction->setText(QString::number(controller.Forecast(ui->spinCompanyNumber->value())));
 }
 
-void Presenter::OnCellClicked(int i, int j)
+void Presenter::OnCellClicked(int , int j)
 {
-    QString text = mp_ui->tableData->horizontalHeaderItem(j)->text();
     mp_ui->editCompanyName->setText(mp_ui->tableData->horizontalHeaderItem(j)->text());
 }
