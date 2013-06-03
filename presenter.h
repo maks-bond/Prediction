@@ -23,9 +23,9 @@ private slots:
     void OnCellClicked(int i, int j);
 
 private:
-    Ui::Presenter *ui;
+    Ui::Presenter *mp_ui;
 
-    Controller controller;
+    Controller m_controller;
 };
 
 #endif // PRESENTER_H
