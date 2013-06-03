@@ -16,6 +16,7 @@ double Forecaster::Forecast(const QString& i_comp_name, const QDate& i_date)
         throw std::logic_error("Data Model is not valid");
 
     // create gmdh models
+
     mp_gmdh_algo->SetData(mp_data->GetRawDataExcept(i_comp_name),mp_data->GetVariable(i_comp_name));
     //Someone must set up here the max power coef!!!
     mp_gmdh_algo->CreateModels(2);

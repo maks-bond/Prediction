@@ -3,11 +3,12 @@
 
 #include "forecaster.h"
 
+#include <QVector>
+
 class QDir;
 class QString;
 class DataModel;
 class AbstractGMDH;
-class QVector;
 
 class Controller
 {
