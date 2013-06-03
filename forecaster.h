@@ -9,6 +9,8 @@
 #include <QString>
 #include <QDate>
 
+#include "matrix.h"
+
 class DataModel;
 class AbstractGMDH;
 
@@ -24,7 +26,12 @@ public:
     void SetForecastAlgorithm(AbstractGMDH* ip_gmdh_algo);
 
 private :
+
+    Matrix _GetTrainingDataX(const Matrix& i_matrix);
+    Matrix::TVariable _GetTrainingDataY(const Matrix::TVariable& i_vector);
+
     static int const mg_max_power = 2;
+
     AbstractGMDH* mp_gmdh_algo;
     const DataModel* mp_data;
     double m_ratio;
