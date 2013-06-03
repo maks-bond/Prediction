@@ -28,6 +28,7 @@ public:
     Matrix::TTimeSlice GetTimeSliceExcept(const QDate& i_date, const QString& i_comp_name) const;
     const Matrix& GetRawData() const;
     bool IsValid() const;
+    bool IsValidCompanyName(const QString& i_comp_name);
 
 private:
     //TCompanies m_model;
