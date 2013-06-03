@@ -1,7 +1,7 @@
 #include "controller.h"
 
 #include "datamodel.h"
-#include "forecaster.h"
+
 #include "csv.h"
 #include "multiseriesgmdh.h"
 
@@ -9,6 +9,7 @@
 
 #include <QDir>
 #include <QString>
+#include <QVector>
 
 namespace
 {
@@ -43,8 +44,8 @@ void Controller::Initialize(const QDir &i_dir)
 {
     delete mp_data_model;
     mp_data_model = _CreateDataModel(i_dir);
-    forecaster.SetData(mp_data_model);
-    forecaster.SetForecastAlgorithm(mp_gmdh);
+    m_forecaster.SetData(mp_data_model);
+    m_forecaster.SetForecastAlgorithm(mp_gmdh);
 }
 
 bool Controller::IsInitialized() const
@@ -62,11 +63,20 @@ bool Controller::IsValidCompanyName(const QString &i_comp_name)
     return mp_data_model->IsValidCompanyName(i_comp_name);
 }
 
-double Controller::Forecast(QString i_company_name)
+QVector<double> Controller::Forecast(QString i_company_name)
 {
     if(mp_data_model->IsValidCompanyName(i_company_name) == false)
         throw std::logic_error("Bad index");
 
-    return forecaster.Forecast(i_company_name);
+    QVector<double> res;
+    QDate cur_date = mp_data_model->GetStartDate();
+
+    for(int i=0;i<mp_data_model->GetObservationNumber();i++){
+        double cur_res = m_forecaster.Forecast(i_company_name,cur_date);
+        res.push_back(cur_res);
+        cur_date.addDays(1);
+    }
+
+    return res;
 }
 

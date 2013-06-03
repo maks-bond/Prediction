@@ -7,6 +7,7 @@
 
 Forecaster::Forecaster()
 {
+    m_ratio = 0.5;
 }
 
 double Forecaster::Forecast(const QString& i_comp_name, const QDate& i_date)
@@ -31,4 +32,7 @@ void Forecaster::SetForecastAlgorithm(AbstractGMDH *ip_gmdh_algo)
     mp_gmdh_algo = ip_gmdh_algo;
 }
 
-
+void Forecaster::SetTrainingRatio(double i_ratio)
+{
+    m_ratio = i_ratio;
+}

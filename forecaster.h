@@ -7,6 +7,7 @@
 #define RECOGNIZER_H
 
 #include <QString>
+#include <QDate>
 
 class DataModel;
 class AbstractGMDH;
@@ -16,8 +17,9 @@ class Forecaster
 public:
     Forecaster();
 
-    double Forecast(const QString& i_comp_name);
+    double Forecast(const QString& i_comp_name, const QDate& i_date);
 
+    void SetTrainingRatio(double i_ratio);
     void SetData(const DataModel* ip_data);
     void SetForecastAlgorithm(AbstractGMDH* ip_gmdh_algo);
 
@@ -25,6 +27,7 @@ private :
     static int const mg_max_power = 2;
     AbstractGMDH* mp_gmdh_algo;
     const DataModel* mp_data;
+    double m_ratio;
 };
 
 #endif // RECOGNIZER_H
