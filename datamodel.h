@@ -21,6 +21,7 @@ public:
     void AddCompanyData(const DataCompany& i_data_company);
     const QString& GetCompanyName(int i_index) const;
     int GetCompaniesNumber() const;
+    TCompaniesNames GetCompaniesNames() const;
     int GetObservationNumber() const;
     const Matrix::TVariable& GetVariable(const QString& i_comp_name) const;
     Matrix GetRawDataExcept(const QString& i_comp_name) const;

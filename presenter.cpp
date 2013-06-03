@@ -12,6 +12,7 @@ Presenter::Presenter(QWidget *parent) :
     setWindowTitle("GMDH Forecaster");
     connect(ui->buttonOpen, SIGNAL(clicked()), this, SLOT(OnOpen()));
     connect(ui->buttonPredict, SIGNAL(clicked()), this, SLOT(OnPredict()));
+    connect(ui->tableData, SIGNAL(cellClicked(int,int)), this, SLOT(OnCellClicked(int, int)));
 }
 
 Presenter::~Presenter()
@@ -29,6 +30,8 @@ void Presenter::OnOpen()
     ui->tableData->setColumnCount(cols);
     ui->tableData->setRowCount(rows);
 
+    ui->tableData->setHorizontalHeaderLabels(controller.GetDataModel()->GetCompaniesNames().toList());
+
     for(int i=0; i<cols; i++){
         for(int j=0; j<rows; j++){
             ui->tableData->setItem(j,i,new QTableWidgetItem(tr("%1").arg(curData.GetObservation(i,j))));
@@ -39,4 +42,10 @@ void Presenter::OnOpen()
 void Presenter::OnPredict()
 {
     //ui->editPrediction->setText(QString::number(controller.Forecast(ui->spinCompanyNumber->value())));
+}
+
+void Presenter::OnCellClicked(int i, int j)
+{
+    QString text = ui->tableData->horizontalHeaderItem(j)->text();
+    ui->editCompanyName->setText(ui->tableData->horizontalHeaderItem(j)->text());
 }

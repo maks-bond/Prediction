@@ -42,6 +42,11 @@ int DataModel::GetCompaniesNumber() const
     return m_companies_names.size();
 }
 
+TCompaniesNames DataModel::GetCompaniesNames() const
+{
+    return m_companies_names;
+}
+
 int DataModel::GetObservationNumber() const
 {
     return m_data.GetObservationNumber();
