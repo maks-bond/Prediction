@@ -43,6 +43,8 @@ void Controller::Initialize(const QDir &i_dir)
 {
     delete mp_data_model;
     mp_data_model = _CreateDataModel(i_dir);
+    forecaster.SetData(mp_data_model);
+    forecaster.SetForecastAlgorithm(mp_gmdh);
 }
 
 bool Controller::IsInitialized() const
@@ -65,9 +67,6 @@ double Controller::Forecast(QString i_company_name)
     if(mp_data_model->IsValidCompanyName(i_company_name) == false)
         throw std::logic_error("Bad index");
 
-    Forecaster forecaster;
-    forecaster.SetData(mp_data_model);
-    forecaster.SetForecastAlgorithm(mp_gmdh);
     return forecaster.Forecast(i_company_name);
 }
 
