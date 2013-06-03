@@ -62,12 +62,12 @@ bool Controller::IsValidCompanyName(const QString &i_comp_name)
 
 double Controller::Forecast(QString i_company_name)
 {
-    if(i_company_index < 0 || i_company_index >= mp_data_model->GetCompaniesNumber())
+    if(mp_data_model->IsValidCompanyName(i_company_name) == false)
         throw std::logic_error("Bad index");
 
     Forecaster forecaster;
     forecaster.SetData(mp_data_model);
     forecaster.SetForecastAlgorithm(mp_gmdh);
-    return forecaster.Forecast(mp_data_model->GetCompanyName(i_company_index));
+    return forecaster.Forecast(i_company_name);
 }
 
