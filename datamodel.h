@@ -24,6 +24,7 @@ public:
     int GetObservationNumber() const;
     const Matrix::TVariable& GetVariable(const QString& i_comp_name) const;
     Matrix GetRawDataExcept(const QString& i_comp_name) const;
+    double GetObservation(const QDate& i_date, const QString& i_comp_name);
     Matrix::TTimeSlice GetTimeSliceExcept(const QDate& i_date, const QString& i_comp_name) const;
     const Matrix& GetRawData() const;
     bool IsValid() const;

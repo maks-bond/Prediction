@@ -1,5 +1,6 @@
- #include "presenter.h"
+#include "presenter.h"
 #include "ui_presenter.h"
+#include "datamodel.h"
 
 #include <QFileDialog>
 
@@ -8,7 +9,7 @@ Presenter::Presenter(QWidget *parent) :
     ui(new Ui::Presenter)
 {
     ui->setupUi(this);
-
+    setWindowTitle("GMDH Forecaster");
     connect(ui->buttonOpen, SIGNAL(clicked()), this, SLOT(OnOpen()));
     connect(ui->buttonPredict, SIGNAL(clicked()), this, SLOT(OnPredict()));
 }
@@ -22,6 +23,16 @@ void Presenter::OnOpen()
 {
     QDir dir = QFileDialog::getExistingDirectory(this, "Choose directory with CSV files");
     controller.Initialize(dir);
+    const Matrix& curData = controller.GetDataModel()->GetRawData();
+    int cols = curData.GetVariablesNumber();
+    int rows = curData.GetObservationNumber();
+    ui->tableWidget->setColumnCount(cols);
+    ui->tableWidget->setRowCount(rows);
+    for(int i=0; i<cols; i++){
+        for(int j=0; j<rows; j++){
+            ui->tableWidget->setItem(j,i,new QTableWidgetItem(tr("%1").arg(curData.GetObservation(i,j))));
+        }
+    }
 }
 
 void Presenter::OnPredict()

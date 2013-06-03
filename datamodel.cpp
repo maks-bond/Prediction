@@ -66,6 +66,14 @@ Matrix DataModel::GetRawDataExcept(const QString &i_comp_name) const
     return res;
 }
 
+double DataModel::GetObservation(const QDate &i_date, const QString &i_comp_name)
+{
+    int ind = m_companies_names.indexOf(i_comp_name);
+    if(ind == -1) throw std::logic_error("can't find company in DataModel");
+
+    return m_data.GetObservation(ind,m_start_date.daysTo(i_date));
+}
+
 Matrix::TTimeSlice DataModel::GetTimeSliceExcept(const QDate &i_date, const QString &i_comp_name) const
 {
     if(i_date < m_start_date || i_date >= m_start_date.addDays(m_data.GetObservationNumber()))

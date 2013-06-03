@@ -24,6 +24,7 @@ public:
     int GetObservationNumber() const;
     const TVariable& GetVariable(int index) const;
     TTimeSlice GetTimeSlice(int i_time, const TFilter& i_filters = TFilter()) const;
+    double GetObservation(int i_index, int i_time) const;
     //Matrix Filter(const TFilter& i_filters);
 
     //Memory leak is here!!!

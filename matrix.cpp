@@ -78,6 +78,16 @@ Matrix::TTimeSlice Matrix::GetTimeSlice(int i_time, const TFilter& i_filters) co
     return res;
 }
 
+double Matrix::GetObservation(int i_index, int i_time) const
+{
+    if(i_index < 0 || i_index >= GetVariablesNumber())
+        throw std::logic_error("Can't retrieve variable");
+    if(i_time < 0 || i_time >= GetObservationNumber())
+        throw std::logic_error("Can't create time slice");
+
+    return m_matrix[i_index][i_time];
+}
+
 /*Matrix Matrix::Filter(const TFilter& i_filters)
 {
     Matrix res;
