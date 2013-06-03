@@ -20,6 +20,7 @@ public:
 private slots:
     void OnOpen();
     void OnPredict();
+    void OnCellClicked(int i, int j);
 
 private:
     Ui::Presenter *ui;
