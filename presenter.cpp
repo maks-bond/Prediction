@@ -28,6 +28,8 @@ Presenter::Presenter(QWidget *parent) :
     connect(mp_ui->buttonPredict, SIGNAL(clicked()), this, SLOT(OnPredict()));
     connect(mp_ui->tableData, SIGNAL(cellPressed(int,int)), this, SLOT(OnCellClicked(int, int)));
     connect(mp_ui->tableData, SIGNAL(cellActivated(int,int)), this, SLOT(OnCellClicked(int, int)));
+
+    mp_ui->tableResult->setColumnCount(2);
 }
 
 Presenter::~Presenter()
@@ -50,7 +52,7 @@ void Presenter::OnOpen()
 
     for(int i=0; i<cols; i++){
         for(int j=0; j<rows; j++){
-            mp_ui->tableData->setItem(j,i,new QTableWidgetItem(tr("%1").arg(curData.GetObservation(i,j))));
+            mp_ui->tableData->setItem(j,i,new QTableWidgetItem(QString::number(curData.GetObservation(i,j))));
         }
     }
 }
@@ -62,7 +64,12 @@ void Presenter::OnPredict()
         QMessageBox::critical(this, "Error", "You must set correct company name!");
         return;
     }
+
     //ui->editPrediction->setText(QString::number(controller.Forecast(ui->spinCompanyNumber->value())));
+    QVector<double> prediction_result = m_controller.Forecast(mp_ui->editCompanyName->text());
+
+    for(int i = 0; i<prediction_result.size(); ++i)
+        mp_ui->tableData->setItem(i, 0, new QTableWidgetItem(QString::number(prediction_result[i])));
 }
 
 void Presenter::OnCellClicked(int , int j)
