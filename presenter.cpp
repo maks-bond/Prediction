@@ -5,6 +5,19 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
+namespace
+{
+    QStringList _FormSequentialDates(const QDate& i_start_date, int i_date_count)
+    {
+        QStringList res;
+
+        for(int i = 0; i<i_date_count; ++i)
+            res.push_back(i_start_date.addDays(i).toString("dd.MM.yyyy"));
+
+        return res;
+    }
+}
+
 Presenter::Presenter(QWidget *parent) :
     QWidget(parent),
     mp_ui(new Ui::Presenter)
@@ -33,6 +46,7 @@ void Presenter::OnOpen()
     mp_ui->tableData->setRowCount(rows);
 
     mp_ui->tableData->setHorizontalHeaderLabels(m_controller.GetDataModel()->GetCompaniesNames().toList());
+    mp_ui->tableData->setVerticalHeaderLabels(_FormSequentialDates(m_controller.GetDataModel()->GetStartDate(), m_controller.GetDataModel()->GetObservationNumber()));
 
     for(int i=0; i<cols; i++){
         for(int j=0; j<rows; j++){
