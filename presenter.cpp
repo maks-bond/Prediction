@@ -26,16 +26,17 @@ void Presenter::OnOpen()
     const Matrix& curData = controller.GetDataModel()->GetRawData();
     int cols = curData.GetVariablesNumber();
     int rows = curData.GetObservationNumber();
-    ui->tableWidget->setColumnCount(cols);
-    ui->tableWidget->setRowCount(rows);
+    ui->tableData->setColumnCount(cols);
+    ui->tableData->setRowCount(rows);
+
     for(int i=0; i<cols; i++){
         for(int j=0; j<rows; j++){
-            ui->tableWidget->setItem(j,i,new QTableWidgetItem(tr("%1").arg(curData.GetObservation(i,j))));
+            ui->tableData->setItem(j,i,new QTableWidgetItem(tr("%1").arg(curData.GetObservation(i,j))));
         }
     }
 }
 
 void Presenter::OnPredict()
 {
-    ui->editPrediction->setText(QString::number(controller.Forecast(ui->spinCompanyNumber->value())));
+    //ui->editPrediction->setText(QString::number(controller.Forecast(ui->spinCompanyNumber->value())));
 }

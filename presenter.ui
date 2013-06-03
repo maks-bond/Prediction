@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>431</width>
-    <height>311</height>
+    <width>600</width>
+    <height>380</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="QPushButton" name="buttonOpen">
      <property name="text">
@@ -22,21 +22,14 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Enter number of company for prediction</string>
+      <widget class="QLineEdit" name="editCompanyName">
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QSpinBox" name="spinCompanyNumber"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QPushButton" name="buttonPredict">
        <property name="text">
@@ -44,17 +37,71 @@
        </property>
       </widget>
      </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="10,1">
      <item>
-      <widget class="QLineEdit" name="editPrediction">
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
+      <widget class="QTableWidget" name="tableData"/>
+     </item>
+     <item>
+      <widget class="QTableWidget" name="tableResult"/>
      </item>
     </layout>
    </item>
    <item>
-    <widget class="QTableWidget" name="tableWidget"/>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Percentage of training</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spinBox"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Average Training Error</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Average Test Error</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_2">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
