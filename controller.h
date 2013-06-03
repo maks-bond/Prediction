@@ -2,7 +2,7 @@
 #define CONTROLLER_H
 
 class QDir;
-
+class QString;
 class DataModel;
 class AbstractGMDH;
 
@@ -16,8 +16,9 @@ public:
     bool IsInitialized() const;
 
     const DataModel* GetDataModel() const;
+    bool IsValidCompanyName(const QString& i_comp_name);
 
-    double Forecast(int i_company_index);
+    double Forecast(QString i_company_name);
 
 private:
     DataModel* mp_data_model;

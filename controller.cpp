@@ -8,6 +8,7 @@
 #include <stdexcept>
 
 #include <QDir>
+#include <QString>
 
 namespace
 {
@@ -54,7 +55,12 @@ const DataModel *Controller::GetDataModel() const
     return mp_data_model;
 }
 
-double Controller::Forecast(int i_company_index)
+bool Controller::IsValidCompanyName(const QString &i_comp_name)
+{
+    return mp_data_model->IsValidCompanyName(i_comp_name);
+}
+
+double Controller::Forecast(QString i_company_name)
 {
     if(i_company_index < 0 || i_company_index >= mp_data_model->GetCompaniesNumber())
         throw std::logic_error("Bad index");

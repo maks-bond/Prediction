@@ -97,3 +97,8 @@ bool DataModel::IsValid() const
 {
     return m_start_date.isValid() && !m_data.IsEmpty() && !m_companies_names.empty();
 }
+
+bool DataModel::IsValidCompanyName(const QString &i_comp_name)
+{
+    return m_companies_names.indexOf(i_comp_name) != -1;
+}
