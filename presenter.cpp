@@ -72,6 +72,7 @@ void Presenter::OnPredict()
     QVector<double> prediction_result = m_controller.Forecast(mp_ui->editCompanyName->text());
 
     mp_ui->tableResult->setRowCount(prediction_result.size());
+    mp_ui->tableResult->setVerticalHeaderLabels(_FormSequentialDates(m_controller.GetDataModel()->GetStartDate(), m_controller.GetDataModel()->GetObservationNumber()));
 
     for(int i = 0; i<prediction_result.size(); ++i)
         mp_ui->tableResult->setItem(i, 0, new QTableWidgetItem(QString::number(prediction_result[i])));
