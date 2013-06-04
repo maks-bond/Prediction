@@ -69,7 +69,7 @@ void Presenter::OnPredict()
     QVector<double> prediction_result = m_controller.Forecast(mp_ui->editCompanyName->text());
 
     for(int i = 0; i<prediction_result.size(); ++i)
-        mp_ui->tableData->setItem(i, 0, new QTableWidgetItem(QString::number(prediction_result[i])));
+        mp_ui->tableResult->setItem(i, 0, new QTableWidgetItem(QString::number(prediction_result[i])));
 }
 
 void Presenter::OnCellClicked(int , int j)
