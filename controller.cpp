@@ -74,7 +74,7 @@ QVector<double> Controller::Forecast(QString i_company_name)
     for(int i=0;i<mp_data_model->GetObservationNumber();i++){
         double cur_res = m_forecaster.Forecast(i_company_name,cur_date);
         res.push_back(cur_res);
-        cur_date.addDays(1);
+        cur_date = cur_date.addDays(1);
     }
 
     return res;

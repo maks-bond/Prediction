@@ -4,6 +4,7 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QScrollBar>
 
 namespace
 {
@@ -28,6 +29,8 @@ Presenter::Presenter(QWidget *parent) :
     connect(mp_ui->buttonPredict, SIGNAL(clicked()), this, SLOT(OnPredict()));
     connect(mp_ui->tableData, SIGNAL(cellPressed(int,int)), this, SLOT(OnCellClicked(int, int)));
     connect(mp_ui->tableData, SIGNAL(cellActivated(int,int)), this, SLOT(OnCellClicked(int, int)));
+    connect(mp_ui->tableData->verticalScrollBar(), SIGNAL(valueChanged(int)), mp_ui->tableResult->verticalScrollBar(), SLOT(setValue(int)));
+    connect(mp_ui->tableResult->verticalScrollBar(), SIGNAL(valueChanged(int)), mp_ui->tableData->verticalScrollBar(), SLOT(setValue(int)));
 
     mp_ui->tableResult->setColumnCount(2);
 }
