@@ -21,6 +21,7 @@ private slots:
     void OnOpen();
     void OnPredict();
     void OnCellClicked(int i, int j);
+    void OnSectionClicked(int i);
 
 private:
     Ui::Presenter *mp_ui;

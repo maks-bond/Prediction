@@ -88,7 +88,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit">
+        <widget class="QLineEdit" name="editTrainingError">
          <property name="readOnly">
           <bool>true</bool>
          </property>
@@ -106,7 +106,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_2">
+        <widget class="QLineEdit" name="editTestError">
          <property name="readOnly">
           <bool>true</bool>
          </property>

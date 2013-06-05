@@ -63,6 +63,11 @@ bool Controller::IsValidCompanyName(const QString &i_comp_name)
     return mp_data_model->IsValidCompanyName(i_comp_name);
 }
 
+void Controller::SetTrainingRatio(double i_ratio)
+{
+    m_forecaster.SetTrainingRatio(i_ratio);
+}
+
 QVector<double> Controller::Forecast(QString i_company_name)
 {
     if(mp_data_model->IsValidCompanyName(i_company_name) == false)

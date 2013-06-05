@@ -22,6 +22,8 @@ public:
     const DataModel* GetDataModel() const;
     bool IsValidCompanyName(const QString& i_comp_name);
 
+    void SetTrainingRatio(double i_ratio);
+
     QVector<double> Forecast(QString i_company_name);
 
 private:

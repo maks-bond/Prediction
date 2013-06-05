@@ -5,6 +5,8 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QScrollBar>
+#include <QHeaderView>
+#include <cmath>
 
 namespace
 {
@@ -29,10 +31,23 @@ Presenter::Presenter(QWidget *parent) :
     connect(mp_ui->buttonPredict, SIGNAL(clicked()), this, SLOT(OnPredict()));
     connect(mp_ui->tableData, SIGNAL(cellPressed(int,int)), this, SLOT(OnCellClicked(int, int)));
     connect(mp_ui->tableData, SIGNAL(cellActivated(int,int)), this, SLOT(OnCellClicked(int, int)));
+
+    connect(mp_ui->tableData->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(OnSectionClicked(int)));
+    connect(mp_ui->tableData->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(OnSectionClicked(int)));
+
+
     connect(mp_ui->tableData->verticalScrollBar(), SIGNAL(valueChanged(int)), mp_ui->tableResult->verticalScrollBar(), SLOT(setValue(int)));
     connect(mp_ui->tableResult->verticalScrollBar(), SIGNAL(valueChanged(int)), mp_ui->tableData->verticalScrollBar(), SLOT(setValue(int)));
 
+    mp_ui->spinPercentage->setValue(50);
     mp_ui->tableResult->setColumnCount(2);
+    mp_ui->tableData->verticalHeader()->setDefaultSectionSize(20);
+    mp_ui->tableResult->verticalHeader()->setDefaultSectionSize(20);
+
+    QStringList right_table_labels;
+    right_table_labels << "Result" << "Error";
+    mp_ui->tableResult->setHorizontalHeaderLabels(right_table_labels);
+
 }
 
 Presenter::~Presenter()
@@ -52,10 +67,17 @@ void Presenter::OnOpen()
 
     mp_ui->tableData->setHorizontalHeaderLabels(m_controller.GetDataModel()->GetCompaniesNames().toList());
     mp_ui->tableData->setVerticalHeaderLabels(_FormSequentialDates(m_controller.GetDataModel()->GetStartDate(), m_controller.GetDataModel()->GetObservationNumber()));
+    for(int i=0; i < mp_ui->tableData->columnCount();i++){
+        mp_ui->tableData->horizontalHeader()->setSectionResizeMode(i,QHeaderView::Stretch);
+    }
+    mp_ui->tableResult->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Stretch);
+    mp_ui->tableResult->horizontalHeader()->setSectionResizeMode(1,QHeaderView::Stretch);
 
     for(int i=0; i<cols; i++){
         for(int j=0; j<rows; j++){
-            mp_ui->tableData->setItem(j,i,new QTableWidgetItem(QString::number(curData.GetObservation(i,j))));
+            QTableWidgetItem* item = new QTableWidgetItem(QString::number(curData.GetObservation(i,j)));
+            item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+            mp_ui->tableData->setItem(j,i,item);
         }
     }
 }
@@ -68,17 +90,70 @@ void Presenter::OnPredict()
         return;
     }
 
+    double ratio = mp_ui->spinPercentage->value()/100.0;
+    m_controller.SetTrainingRatio(ratio);
+
     //ui->editPrediction->setText(QString::number(controller.Forecast(ui->spinCompanyNumber->value())));
     QVector<double> prediction_result = m_controller.Forecast(mp_ui->editCompanyName->text());
 
     mp_ui->tableResult->setRowCount(prediction_result.size());
     mp_ui->tableResult->setVerticalHeaderLabels(_FormSequentialDates(m_controller.GetDataModel()->GetStartDate(), m_controller.GetDataModel()->GetObservationNumber()));
+    mp_ui->tableResult->setHorizontalHeaderItem(0,new QTableWidgetItem(tr("%1-Res").arg(mp_ui->editCompanyName->text())));
 
-    for(int i = 0; i<prediction_result.size(); ++i)
-        mp_ui->tableResult->setItem(i, 0, new QTableWidgetItem(QString::number(prediction_result[i])));
+    QBrush gray_brush(Qt::lightGray);
+    QBrush white_brush(Qt::white);
+
+
+    int rows = prediction_result.size();
+    int cols = mp_ui->tableData->columnCount();
+    int cur_col = mp_ui->tableData->currentColumn();
+    int training_count = (int)(rows*ratio) + 1;
+    int test_count = rows - training_count;
+    double training_error = 0;
+    double test_error = 0;
+
+    for(int i = 0; i<rows; ++i){
+        double cur_comp_val = mp_ui->tableData->item(i,cur_col)->text().toDouble();
+        double cur_forecast_val = prediction_result[i];
+        double error = fabs(cur_forecast_val - cur_comp_val)/cur_comp_val * 100.0;
+        QTableWidgetItem* cur_error_item = new QTableWidgetItem(QString::number(error));
+        QTableWidgetItem* cur_item = new QTableWidgetItem(QString::number(cur_forecast_val));
+        if(i < rows*ratio) {
+            training_error += error;
+            cur_item->setBackground(gray_brush);
+            cur_error_item->setBackground(gray_brush);
+        }
+        else{
+            test_error += error;
+        }
+        cur_item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+        cur_error_item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+        mp_ui->tableResult->setItem(i, 0, cur_item);
+        mp_ui->tableResult->setItem(i,1,cur_error_item);
+    }
+
+    training_error /= training_count;
+    test_error /= test_count;
+
+    mp_ui->editTestError->setText(QString::number(test_error));
+    mp_ui->editTrainingError->setText(QString::number(training_error));
+
+    for(int i=0;i<rows;i++){
+        for(int j=0;j<cols;j++){
+            QTableWidgetItem* cur_item = mp_ui->tableData->item(i,j);
+            if(i < rows*ratio) cur_item->setBackground(gray_brush);
+            else cur_item->setBackground(white_brush);
+        }
+    }
+
 }
 
 void Presenter::OnCellClicked(int , int j)
 {
     mp_ui->editCompanyName->setText(mp_ui->tableData->horizontalHeaderItem(j)->text());
+}
+
+void Presenter::OnSectionClicked(int i)
+{
+    mp_ui->editCompanyName->setText(mp_ui->tableData->horizontalHeaderItem(i)->text());
 }
