@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QScrollBar>
+#include <QSplitter>
 #include <QHeaderView>
 #include <cmath>
 
@@ -43,6 +44,17 @@ Presenter::Presenter(QWidget *parent) :
     mp_ui->tableResult->setColumnCount(2);
     mp_ui->tableData->verticalHeader()->setDefaultSectionSize(20);
     mp_ui->tableResult->verticalHeader()->setDefaultSectionSize(20);
+
+    //Splitter adding
+    mp_ui->layoutTables->removeWidget(mp_ui->tableData);
+    mp_ui->layoutTables->removeWidget(mp_ui->tableResult);
+
+    QSplitter* p_splitter = new QSplitter(this);
+    p_splitter->addWidget(mp_ui->tableData);
+    p_splitter->addWidget(mp_ui->tableResult);
+    p_splitter->setStretchFactor(0, 3);
+    p_splitter->setStretchFactor(1, 1);
+    mp_ui->layoutTables->addWidget(p_splitter);
 
     QStringList right_table_labels;
     right_table_labels << "Result" << "Error";

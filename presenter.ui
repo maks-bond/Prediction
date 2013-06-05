@@ -40,7 +40,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="3,1">
+    <layout class="QHBoxLayout" name="layoutTables" stretch="3,1">
      <item>
       <widget class="QTableWidget" name="tableData"/>
      </item>
