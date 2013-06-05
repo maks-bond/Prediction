@@ -31,6 +31,7 @@ private :
     Matrix::TVariable _GetTrainingDataY(const Matrix::TVariable& i_vector);
 
     static int const mg_max_power = 2;
+    static int const mg_time_diff = 2;
 
     AbstractGMDH* mp_gmdh_algo;
     const DataModel* mp_data;

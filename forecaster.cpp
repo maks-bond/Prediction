@@ -41,7 +41,7 @@ Matrix Forecaster::_GetTrainingDataX(const Matrix &i_matrix)
     for(int i=0;i<i_matrix.GetVariablesNumber();i++)
     {
         Matrix::TVariable cur = i_matrix.GetVariable(i);
-        res.PushVariable(cur.mid(0, i_matrix.GetObservationNumber()*m_ratio));
+        res.PushVariable(cur.mid(0, i_matrix.GetObservationNumber()*m_ratio - mg_time_diff));
     }
 
     return res;
@@ -49,7 +49,7 @@ Matrix Forecaster::_GetTrainingDataX(const Matrix &i_matrix)
 
 Matrix::TVariable Forecaster::_GetTrainingDataY(const Matrix::TVariable &i_vector)
 {
-    return i_vector.mid(0, i_vector.size()*m_ratio);
+    return i_vector.mid(mg_time_diff, i_vector.size()*m_ratio);
 }
 
 void Forecaster::SetTrainingRatio(double i_ratio)
