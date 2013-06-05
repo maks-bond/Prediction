@@ -25,6 +25,11 @@ double Forecaster::Forecast(const QString& i_comp_name, const QDate& i_date)
     return mp_gmdh_algo->Evaluate(mp_data->GetTimeSliceExcept(i_date, i_comp_name));
 }
 
+double Forecaster::GetTrainingRatio() const
+{
+    return m_ratio;
+}
+
 void Forecaster::SetData(const DataModel* data)
 {
     if(data->IsValid()) mp_data = data;

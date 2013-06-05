@@ -21,6 +21,8 @@ public:
 
     double Forecast(const QString& i_comp_name, const QDate& i_date);
 
+    double GetTrainingRatio() const;
+
     void SetTrainingRatio(double i_ratio);
     void SetTimeStep(int i_time_step);
     void SetData(const DataModel* ip_data);

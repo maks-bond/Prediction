@@ -63,6 +63,11 @@ bool Controller::IsValidCompanyName(const QString &i_comp_name)
     return mp_data_model->IsValidCompanyName(i_comp_name);
 }
 
+double Controller::GetTrainingRatio() const
+{
+    return m_forecaster.GetTrainingRatio();
+}
+
 void Controller::SetTrainingRatio(double i_ratio)
 {
     m_forecaster.SetTrainingRatio(i_ratio);

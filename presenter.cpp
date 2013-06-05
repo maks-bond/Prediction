@@ -27,7 +27,7 @@ namespace
 
     Matrix::TVariable _FormResultData(const Matrix::TVariable& i_variable, double i_training_ratio)
     {
-        return i_variable.mid(i_variable.size()*i_training_ratio);
+        return i_variable.mid(i_variable.size()*i_training_ratio + 1);
     }
 }
 
@@ -47,6 +47,7 @@ Presenter::Presenter(QWidget *parent) :
 
     connect(mp_ui->tableData->verticalScrollBar(), SIGNAL(valueChanged(int)), mp_ui->tableResult->verticalScrollBar(), SLOT(setValue(int)));
     connect(mp_ui->tableResult->verticalScrollBar(), SIGNAL(valueChanged(int)), mp_ui->tableData->verticalScrollBar(), SLOT(setValue(int)));
+    connect(mp_ui->buttonExport, SIGNAL(clicked()), this, SLOT(OnExport()));
 
     mp_ui->spinPercentage->setValue(50);
     mp_ui->tableResult->setColumnCount(2);
@@ -79,7 +80,14 @@ void Presenter::OnExport()
 {
     QDir dir = QFileDialog::getExistingDirectory(this, "Choose directory for export");
 
-    Export::Write(_FormResultData(m_controller.GetDataModel()->GetVariable(m_controller.GetPredictedCompanyName()), 0.5), "");
+    QString company_name = m_controller.GetPredictedCompanyName();
+
+    Matrix::TVariable true_variable = m_controller.GetDataModel()->GetVariable(company_name);
+    QString true_file_name = dir.dirName() + "/" + company_name+"-True.txt";
+    Export::Write(_FormResultData(true_variable, m_controller.GetTrainingRatio()), true_file_name);
+
+    QString predicted_file_name = dir.dirName() + "/" + company_name+"-Predicted.txt";
+    Export::Write(_FormResultData(m_controller.GetPrediction(), m_controller.GetTrainingRatio()), predicted_file_name);
 }
 
 void Presenter::OnOpen()
@@ -119,7 +127,7 @@ void Presenter::OnPredict()
 
     double ratio = mp_ui->spinPercentage->value()/100.0;
     m_controller.SetTrainingRatio(ratio);
-
+    m_controller.SetTimeStep(mp_ui->spinTimeStep->value());
     m_controller.Forecast(mp_ui->editCompanyName->text());
     QVector<double> prediction_result = m_controller.GetPrediction();
 

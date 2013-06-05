@@ -23,6 +23,8 @@ public:
     const DataModel* GetDataModel() const;
     bool IsValidCompanyName(const QString& i_comp_name);
 
+    double GetTrainingRatio() const;
+
     void SetTrainingRatio(double i_ratio);
     void SetTimeStep(int i_time_step);
 
