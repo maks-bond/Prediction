@@ -1,12 +1,16 @@
 #include "presenter.h"
 #include "ui_presenter.h"
+
 #include "datamodel.h"
+#include "export.h"
 
 #include <QFileDialog>
+#include <QFileInfo>
 #include <QMessageBox>
 #include <QScrollBar>
 #include <QSplitter>
 #include <QHeaderView>
+
 #include <cmath>
 
 namespace
@@ -19,6 +23,11 @@ namespace
             res.push_back(i_start_date.addDays(i).toString("dd.MM.yyyy"));
 
         return res;
+    }
+
+    Matrix::TVariable _FormResultData(const Matrix::TVariable& i_variable, double i_training_ratio)
+    {
+        return i_variable.mid(i_variable.size()*i_training_ratio);
     }
 }
 
@@ -68,7 +77,9 @@ Presenter::~Presenter()
 
 void Presenter::OnExport()
 {
+    QDir dir = QFileDialog::getExistingDirectory(this, "Choose directory for export");
 
+    Export::Write(_FormResultData(m_controller.GetDataModel()->GetVariable(m_controller.GetPredictedCompanyName()), 0.5), "");
 }
 
 void Presenter::OnOpen()
@@ -118,7 +129,6 @@ void Presenter::OnPredict()
 
     QBrush gray_brush(Qt::lightGray);
     QBrush white_brush(Qt::white);
-
 
     int rows = prediction_result.size();
     int cols = mp_ui->tableData->columnCount();

@@ -8,6 +8,7 @@ namespace Export
     void Write(const Matrix::TVariable &i_variable, const QString &i_file_name)
     {
         QFile file(i_file_name);
+        file.open(QIODevice::WriteOnly);
 
         QTextStream text_stream(&file);
 
