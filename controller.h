@@ -24,6 +24,7 @@ public:
     bool IsValidCompanyName(const QString& i_comp_name);
 
     void SetTrainingRatio(double i_ratio);
+    void SetTimeStep(int i_time_step);
 
     QString GetPredictedCompanyName() const;
     Matrix::TVariable GetPrediction() const;

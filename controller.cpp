@@ -68,6 +68,11 @@ void Controller::SetTrainingRatio(double i_ratio)
     m_forecaster.SetTrainingRatio(i_ratio);
 }
 
+void Controller::SetTimeStep(int i_time_step)
+{
+    m_forecaster.SetTimeStep(i_time_step);
+}
+
 QString Controller::GetPredictedCompanyName() const
 {
     return m_predicted_company_name;
