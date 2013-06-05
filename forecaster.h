@@ -22,6 +22,7 @@ public:
     double Forecast(const QString& i_comp_name, const QDate& i_date);
 
     void SetTrainingRatio(double i_ratio);
+    void SetTimeStep(int i_time_step);
     void SetData(const DataModel* ip_data);
     void SetForecastAlgorithm(AbstractGMDH* ip_gmdh_algo);
 
@@ -31,11 +32,11 @@ private :
     Matrix::TVariable _GetTrainingDataY(const Matrix::TVariable& i_vector);
 
     static int const mg_max_power = 2;
-    static int const mg_time_diff = 2;
 
     AbstractGMDH* mp_gmdh_algo;
     const DataModel* mp_data;
     double m_ratio;
+    int m_time_step;
 };
 
 #endif // RECOGNIZER_H

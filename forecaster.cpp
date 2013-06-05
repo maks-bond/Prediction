@@ -8,6 +8,7 @@
 Forecaster::Forecaster()
 {
     m_ratio = 0.5;
+    m_time_step = 0;
 }
 
 double Forecaster::Forecast(const QString& i_comp_name, const QDate& i_date)
@@ -55,4 +56,9 @@ Matrix::TVariable Forecaster::_GetTrainingDataY(const Matrix::TVariable &i_vecto
 void Forecaster::SetTrainingRatio(double i_ratio)
 {
     m_ratio = i_ratio;
+}
+
+void Forecaster::SetTimeStep(int i_time_step)
+{
+    m_time_step = i_time_step;
 }
