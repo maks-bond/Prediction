@@ -68,20 +68,30 @@ void Controller::SetTrainingRatio(double i_ratio)
     m_forecaster.SetTrainingRatio(i_ratio);
 }
 
-QVector<double> Controller::Forecast(QString i_company_name)
+QString Controller::GetPredictedCompanyName() const
+{
+    return m_predicted_company_name;
+}
+
+Matrix::TVariable Controller::GetPrediction() const
+{
+    return m_prediction;
+}
+
+void Controller::Forecast(const QString& i_company_name)
 {
     if(mp_data_model->IsValidCompanyName(i_company_name) == false)
         throw std::logic_error("Bad index");
 
-    QVector<double> res;
+    m_prediction.clear();
     QDate cur_date = mp_data_model->GetStartDate();
 
     for(int i=0;i<mp_data_model->GetObservationNumber();i++){
         double cur_res = m_forecaster.Forecast(i_company_name,cur_date);
-        res.push_back(cur_res);
+        m_prediction.push_back(cur_res);
         cur_date = cur_date.addDays(1);
     }
 
-    return res;
+    m_predicted_company_name = i_company_name;
 }
 

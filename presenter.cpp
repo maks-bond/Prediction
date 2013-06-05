@@ -36,7 +36,6 @@ Presenter::Presenter(QWidget *parent) :
     connect(mp_ui->tableData->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(OnSectionClicked(int)));
     connect(mp_ui->tableData->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(OnSectionClicked(int)));
 
-
     connect(mp_ui->tableData->verticalScrollBar(), SIGNAL(valueChanged(int)), mp_ui->tableResult->verticalScrollBar(), SLOT(setValue(int)));
     connect(mp_ui->tableResult->verticalScrollBar(), SIGNAL(valueChanged(int)), mp_ui->tableData->verticalScrollBar(), SLOT(setValue(int)));
 
@@ -65,6 +64,11 @@ Presenter::Presenter(QWidget *parent) :
 Presenter::~Presenter()
 {
     delete mp_ui;
+}
+
+void Presenter::OnExport()
+{
+
 }
 
 void Presenter::OnOpen()
@@ -105,8 +109,8 @@ void Presenter::OnPredict()
     double ratio = mp_ui->spinPercentage->value()/100.0;
     m_controller.SetTrainingRatio(ratio);
 
-    //ui->editPrediction->setText(QString::number(controller.Forecast(ui->spinCompanyNumber->value())));
-    QVector<double> prediction_result = m_controller.Forecast(mp_ui->editCompanyName->text());
+    m_controller.Forecast(mp_ui->editCompanyName->text());
+    QVector<double> prediction_result = m_controller.GetPrediction();
 
     mp_ui->tableResult->setRowCount(prediction_result.size());
     mp_ui->tableResult->setVerticalHeaderLabels(_FormSequentialDates(m_controller.GetDataModel()->GetStartDate(), m_controller.GetDataModel()->GetObservationNumber()));

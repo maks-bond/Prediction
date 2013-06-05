@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     matrix.cpp \
     multiseriesgmdh.cpp \
     controller.cpp \
-    presenter.cpp
+    presenter.cpp \
+    Export.cpp
 
 HEADERS  += mainwindow.h \
     modelitem.h \
@@ -59,7 +60,8 @@ HEADERS  += mainwindow.h \
     matrix.h \
     multiseriesgmdh.h \
     controller.h \
-    presenter.h
+    presenter.h \
+    Export.h
 
 FORMS    += mainwindow.ui \
     presenter.ui

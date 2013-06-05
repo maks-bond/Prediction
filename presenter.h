@@ -18,6 +18,7 @@ public:
     ~Presenter();
     
 private slots:
+    void OnExport();
     void OnOpen();
     void OnPredict();
     void OnCellClicked(int i, int j);

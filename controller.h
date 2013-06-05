@@ -2,6 +2,7 @@
 #define CONTROLLER_H
 
 #include "forecaster.h"
+#include "matrix.h"
 
 #include <QVector>
 
@@ -24,12 +25,18 @@ public:
 
     void SetTrainingRatio(double i_ratio);
 
-    QVector<double> Forecast(QString i_company_name);
+    QString GetPredictedCompanyName() const;
+    Matrix::TVariable GetPrediction() const;
+
+    void Forecast(const QString& i_company_name);
 
 private:
     DataModel* mp_data_model;
     AbstractGMDH* mp_gmdh;
     Forecaster m_forecaster;
+
+    QString m_predicted_company_name;
+    Matrix::TVariable m_prediction;
 };
 
 #endif // CONTROLLER_H
