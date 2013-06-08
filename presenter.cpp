@@ -50,7 +50,7 @@ Presenter::Presenter(QWidget *parent) :
     connect(mp_ui->buttonExport, SIGNAL(clicked()), this, SLOT(OnExport()));
 
     mp_ui->spinPercentage->setValue(50);
-    mp_ui->tableResult->setColumnCount(2);
+    mp_ui->tableResult->setColumnCount(3);
     mp_ui->tableData->verticalHeader()->setDefaultSectionSize(20);
     mp_ui->tableResult->verticalHeader()->setDefaultSectionSize(20);
 
@@ -66,9 +66,12 @@ Presenter::Presenter(QWidget *parent) :
     mp_ui->layoutTables->addWidget(p_splitter);
 
     QStringList right_table_labels;
-    right_table_labels << "Result" << "Error";
+    right_table_labels << "Result" << "Error" << "Grow error";
     mp_ui->tableResult->setHorizontalHeaderLabels(right_table_labels);
 
+    mp_ui->tableResult->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Stretch);
+    mp_ui->tableResult->horizontalHeader()->setSectionResizeMode(1,QHeaderView::Stretch);
+    mp_ui->tableResult->horizontalHeader()->setSectionResizeMode(2,QHeaderView::Stretch);
 }
 
 Presenter::~Presenter()
@@ -107,6 +110,7 @@ void Presenter::OnOpen()
     }
     mp_ui->tableResult->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Stretch);
     mp_ui->tableResult->horizontalHeader()->setSectionResizeMode(1,QHeaderView::Stretch);
+    mp_ui->tableResult->horizontalHeader()->setSectionResizeMode(2,QHeaderView::Stretch);
 
     for(int i=0; i<cols; i++){
         for(int j=0; j<rows; j++){
@@ -150,20 +154,25 @@ void Presenter::OnPredict()
         double cur_comp_val = mp_ui->tableData->item(i,cur_col)->text().toDouble();
         double cur_forecast_val = prediction_result[i];
         double error = fabs(cur_forecast_val - cur_comp_val)/cur_comp_val * 100.0;
+        double grow_error = 0;
+        QTableWidgetItem* cur_grow_error = new QTableWidgetItem(QString::number(grow_error));
         QTableWidgetItem* cur_error_item = new QTableWidgetItem(QString::number(error));
         QTableWidgetItem* cur_item = new QTableWidgetItem(QString::number(cur_forecast_val));
         if(i < rows*ratio) {
             training_error += error;
             cur_item->setBackground(gray_brush);
             cur_error_item->setBackground(gray_brush);
+            cur_grow_error->setBackground(gray_brush);
         }
         else{
             test_error += error;
         }
         cur_item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
         cur_error_item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+        cur_grow_error->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
         mp_ui->tableResult->setItem(i, 0, cur_item);
         mp_ui->tableResult->setItem(i,1,cur_error_item);
+        mp_ui->tableResult->setItem(i,2,cur_grow_error);
     }
 
     training_error /= training_count;
